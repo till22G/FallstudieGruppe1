@@ -1,0 +1,13 @@
+.div-login-form {
+  position: fixed;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   top: 35rem;
+}
+
+#login-button {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 1rem;
+}

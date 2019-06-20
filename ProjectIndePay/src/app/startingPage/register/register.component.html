@@ -1,5 +1,5 @@
-<div class="div-login-form">
-<form class="login-form" (submit)="onRegister(registerForm)" #registerForm>
+<div class="div-register-form">
+<form class="register-form" (submit)="onRegister(registerForm)" #registerForm>
     <mat-form-field>
       <input type="text" matInput placeholder="first name">
     </mat-form-field><br>
@@ -16,9 +16,10 @@
       <input type="password" matInput placeholder="repeat passoword">
     </mat-form-field><br>
     <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        >Register</button>
+      id="register-button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      >Register</button>
   </form>
 </div>
