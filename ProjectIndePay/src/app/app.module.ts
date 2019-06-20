@@ -6,11 +6,17 @@ import { MatToolbarModule, MatMenuModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './startingPage/login/login.component';
+import { RegisterComponent } from './startingPage/register/register.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent
+
   ],
   imports: [
     BrowserModule,
