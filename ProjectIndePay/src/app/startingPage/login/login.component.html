@@ -1,10 +1,10 @@
 <div class="div-login-form">
-  <form class="login-form" (submit)="onLogin(loginForm)" #loginForm>
+  <form class="login-form" (submit)="onLogin(loginForm)" #loginForm="ngForm">
       <mat-form-field>
-        <input type="text" matInput placeholder="username">
+        <input type="text" matInput placeholder="login name">
       </mat-form-field><br>
       <mat-form-field>
-          <input type="text" matInput placeholder="password">
+          <input type="password" matInput placeholder="password">
       </mat-form-field><br>
       <button
       id="login-button"

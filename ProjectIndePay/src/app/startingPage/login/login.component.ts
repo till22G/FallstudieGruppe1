@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { User } from '../../shared/user.model';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  userLogin: User;
+
   constructor() {}
 
   ngOnInit() {
 
   }
 
-  onLogin() {
+  onLogin(form: NgForm) {
 
+    //this.userLogin = new User();
   }
 }

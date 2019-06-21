@@ -1,3 +1,5 @@
+import { keyframes } from '@angular/animations';
+
 export class User {
   public firstName: string;
   public lastName: string;
