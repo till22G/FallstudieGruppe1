@@ -1,28 +1,56 @@
 <div class="div-register-form">
-<form class="register-form" (submit)="onRegister(registerForm)" #registerForm>
+<form class="register-form" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
     <mat-form-field>
-      <input type="text" matInput placeholder="first name">
-    </mat-form-field><br>
+      <input type="text"
+      matInput
+      placeholder="first name"
+      name="firstName"
+      ngModel
+      required>
+    </mat-form-field>
+    <br>
     <mat-form-field>
-      <input type="text" matInput placeholder="last name">
-    </mat-form-field><br>
+      <input type="text"
+      matInput
+      placeholder="last name"
+      name="lastName"
+      ngModel
+      required>
+    </mat-form-field>
+    <br>
     <mat-form-field>
-      <input type="text" matInput placeholder="phone number">
-    </mat-form-field><br>
+      <input type="text"
+      matInput
+      placeholder="login name"
+      name="loginName"
+      ngModel
+      required>
+    </mat-form-field>
+    <br>
     <mat-form-field>
-      <input type="text" matInput placeholder="login name">
-    </mat-form-field><br>
+      <input type="password"
+      matInput
+      placeholder="password"
+      name="password"
+      ngModel
+      required>
+    </mat-form-field>
+    <br>
     <mat-form-field>
-      <input type="password" matInput placeholder="password">
-    </mat-form-field><br>
-    <mat-form-field>
-      <input type="password" matInput placeholder="repeat passoword">
-    </mat-form-field><br>
+      <input type="password"
+      matInput
+      placeholder="repeat password"
+      name="passwordRepeat"
+      ngModel
+      required>
+    </mat-form-field>
+    <br>
     <button
       id="register-button"
       mat-raised-button
       color="primary"
       type="submit"
+      [disabled]="!registerForm.valid"
       >Register</button>
   </form>
 </div>
