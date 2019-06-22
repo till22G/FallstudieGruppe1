@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
-import { User } from '../../shared/user.model';
+import { SessionUser } from 'src/app/shared/sessionUser.model';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +9,9 @@ import { User } from '../../shared/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  userLogin: User;
+  //@ViewChild('loginForm', {static: false}) loginForm: NgForm;
+
+  user: SessionUser;
 
   constructor() {}
 
@@ -18,8 +19,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onLogin(form: NgForm) {
-
-    //this.userLogin = new User();
+  onLogin(loginForm: NgForm) {
+    this.user = new SessionUser(loginForm.value.loginName,
+                                loginForm.value.password);
   }
 }
