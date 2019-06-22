@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
                             registerForm.value.password,
                             registerForm.value.passwordRepeat);
     console.log(this.user.password);
-                          }
+    registerForm.reset();
+    }
 
 }

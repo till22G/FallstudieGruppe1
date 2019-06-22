@@ -22,5 +22,6 @@ export class LoginComponent implements OnInit {
   onLogin(loginForm: NgForm) {
     this.user = new SessionUser(loginForm.value.loginName,
                                 loginForm.value.password);
-  }
+    loginForm.reset();
+    }
 }
