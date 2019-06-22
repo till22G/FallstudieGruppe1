@@ -4,6 +4,6 @@ export class SessionUser {
 
   constructor(loginName: string, password: string) {
     this.loginName = loginName;
-    this.password = this.password;
+    this.password = password;
   }
 }
