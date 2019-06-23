@@ -17,6 +17,7 @@ import { RegisterComponent } from './startingPage/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { InfoPageComponent } from './startingPage/info-page/info-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
