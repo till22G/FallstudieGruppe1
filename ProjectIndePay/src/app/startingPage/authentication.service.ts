@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationData } from '../shared/AuthenticationData';
+import { AuthenticationData } from '../shared/authentication-data';
 
 @Injectable({ providedIn: 'root'})
 export class AuthenticationService {
