@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SessionUser } from 'src/app/shared/sessionUser.model';
+import { AuthenticationData } from 'src/app/shared/AuthenticationData';
+import { AuthenticationService } from '../authentication.service';
+import { format } from 'url';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +12,28 @@ import { SessionUser } from 'src/app/shared/sessionUser.model';
 export class LoginComponent implements OnInit {
 
   //@ViewChild('loginForm', {static: false}) loginForm: NgForm;
+  // attribute for the spinner
+  //isLoading = flase;
 
-  user: SessionUser;
+  constructor(public authenticationService: AuthenticationService ) {}
+  user: AuthenticationData;
 
-  constructor() {}
 
-  ngOnInit() {
-
-  }
-
+  //method is executed when LoginButton pressed and thus loginForm is submitted
   onLogin(loginForm: NgForm) {
-    this.user = new SessionUser(loginForm.value.loginName,
-                                loginForm.value.password);
-    loginForm.reset();
+    if (loginForm.invalid){     //check if form is valid
+      return;
     }
+    else {     // else pass loginName and password to authentication service
+      this.authenticationService.login(loginForm.value.loginName, loginForm.value.password);
+    }
+    loginForm.reset();
+
+
+    //old code => can be removed later if not needed
+    // this.user = new AuthenticationData(loginForm.value.loginName,
+    //                                     loginForm.value.password);
+  }
+      ngOnInit() {
+      }
 }
