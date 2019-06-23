@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 //--------------------------------------------------//
 // This path should add new users to database
-app.get("/control/users/create", (req, res, next) => {
+app.post("/control/users/create", (req, res, next) => {
   console.log("Request for new user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
   var data = [req.body.loginName];
@@ -112,7 +112,7 @@ app.get("/control/users/create", (req, res, next) => {
 //--------------------------------------------------//
 // This path is used for login. It also does the verification, and then sends relevant data back to client.
 // @ToDo maybe some more tranlation of roles and currency on server side?
-app.get("/control/users/read", (req, res, next) => {
+app.post("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
   var data = [req.body.loginName];
@@ -135,7 +135,7 @@ app.get("/control/users/read", (req, res, next) => {
               balance   : row.BALANCE,
               currency  : row.CURRENCY,
               role      : row.ROLE,
-              language  : row.LANGUAGE
+              language  : row.LANGUAGE // @ToDo webtoken authentification
             });
           } else {
             res.status(201).json({

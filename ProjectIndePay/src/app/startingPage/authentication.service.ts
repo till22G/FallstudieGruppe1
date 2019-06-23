@@ -10,7 +10,7 @@ export class AuthenticationService {
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData ={loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
-    this.http.post("", authenticationData)
+    this.http.post('http://localhost:3000/control/users/read', authenticationData)
       .subscribe(response => {
         console.log("auth worked");
         //implement what schoul happen
