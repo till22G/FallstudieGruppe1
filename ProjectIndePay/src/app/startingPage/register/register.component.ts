@@ -15,13 +15,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
+  // creates an user object with the following attributes
+  // resets form after object creation
   onRegister(registerForm: NgForm) {
     this.user = new RegisterUser(registerForm.value.firstName,
                             registerForm.value.lastName,
                             registerForm.value.loginName,
                             registerForm.value.password,
                             registerForm.value.passwordRepeat);
-    console.log(this.user.password);
     registerForm.reset();
     }
 
