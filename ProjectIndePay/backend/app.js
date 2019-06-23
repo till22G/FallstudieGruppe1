@@ -41,9 +41,29 @@ app.use((req, res, next) => {
 //--------------------------------------------------//
 
 //--------------------------------------------------//
-// This path should add new users to database @ToDo change to POST ASA testing is done
+// This path should add new users to database
 app.get("/control/users/create", (req, res, next) => {
   console.log("Request for new user: " + req.body);
+  var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
+  var data = [req.body.loginName];
+  var query = mysql.format(selectQuery, data);
+  var connection = createNewConnection();
+  connection.connect();
+  connection.query(query, function(err, rows, fields) {
+    if (!err) {
+      if (rows.length > 0){
+        res.status(201).json({
+          message: "User already exists!"
+        });
+      }else{
+        console.log("User does not exist yet! Creating...");
+      }
+    } else {
+      console.log(err);
+      res.send(err);
+    }
+  });
+
   var insertQuery =
     "INSERT INTO REGUSER (??,??,??,??,??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   var data = [
@@ -60,10 +80,10 @@ app.get("/control/users/create", (req, res, next) => {
     "LANGUAGE",
     "LAST_LOGIN_DATE",
     new Date(),
-    "this is loginname", // @ToDo get real login from request
-    "this is password", // @ToDo get real password from request
-    "this is firstname", // @ToDo get real firstname from request
-    "this is lastname", // @ToDo get real lastname from request
+    req.body.loginName,
+    req.body.password,
+    req.body.firstName,
+    req.body.lastName,
     0,
     0,
     0,
@@ -72,10 +92,8 @@ app.get("/control/users/create", (req, res, next) => {
     "de", // @ToDo get real language from request
     new Date(0)
   ];
-  var query = mysql.format(insertQuery, data);
+  query = mysql.format(insertQuery, data);
 
-  var connection = createNewConnection();
-  connection.connect();
   connection.query(query, function(err, rows, fields) {
     if (!err) {
       console.log("Success!");
@@ -97,7 +115,7 @@ app.get("/control/users/create", (req, res, next) => {
 app.get("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-  var data = ["testroot"]; // @ToDo get real loginname from request
+  var data = [req.body.loginName];
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -109,8 +127,7 @@ app.get("/control/users/read", (req, res, next) => {
       if (rows.length > 0) {
         var row = rows[0];
         if (row.LOCKED == 0) {
-          if (row.PASSWORD == "admin123") {
-            // @ToDo get real password from request
+          if (row.PASSWORD == req.body.password) {
             res.status(201).json({
               message   : "Success!",
               firstName : row.RU_FIRSTNAME,
