@@ -1,6 +1,7 @@
 import { OnInit, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegisterUser } from 'src/app/shared/register-user.model';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -11,17 +12,23 @@ import { RegisterUser } from 'src/app/shared/register-user.model';
 export class RegisterComponent implements OnInit {
   user: RegisterUser;
 
-  constructor() {}
+  constructor(public authenticationService: AuthenticationService ) {}
 
   ngOnInit() {}
 
+  // resets form after object creation
   onRegister(registerForm: NgForm) {
-    this.user = new RegisterUser(registerForm.value.firstName,
-                            registerForm.value.lastName,
-                            registerForm.value.loginName,
-                            registerForm.value.password,
-                            registerForm.value.passwordRepeat);
-    console.log(this.user.password);
+    if (registerForm.invalid){
+      return;
+    }
+    else {
+      this.authenticationService
+      .register(registerForm.value.firstName,
+                registerForm.value.lastName,
+                registerForm.value.loginName,
+                registerForm.value.password,
+                registerForm.value.passwordRepeat);
+    }
     registerForm.reset();
     }
 

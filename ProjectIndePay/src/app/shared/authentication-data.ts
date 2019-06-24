@@ -1,4 +1,4 @@
-export class SessionUser {
+export class AuthenticationData {
   public loginName: string;
   public password: string;
 
