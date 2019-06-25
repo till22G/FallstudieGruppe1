@@ -12,9 +12,9 @@ export class AuthenticationService {
 
   login(loginName: string, password: string) {
     // create const with the data passed to the login method of the service
-    const authenticationData: AuthenticationData ={loginName: loginName, password: password};
+    const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
-    this.http.post<{token:string}>('http://localhost:3000/control/users/read', authenticationData)
+    this.http.post<{token: string}>('http://localhost:3000/control/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
@@ -30,22 +30,21 @@ export class AuthenticationService {
   register(firstName: string, lastName: string, loginName: string, password: string, repeatPassword: string) {
 
     // create const as RegisterUser to pass along in http.post
-    const registerUser: RegisterUser = {firstName: firstName,
-      lastName: lastName,
-      loginName: loginName,
-      password: password,
-      repeatPassword: repeatPassword};
+    const registerUser: RegisterUser = {
+      firstName      : firstName,
+      lastName       : lastName,
+      loginName      : loginName,
+      password       : password,
+      repeatPassword : repeatPassword};
 
       // implement path for user registration
-      this.http.post('', RegisterUser)
-      .subscribe(response => {
+    this.http.post('', RegisterUser).subscribe(response => {
         console.log('registration worked');
         console.log(response);
       });
     }
 
-    getToken(){
+    getToken() {
       return this.token;
-
     }
   }
