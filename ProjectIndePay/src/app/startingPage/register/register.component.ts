@@ -14,8 +14,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(public authenticationService: AuthenticationService ) {}
 
-  ngOnInit() {}
-
   // resets form after object creation
   onRegister(registerForm: NgForm) {
     if (registerForm.invalid){
@@ -24,12 +22,13 @@ export class RegisterComponent implements OnInit {
     else {
       this.authenticationService
       .register(registerForm.value.firstName,
-                registerForm.value.lastName,
-                registerForm.value.loginName,
-                registerForm.value.password,
-                registerForm.value.passwordRepeat);
-    }
-    registerForm.reset();
+        registerForm.value.lastName,
+        registerForm.value.loginName,
+        registerForm.value.password,
+        registerForm.value.passwordRepeat);
+      }
+      registerForm.reset();
     }
 
+    ngOnInit() {}
 }
