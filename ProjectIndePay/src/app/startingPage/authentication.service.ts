@@ -15,7 +15,7 @@ export class AuthenticationService {
       .subscribe(response => {
         console.log('auth worked');
         console.log(response);
-        // implement what schoul happen
+        // implement what should happen
       });
   }
 
@@ -30,12 +30,11 @@ export class AuthenticationService {
                                       repeatPassword: repeatPassword};
 
  // implement path for user registration
-  this.http.post('', RegisterUser)
+  this.http.post('http://localhost:3000/control/users/create', registerUser)
     .subscribe(response => {
       console.log('registration worked');
       console.log(response);
     });
-
   }
 
 

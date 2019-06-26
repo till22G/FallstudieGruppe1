@@ -18,10 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(public authenticationService: AuthenticationService ) {}
   user: AuthenticationData;
 
-
   //method is executed when LoginButton pressed and thus loginForm is submitted
   onLogin(loginForm: NgForm) {
-    if (loginForm.invalid){     //check if form is valid
+    if (loginForm.invalid) {     //check if form is valid
       return;
     }
     else {     // else pass loginName and password to authentication service

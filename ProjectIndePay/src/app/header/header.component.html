@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
-  <span class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">INDEPAY</a></span>
+  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">INDEPAY</a></span>
+  <span *ngIf="loggedIn" class="header-element"><a mat-button routerLink="" routerLinkActive="mat-accent">INDEPAY</a></span>
   <span class="spacer"></span>
-  <span class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
-  <span class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
+  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
+  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
+  <span *ngIf="loggedIn" class="header-element"><a mat-button routerLink="" routerLinkActive="mat-accent">Logout</a></span>
 </mat-toolbar>
