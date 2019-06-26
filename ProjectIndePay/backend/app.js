@@ -2,7 +2,13 @@ const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const jwt = require("jsonwebtoken");
+const uuid = require('uuid/v4');
+
 const app = express();
+
+var secretKey = uuid();
+console.log("Sessions secret key = " + secretKey);
 
 //--------------------------------------------------//
 // This function handles creation of a connection to db. It can be called multiple times, to create new connections.
@@ -112,10 +118,11 @@ app.post("/control/users/create", (req, res, next) => {
 //--------------------------------------------------//
 // This path is used for login. It also does the verification, and then sends relevant data back to client.
 // @ToDo maybe some more tranlation of roles and currency on server side?
-app.post("/control/users/read", (req, res, next) => {
+app.get("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-  var data = [req.body.loginName];
+  var data = ['testroot']; // for testing
+  //var data = [req.body.loginName];
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -127,7 +134,17 @@ app.post("/control/users/read", (req, res, next) => {
       if (rows.length > 0) {
         var row = rows[0];
         if (row.LOCKED == 0) {
-          if (row.PASSWORD == req.body.password) {
+          //if (row.PASSWORD == req.body.password) {
+          if (row.PASSWORD == 'admin123') { // for testing
+            // creating webToken
+            var claims = {
+              userId    : row.USERID,
+              loginName : row.LOGINNAME
+            }
+            var token = jwt.sign(claims, secretKey);
+
+            console.log(jwt.verify(token, secretKey));
+            // sending response
             res.status(201).json({
               message   : "Success!",
               firstName : row.RU_FIRSTNAME,
@@ -135,7 +152,8 @@ app.post("/control/users/read", (req, res, next) => {
               balance   : row.BALANCE,
               currency  : row.CURRENCY,
               role      : row.ROLE,
-              language  : row.LANGUAGE // @ToDo webtoken authentification
+              language  : row.LANGUAGE,
+              jwt       : token
             });
           } else {
             res.status(201).json({
