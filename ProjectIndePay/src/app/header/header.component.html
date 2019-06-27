@@ -1,8 +1,12 @@
 <mat-toolbar color="primary">
-  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">INDEPAY</a></span>
-  <span *ngIf="loggedIn" class="header-element"><a mat-button routerLink="" routerLinkActive="mat-accent">INDEPAY</a></span>
+  <div>
+    <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">INDEPAY</a></span>
+    <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">INDEPAY</a></span><br>
+    <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
+  </div>
+
   <span class="spacer"></span>
-  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
-  <span *ngIf="!loggedIn" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
-  <span *ngIf="loggedIn" class="header-element"><a mat-button routerLink="" routerLinkActive="mat-accent">Logout</a></span>
+  <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
+  <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
+  <span *ngIf="userIsAuthenticated" class="header-element"><button mat-button (click)="onLogout()">Logout</button></span>
 </mat-toolbar>
