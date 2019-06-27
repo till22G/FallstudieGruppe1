@@ -18,12 +18,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { InfoPageComponent } from './startingPage/info-page/info-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './restricted-pages/home-page/home-page.component';
+import { AuthenticationGuard } from './restricted-pages/authentication.guard';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
   { path: 'info', component: InfoPageComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard]}
 ];
 
 @NgModule({
@@ -32,7 +35,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    InfoPageComponent
+    InfoPageComponent,
+    HomePageComponent
 
   ],
   imports: [
@@ -50,7 +54,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
