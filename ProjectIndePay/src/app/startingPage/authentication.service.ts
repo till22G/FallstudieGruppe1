@@ -15,13 +15,13 @@ export class AuthenticationService {
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{token: string}>('http://localhost:3000/control/users/read', authenticationData)
+    this.http.post('http://localhost:3000/control/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
       // get token from response
-      const token = response.token;
-      this.token = token;
+      // const token = response.token;
+      // this.token = token;
       // implement what schoul happen
     });
   }

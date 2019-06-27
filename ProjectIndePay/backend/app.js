@@ -118,11 +118,11 @@ app.post("/control/users/create", (req, res, next) => {
 //--------------------------------------------------//
 // This path is used for login. It also does the verification, and then sends relevant data back to client.
 // @ToDo maybe some more tranlation of roles and currency on server side?
-app.get("/control/users/read", (req, res, next) => {
+app.post("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-  var data = ['testroot']; // for testing
-  //var data = [req.body.loginName];
+   var data = ['tgalla']; // for testing
+  // var data = [req.body.loginName];
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -134,8 +134,8 @@ app.get("/control/users/read", (req, res, next) => {
       if (rows.length > 0) {
         var row = rows[0];
         if (row.LOCKED == 0) {
-          //if (row.PASSWORD == req.body.password) {
-          if (row.PASSWORD == 'admin123') { // for testing
+          // if (row.PASSWORD == req.body.password) {
+           if (row.PASSWORD == 'tgalla') { // for testing
             // creating webToken
             var claims = {
               userId    : row.USERID,
