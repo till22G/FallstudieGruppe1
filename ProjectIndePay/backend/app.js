@@ -121,8 +121,8 @@ app.post("/control/users/create", (req, res, next) => {
 app.post("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-   var data = ['tgalla']; // for testing
-  // var data = [req.body.loginName];
+   // var data = ['tgalla']; // for testing
+   var data = [req.body.loginName];
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -134,18 +134,19 @@ app.post("/control/users/read", (req, res, next) => {
       if (rows.length > 0) {
         var row = rows[0];
         if (row.LOCKED == 0) {
-          // if (row.PASSWORD == req.body.password) {
-           if (row.PASSWORD == 'tgalla') { // for testing
+           if (row.PASSWORD == req.body.password) {
+           // if (row.PASSWORD == 'tgalla') { // for testing
             // creating webToken
             var claims = {
               userId    : row.USERID,
               loginName : row.LOGINNAME
             }
-            var token = jwt.sign(claims, secretKey);
+            var token = jwt.sign(claims, secretKey, {expiresIn: "1h" });
 
             console.log(jwt.verify(token, secretKey));
             // sending response
             res.status(201).json({
+              jwt       : token,
               message   : "Success!",
               firstName : row.RU_FIRSTNAME,
               surname   : row.RU_SURNAME,
@@ -153,7 +154,6 @@ app.post("/control/users/read", (req, res, next) => {
               currency  : row.CURRENCY,
               role      : row.ROLE,
               language  : row.LANGUAGE,
-              jwt       : token
             });
           } else {
             res.status(201).json({
