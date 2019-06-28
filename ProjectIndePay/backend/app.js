@@ -1,26 +1,21 @@
+require("./env");
 const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 
 const jwt = require("jsonwebtoken");
-const uuid = require('uuid/v4');
 
 const app = express();
-
-var secretKey = uuid();
-console.log("Sessions secret key = " + secretKey);
 
 //--------------------------------------------------//
 // This function handles creation of a connection to db. It can be called multiple times, to create new connections.
 // All opening and closing has to be done in calling function.
 function createNewConnection() {
   var tempConnection = mysql.createConnection({
-    //connectTimeout: 60 * 1000,
-    host: "db4free.net",
-    //port     : 3306,
-    user: "alexander92",
-    password: "esistsoschön",
-    database: "fallstudieindepa"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
   });
   return tempConnection;
 }
@@ -121,8 +116,8 @@ app.post("/control/users/create", (req, res, next) => {
 app.post("/control/users/read", (req, res, next) => {
   console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-   // var data = ['tgalla']; // for testing
-   var data = [req.body.loginName];
+  //var data = ['tgalla']; // for testing
+  var data = [req.body.loginName];
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -135,15 +130,15 @@ app.post("/control/users/read", (req, res, next) => {
         var row = rows[0];
         if (row.LOCKED == 0) {
            if (row.PASSWORD == req.body.password) {
-           // if (row.PASSWORD == 'tgalla') { // for testing
+           //if (row.PASSWORD == 'tgalla') { // for testing
             // creating webToken
             var claims = {
               userId    : row.USERID,
               loginName : row.LOGINNAME
             }
-            var token = jwt.sign(claims, secretKey, {expiresIn: "10m" });
+            var token = jwt.sign(claims, process.env.SECRET_KEY, {expiresIn: "10m" });
 
-            console.log(jwt.verify(token, secretKey));
+            console.log(jwt.verify(token, process.env.SECRET_KEY));
             // sending response
             res.status(201).json({
               jwt       : token,

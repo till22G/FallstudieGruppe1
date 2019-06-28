@@ -7,8 +7,7 @@ module.exports = (req, res, next) => {
     // token is the second part the name => therefore use split to get it
     const token = req.headers.authorization.split(" ")[1];
     //verify the token with  jwt.verify()
-    // TODO: insert creation string
-    jwt.verify(token, "insert string with which token was created here");
+    jwt.verify(token, process.env.SECRET_KEY);
     next();
   }
   catch (error){
