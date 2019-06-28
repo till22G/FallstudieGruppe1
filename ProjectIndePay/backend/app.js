@@ -1,4 +1,6 @@
 require("./env");
+const router = require("./router");
+
 const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -26,7 +28,7 @@ function createNewConnection() {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Necessary to access other servers on different hosts and ports
+// Necessary to access to other servers on different hosts and ports
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -40,6 +42,8 @@ app.use((req, res, next) => {
   next();
 });
 //--------------------------------------------------//
+
+app.use("/test", router);
 
 //--------------------------------------------------//
 // This path should add new users to database
