@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(public authenticationService: AuthenticationService ) {}
 
-  // resets form after object creation
+
   onRegister(registerForm: NgForm) {
     if (registerForm.invalid) {
       return;

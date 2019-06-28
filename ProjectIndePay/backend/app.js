@@ -141,12 +141,13 @@ app.post("/control/users/read", (req, res, next) => {
               userId    : row.USERID,
               loginName : row.LOGINNAME
             }
-            var token = jwt.sign(claims, secretKey, {expiresIn: "1h" });
+            var token = jwt.sign(claims, secretKey, {expiresIn: "10m" });
 
             console.log(jwt.verify(token, secretKey));
             // sending response
             res.status(201).json({
               jwt       : token,
+              expiresIn : "600",  // token expires after 600 seconds => give this information to frontend
               message   : "Success!",
               firstName : row.RU_FIRSTNAME,
               surname   : row.RU_SURNAME,

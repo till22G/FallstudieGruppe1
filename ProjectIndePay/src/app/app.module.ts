@@ -19,7 +19,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { InfoPageComponent } from './startingPage/info-page/info-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './restricted-pages/home-page/home-page.component';
-import { AuthenticationGuard } from './restricted-pages/authentication.guard';
+import { AuthenticationGuard } from './restricted-pages/services/authentication.guard';
+import { BalanceComponent } from './restricted-pages/balance/balance.component';
+import { LastTransactionsComponent } from './restricted-pages/last-transactions/last-transactions.component';
+import { AllTransactionsComponent } from './restricted-pages/last-transactions/all-transactions/all-transactions.component';
+import { OutgoingTransactionsComponent } from './restricted-pages/last-transactions/outgoing-transactions/outgoing-transactions.component';
+import { IncomingTransactionsComponent } from './restricted-pages/last-transactions/incoming-transactions/incoming-transactions.component';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -36,7 +41,12 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     InfoPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    BalanceComponent,
+    LastTransactionsComponent,
+    AllTransactionsComponent,
+    OutgoingTransactionsComponent,
+    IncomingTransactionsComponent
 
   ],
   imports: [
