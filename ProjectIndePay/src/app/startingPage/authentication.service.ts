@@ -14,6 +14,7 @@ export class AuthenticationService {
   private authenticationNameListener = new Subject<string>();
   private isAuthenticated = false;
 
+  private initialBalance: number;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -24,7 +25,7 @@ export class AuthenticationService {
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{jwt: string, firstName: string, expiresIn: number}>('http://localhost:3000/control/users/read', authenticationData)
+    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number}>('http://localhost:3000/control/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
@@ -57,9 +58,13 @@ export class AuthenticationService {
           this.logout(); // call logout after timer expires
         }, expiresInDuration * 1000); // * 1000 => because setTimer works with milliseconds and we get seconds from the backend
 
+        // get the initial balance so the balance servive can get it for the home-page after rerouting
+        const initialBalance = response.balance;
+        this.initialBalance = initialBalance;
+
         //give the local Storage the curent date + the expiration time so we can implements an auto login while token is valid
-        const now = new Date();
-        const expirationDate = new Date(now.getTime() + (expiresInDuration * 1000));
+        // const now = new Date();
+        // const expirationDate = new Date(now.getTime() + (expiresInDuration * 1000));
         // this.saveAuthenticationData(token , expirationDate); ---------------------------> for auto login
         // call router an navigate to the home page
         this.router.navigate(['/home']);
@@ -147,5 +152,9 @@ export class AuthenticationService {
 
     getIsAuthenticated() {
       return this.isAuthenticated;
+    }
+
+    getInitialBalance() {
+      return this.initialBalance;
     }
   }

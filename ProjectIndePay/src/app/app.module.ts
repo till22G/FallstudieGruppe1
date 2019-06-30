@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import {MatToolbarModule,
@@ -8,7 +8,9 @@ import {MatToolbarModule,
         MatCardModule,
         MatButtonModule,
         MatInputModule,
-        MatProgressSpinnerModule} from '@angular/material';
+        MatProgressSpinnerModule,
+        MatListModule,
+        MatPaginatorModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,16 +24,15 @@ import { HomePageComponent } from './restricted-pages/home-page/home-page.compon
 import { AuthenticationGuard } from './restricted-pages/services/authentication.guard';
 import { BalanceComponent } from './restricted-pages/balance/balance.component';
 import { LastTransactionsComponent } from './restricted-pages/last-transactions/last-transactions.component';
-import { AllTransactionsComponent } from './restricted-pages/last-transactions/all-transactions/all-transactions.component';
-import { OutgoingTransactionsComponent } from './restricted-pages/last-transactions/outgoing-transactions/outgoing-transactions.component';
-import { IncomingTransactionsComponent } from './restricted-pages/last-transactions/incoming-transactions/incoming-transactions.component';
+import { FilterTransactionsPipe } from './restricted-pages/services/filter-transactions.pipe';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
   { path: 'info', component: InfoPageComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard]}
+  { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard]},
+  { path: 'lastTransactions', component: LastTransactionsComponent, canActivate: [AuthenticationGuard]}
 ];
 
 @NgModule({
@@ -44,10 +45,7 @@ const appRoutes: Routes = [
     HomePageComponent,
     BalanceComponent,
     LastTransactionsComponent,
-    AllTransactionsComponent,
-    OutgoingTransactionsComponent,
-    IncomingTransactionsComponent
-
+    FilterTransactionsPipe,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +56,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatPaginatorModule,
     NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
