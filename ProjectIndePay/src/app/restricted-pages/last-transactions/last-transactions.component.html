@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <div>
+      <button mat-button id="all" (click)="onChangePipeFilter('all')">All</button>
+      <button mat-button id="sent" (click)="onChangePipeFilter('sent')">Sent</button>
+      <button mat-button id="recieved" (click)="onChangePipeFilter('recieved')">Recieved</button>
+  </div>
+</mat-toolbar>
+
+  <div>
+    <mat-list>
+      <h2>Last Transactions</h2>
+      <mat-list-item
+        class=list-group-item
+        *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
+        Amount: {{ transaction.amount }}  direction: {{transaction.direction}} contact: {{transaction.contact}}
+      </mat-list-item>
+    </mat-list>
+    <mat-paginator
+      [length]="totalTransactions"
+      [pageSize]="transactionsPerPage"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onChangedPage($event)"></mat-paginator>
+  </div>
+

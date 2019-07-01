@@ -10,6 +10,7 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+    isLoading = false;
 
   //@ViewChild('loginForm', {static: false}) loginForm: NgForm;
   // attribute for the spinner
@@ -18,21 +19,24 @@ export class LoginComponent implements OnInit {
   constructor(public authenticationService: AuthenticationService ) {}
   user: AuthenticationData;
 
+
+
   //method is executed when LoginButton pressed and thus loginForm is submitted
   onLogin(loginForm: NgForm) {
     if (loginForm.invalid) {     //check if form is valid
       return;
     }
     else {     // else pass loginName and password to authentication service
-      this.authenticationService.login(loginForm.value.loginName, loginForm.value.password);
+      this.authenticationService
+      .login( loginForm.value.loginName,
+              loginForm.value.password);
+      this.isLoading = true;
     }
     loginForm.reset();
-
-
-    //old code => can be removed later if not needed
-    // this.user = new AuthenticationData(loginForm.value.loginName,
-    //                                     loginForm.value.password);
   }
-      ngOnInit() {
-      }
+
+
+  ngOnInit() {
+
+  }
 }

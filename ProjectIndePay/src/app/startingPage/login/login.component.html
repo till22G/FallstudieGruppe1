@@ -1,5 +1,4 @@
 <div class="div-login-form">
-  <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
   <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
       <mat-form-field>
         <input type="text"
@@ -20,11 +19,13 @@
       </mat-form-field>
       <br>
       <button
+      *ngIf="!isLoading"
       id="login-button"
       mat-raised-button
       color="primary"
       type="submit"
       [disabled]="!loginForm.valid"
       >Login</button>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </div>

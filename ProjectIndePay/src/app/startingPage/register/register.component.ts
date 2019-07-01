@@ -11,12 +11,13 @@ import { AuthenticationService } from '../authentication.service';
 
 export class RegisterComponent implements OnInit {
   user: RegisterUser;
+  isLoading = false;
 
   constructor(public authenticationService: AuthenticationService ) {}
 
-  // resets form after object creation
+
   onRegister(registerForm: NgForm) {
-    if (registerForm.invalid){
+    if (registerForm.invalid) {
       return;
     }
     else {
@@ -26,8 +27,9 @@ export class RegisterComponent implements OnInit {
         registerForm.value.loginName,
         registerForm.value.password,
         registerForm.value.passwordRepeat);
+      this.isLoading = true;
       }
-      registerForm.reset();
+    registerForm.reset();
     }
 
     ngOnInit() {}

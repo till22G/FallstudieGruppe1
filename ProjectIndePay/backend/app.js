@@ -1,26 +1,23 @@
+require("./env");
+const router = require("./router");
+
 const mysql = require("mysql");
 const express = require("express");
 const bodyParser = require("body-parser");
 
 const jwt = require("jsonwebtoken");
-const uuid = require('uuid/v4');
 
 const app = express();
-
-var secretKey = uuid();
-console.log("Sessions secret key = " + secretKey);
 
 //--------------------------------------------------//
 // This function handles creation of a connection to db. It can be called multiple times, to create new connections.
 // All opening and closing has to be done in calling function.
 function createNewConnection() {
   var tempConnection = mysql.createConnection({
-    //connectTimeout: 60 * 1000,
-    host: "db4free.net",
-    //port     : 3306,
-    user: "alexander92",
-    password: "esistsoschön",
-    database: "fallstudieindepa"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
   });
   return tempConnection;
 }
@@ -31,7 +28,7 @@ function createNewConnection() {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Necessary to access other servers on different hosts and ports
+// Necessary to access to other servers on different hosts and ports
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -45,6 +42,8 @@ app.use((req, res, next) => {
   next();
 });
 //--------------------------------------------------//
+
+app.use("/test", router);
 
 //--------------------------------------------------//
 // This path should add new users to database
@@ -119,11 +118,10 @@ app.post("/control/users/create", (req, res, next) => {
 // This path is used for login. It also does the verification, and then sends relevant data back to client.
 // @ToDo maybe some more tranlation of roles and currency on server side?
 app.post("/control/users/read", (req, res, next) => {
-  console.log("Request for existing user: " + req.body.lohinName);
+  console.log("Request for existing user: " + req.body);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
-  // var data = ['testroot']; // for testing
+  //var data = ['tgalla']; // for testing
   var data = [req.body.loginName];
-  console.log(data);
   var query = mysql.format(selectQuery, data);
 
   var connection = createNewConnection();
@@ -135,18 +133,20 @@ app.post("/control/users/read", (req, res, next) => {
       if (rows.length > 0) {
         var row = rows[0];
         if (row.LOCKED == 0) {
-          if (row.PASSWORD == req.body.password) {
-          //if (row.PASSWORD == 'admin123') { // for testing
+           if (row.PASSWORD == req.body.password) {
+           //if (row.PASSWORD == 'tgalla') { // for testing
             // creating webToken
             var claims = {
               userId    : row.USERID,
               loginName : row.LOGINNAME
             }
-            var token = jwt.sign(claims, secretKey);
+            var token = jwt.sign(claims, process.env.SECRET_KEY, {expiresIn: "10m" });
 
-            console.log(jwt.verify(token, secretKey));
+            console.log(jwt.verify(token, process.env.SECRET_KEY));
             // sending response
             res.status(201).json({
+              jwt       : token,
+              expiresIn : "600",  // token expires after 600 seconds => give this information to frontend
               message   : "Success!",
               firstName : row.RU_FIRSTNAME,
               surname   : row.RU_SURNAME,
@@ -154,7 +154,6 @@ app.post("/control/users/read", (req, res, next) => {
               currency  : row.CURRENCY,
               role      : row.ROLE,
               language  : row.LANGUAGE,
-              jwt       : token
             });
           } else {
             res.status(201).json({
