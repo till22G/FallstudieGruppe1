@@ -14,14 +14,14 @@ export class AuthenticationService {
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
-
+    console.log(authenticationData);
     this.http.post<{token: string}>('http://localhost:3000/control/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
-      console.log(response);
       // get token from response
       const token = response.token;
       this.token = token;
+      console.log(token);
       // implement what schoul happen
     });
   }
@@ -39,7 +39,7 @@ export class AuthenticationService {
       repeatPassword : repeatPassword};
 
       // implement path for user registration
-    this.http.post('', RegisterUser).subscribe(response => {
+    this.http.post('', registerUser).subscribe(response => {
         console.log('registration worked');
         console.log(response);
       });
