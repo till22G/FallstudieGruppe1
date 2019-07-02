@@ -13,7 +13,6 @@ export class TransactionsService {
     getTransactions() {
       this.http.get('')
         .subscribe(response => {
-
         })
 
     }

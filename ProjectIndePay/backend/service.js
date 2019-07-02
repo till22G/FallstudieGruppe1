@@ -10,7 +10,7 @@ function createNewConnection() {
   return tempConnection;
 }
 
-exports.createUser = function(data, res) {
+exports.createUser = function(data, callback) {
   console.log("DBService createUser " + data);
 
   var insertQuery =
@@ -21,41 +21,38 @@ exports.createUser = function(data, res) {
   connection.connect();
   console.log(query);
   connection.query(query, function(err, rows, fields) {
-    if (!err) {
-      if (rows.affectedRows == 1) {
-        return true;
-      } else {
-        return false;
-      }
+    if (err) {
+      console.log("DBService createUser ERR = " + err);
+      callback(err, null);
     } else {
-      console.log(err);
-      res.send(err);
+      console.log("DBService createUser ROWS = " + rows);
+      callback(null, rows);
     }
   });
   connection.end();
 };
 
-exports.getUserByName = function(loginName, res) {
+exports.getUserByName = function(loginName, callback) {
   console.log("DBService getUserByName " + loginName);
   var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
   var query = mysql.format(selectQuery, [loginName]);
 
   var connection = createNewConnection();
   connection.connect();
-  console.log(query);
+  console.log("DBService getUserByName QUERY = " + query);
   connection.query(query, function(err, rows, fields) {
-    if (!err) {
-      console.log("DBService getUserByName ROWS = " + rows)
-      return rows;
+    if (err) {
+      console.log("DBService getUserByName ERR = " + err);
+      callback(err, null);
     } else {
-      console.log(err);
-      res.send(err);
+      console.log("DBService getUserByName ROWS = " + rows);
+      callback(null, rows);
     }
   });
   connection.end();
 };
 
-exports.getUserById = function(userId, res) {
+exports.getUserById = function(userId, callback) {
   console.log("DBService getUserById " + userId);
   var selectQuery = "SELECT * FROM REGUSER WHERE USERID = ?";
   var query = mysql.format(selectQuery, [userId]);
@@ -63,11 +60,12 @@ exports.getUserById = function(userId, res) {
   connection.connect();
   console.log(query);
   connection.query(query, function(err, rows, fields) {
-    if (!err) {
-      return rows;
+    if (err) {
+      console.log("DBService getUserById ERR = " + err);
+      callback(err, null);
     } else {
-      console.log(err);
-      res.send(err);
+      console.log("DBService getUserById ROWS = " + rows);
+      callback(null, rows);
     }
   });
   connection.end();
