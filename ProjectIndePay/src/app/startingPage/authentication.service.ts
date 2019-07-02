@@ -25,7 +25,8 @@ export class AuthenticationService {
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number}>('http://localhost:3000/control/users/read', authenticationData)
+    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number}>
+    ('http://localhost:3000/control/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
@@ -35,7 +36,7 @@ export class AuthenticationService {
       this.token = token;
       console.log(this.token);
 
-      //check if a token was returned
+      // check if a token was returned
       if(token) {
         // set isAuthenticated to true so other components can get this information from the authentication servive
         // and check if the user is authenticated

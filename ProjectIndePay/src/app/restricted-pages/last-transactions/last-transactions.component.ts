@@ -32,10 +32,8 @@ export class LastTransactionsComponent implements OnInit {
   }
 
   onChangedPage(pageDate: PageEvent) {
-
   }
 
   ngOnInit() {
   }
-
 }

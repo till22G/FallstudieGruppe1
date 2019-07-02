@@ -11,6 +11,7 @@ export class BalanceService {
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
 
   // send with token
+
   // getCurrentBalance() {
   //   this.http.get('')
   //   .subscribe(response => {

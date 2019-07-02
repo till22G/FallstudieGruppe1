@@ -128,7 +128,7 @@ app.post("/control/users/read", (req, res, next) => {
   connection.connect();
   connection.query(query, function(err, rows, fields) {
     if (!err) {
-      console.log("Success!");ö
+      console.log("Success!");
       console.log(rows);
       if (rows.length > 0) {
         var row = rows[0];
