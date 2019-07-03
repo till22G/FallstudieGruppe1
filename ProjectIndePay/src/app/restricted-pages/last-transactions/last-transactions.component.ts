@@ -13,14 +13,14 @@ export class LastTransactionsComponent implements OnInit {
   totalTransactions = 8;
   transactionsPerPage = 4;
   pageSizeOptions = [1, 2, 5, 10, 20];
-  lastTransactions = [  {amount: 20, direction: 'sent', contact: 'phil' },
-                        {amount: 320, direction: 'recieved', contact: 'tom' },
-                        {amount: 9321, direction: 'recieved', contact: 'Hans' },
-                        {amount: 5, direction: 'sent', contact: 'Lisa' },
-                        {amount: 10, direction: 'recieved', contact: 'Anna' },
-                        {amount: 1654, direction: 'recieved', contact: 'Leon' },
-                        {amount: 21, direction: 'sent', contact: 'Mark' },
-                        {amount: 2, direction: 'sent', contact: 'Akufu' },
+  lastTransactions = [  { transactionDate: '01.01.2013',
+                          totalAmount: 20.04,
+                          amount: 20,
+                          fee: 0.04,
+                          currency: 'USH',
+                          receiver: 'phil',
+                          category: 'tranfer',
+                          comment: 'dept' },
                         ];
 
   constructor(private router: Router, private transctionService: TransactionsService) { }
