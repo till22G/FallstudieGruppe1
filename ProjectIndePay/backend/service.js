@@ -1,23 +1,27 @@
 const mysql = require("mysql");
 
-function createNewConnection() {
+//-----------------------------------------------------//
+function createNewConnection(multiple) {
   var tempConnection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    database: process.env.DB_DATABASE,
+    multipleStatements: multiple
   });
   return tempConnection;
 }
+//-----------------------------------------------------//
 
+//-----------------------------------------------------//
 exports.createUser = function(data, callback) {
   console.log("DBService createUser " + data);
 
   var insertQuery =
-    "INSERT INTO REGUSER (??,??,??,??,??,??,??,??,??,??,??,??) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO REGUSER ('SYS_CREATE_DATE', 'LOGINNAME', 'PASSWORD', 'RU_FIRSTNAME', 'RU_SURNAME', 'LOCKED', 'BALANCE', 'CURRENCY', 'COUNTRY', 'ROLE', 'LANGUAGE', 'LAST_LOGIN_DATE') VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
   query = mysql.format(insertQuery, data);
 
-  var connection = createNewConnection();
+  var connection = createNewConnection(false);
   connection.connect();
   console.log(query);
   connection.query(query, function(err, rows, fields) {
@@ -31,13 +35,15 @@ exports.createUser = function(data, callback) {
   });
   connection.end();
 };
+//-----------------------------------------------------//
 
+//-----------------------------------------------------//
 exports.getUserByName = function(loginName, callback) {
   console.log("DBService getUserByName " + loginName);
-  var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?";
+  var selectQuery = "SELECT * FROM REGUSER WHERE LOGINNAME = ?;";
   var query = mysql.format(selectQuery, [loginName]);
 
-  var connection = createNewConnection();
+  var connection = createNewConnection(false);
   connection.connect();
   console.log("DBService getUserByName QUERY = " + query);
   connection.query(query, function(err, rows, fields) {
@@ -51,12 +57,14 @@ exports.getUserByName = function(loginName, callback) {
   });
   connection.end();
 };
+//-----------------------------------------------------//
 
+//-----------------------------------------------------//
 exports.getUserById = function(userId, callback) {
   console.log("DBService getUserById " + userId);
-  var selectQuery = "SELECT * FROM REGUSER WHERE USERID = ?";
+  var selectQuery = "SELECT * FROM REGUSER WHERE USERID = ?;";
   var query = mysql.format(selectQuery, [userId]);
-  var connection = createNewConnection();
+  var connection = createNewConnection(false);
   connection.connect();
   console.log(query);
   connection.query(query, function(err, rows, fields) {
@@ -70,3 +78,32 @@ exports.getUserById = function(userId, callback) {
   });
   connection.end();
 };
+//-----------------------------------------------------//
+exports.doTransaction = function(data, callback) {
+  console.log("DBService doTransaction " + data);
+  var updateQuery1 =
+    "UPDATE REGUSER SET BALANCE = BALANCE - ? WHERE USERID = ?;";
+  var updateQuery2 =
+    "UPDATE REGUSER SET BALANCE = BALANCE + ? WHERE USERID = ?;";
+  var insertQuery =
+    "INSERT INTO TRANSACTION (`SYS_CREATE_DATE`, `SENDER`, `RECEIVER`, `AMOUNT`, `FEE`, `CURRENCY`, `CATEGORY`, `COMMENT`) VALUES (?,?,?,?,?,?,?,?)";
+  var totalQuery = updateQuery1 + updateQuery2 + insertQuery;
+
+  var query = mysql.format(totalQuery, data);
+  var connection = createNewConnection(true);
+  connection.connect();
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) {
+      console.log("DBService getUserById ERR = " + err);
+      callback(err, null);
+    } else {
+      console.log("DBService getUserById ROWS = " + rows);
+      callback(null, rows);
+    }
+  });
+  connection.end();
+};
+//-----------------------------------------------------//
+
+//-----------------------------------------------------//
