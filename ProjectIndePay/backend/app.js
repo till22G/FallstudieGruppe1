@@ -9,19 +9,6 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 
-//--------------------------------------------------//
-// This function handles creation of a connection to db. It can be called multiple times, to create new connections.
-// All opening and closing has to be done in calling function.
-function createNewConnection() {
-  var tempConnection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
-  });
-  return tempConnection;
-}
-//--------------------------------------------------//
 
 //--------------------------------------------------//
 // Necessary to have an easier request body to work with
