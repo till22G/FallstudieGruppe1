@@ -1,0 +1,19 @@
+<div class="div-send-money">
+  <form (ngSubmit)="onContinueSendMoney(sendMoneyForm)" #sendMoneyForm>
+    <div>
+      <input type="number">
+    </div>
+    <div>
+      Currency
+    </div>
+    <div>
+      Current balance here
+    </div>
+    <div>
+      <button mat-raised-button color="primary">Search in contacts</button>
+      <button mat-raised-button color="primary">New contact</button>
+      <br>show contact here
+    </div>
+    <button mat-raised-button color="primary" type="submit">Continue</button>
+  </form>
+</div>

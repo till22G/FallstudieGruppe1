@@ -2,6 +2,7 @@ const DBService = require("./service");
 
 const jwt = require("jsonwebtoken");
 
+//-----------------------------------------------------//
 function sendUserData(row, res){
   var claims = {
     userId    : row.USERID,
@@ -23,6 +24,7 @@ function sendUserData(row, res){
     language  : row.LANGUAGE
   });
 }
+//-----------------------------------------------------//
 
 //-----------------------------------------------------//
 exports.createUser = function(req, res) {
@@ -46,18 +48,6 @@ exports.createUser = function(req, res) {
       } else {
 
         var data = [
-          "SYS_CREATE_DATE",
-          "LOGINNAME",
-          "PASSWORD",
-          "RU_FIRSTNAME",
-          "RU_SURNAME",
-          "LOCKED",
-          "BALANCE",
-          "CURRENCY",
-          "COUNTRY",
-          "ROLE",
-          "LANGUAGE",
-          "LAST_LOGIN_DATE",
           new Date(),
           req.body.loginName,
           req.body.password,
@@ -65,7 +55,7 @@ exports.createUser = function(req, res) {
           req.body.lastName,
           0,
           0,
-          0,
+          1,
           "GER", // @ToDo get real country from request
           1,
           "de", // @ToDo get real language from request
@@ -92,6 +82,7 @@ exports.createUser = function(req, res) {
 };
 //-----------------------------------------------------//
 
+//-----------------------------------------------------//
 exports.getUser = function(req, res) {
   console.log("UserController getUser ");
   if (req.body.loginName){
@@ -142,3 +133,4 @@ exports.getUser = function(req, res) {
     }
   }
 };
+//-----------------------------------------------------//

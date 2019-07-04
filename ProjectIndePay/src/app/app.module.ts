@@ -13,18 +13,25 @@ import {MatToolbarModule,
         MatPaginatorModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
+
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './startingPage/login/login.component';
 import { RegisterComponent } from './startingPage/register/register.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 import { InfoPageComponent } from './startingPage/info-page/info-page.component';
-import { HttpClientModule } from '@angular/common/http';
+
 import { HomePageComponent } from './restricted-pages/home-page/home-page.component';
-import { AuthenticationGuard } from './restricted-pages/services/authentication.guard';
 import { BalanceComponent } from './restricted-pages/balance/balance.component';
 import { LastTransactionsComponent } from './restricted-pages/last-transactions/last-transactions.component';
+import { SendMoneyComponent } from './restricted-pages/send-money/send-money.component';
+import { SearchContanctsComponent } from './restricted-pages/search-contancts/search-contancts.component';
+
+import { AuthenticationGuard } from './restricted-pages/services/authentication.guard';
 import { FilterTransactionsPipe } from './restricted-pages/services/filter-transactions.pipe';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { AddNewContactComponent } from './restricted-pages/add-new-contact/add-new-contact.component';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -46,6 +53,9 @@ const appRoutes: Routes = [
     BalanceComponent,
     LastTransactionsComponent,
     FilterTransactionsPipe,
+    SearchContanctsComponent,
+    SendMoneyComponent,
+    AddNewContactComponent,
   ],
   imports: [
     BrowserModule,

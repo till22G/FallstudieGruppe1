@@ -1,0 +1,27 @@
+<hr>
+<div>
+  <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm>
+    <input type="text"
+      matInput
+      placeholder="contact name"
+      name="contactName"
+      ngModel
+      required><br>
+
+    <input type="text"
+      matInput
+      placeholder="comment (optinal)"
+      name="comment"
+      ngModel>
+
+    <br>
+    <button
+      id="create-contact-button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.valid"
+      >Add to contacts</button>
+  </form>
+  <div *ngIf="!addContectSuccesssful"> {{ errorMessage }} </div>
+</div>
