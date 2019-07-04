@@ -27,7 +27,7 @@ export class AuthenticationService {
     // pass authenticationData to http and post it + subsribe for response
 
     this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number}>
-    ('http://localhost:3000/control/users/read', authenticationData)
+    ('http://localhost:3000/api/v1/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
