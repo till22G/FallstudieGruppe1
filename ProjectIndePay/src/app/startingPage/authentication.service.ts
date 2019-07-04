@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationData } from '../shared/authentication-data';
+import { AuthenticationData } from '../shared/authentication-data.model';
 import { RegisterUser } from '../shared/register-user.model';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -21,6 +21,7 @@ export class AuthenticationService {
 
 
   login(loginName: string, password: string) {
+    console.log("login called")
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
