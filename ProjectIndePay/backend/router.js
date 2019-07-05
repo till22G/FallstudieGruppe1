@@ -4,6 +4,7 @@ var router = express.Router();
 const checkAuthentication = require("./middleware/check-authentication");
 const userControl = require("./user-controller");
 const transactionControl = require("./transaction-controller");
+const contactControl = require("./contact-controller");
 
 router.post("/api/v1/users/create", function(req, res) {
   console.log("Router POST /api/v1/users/create");
@@ -27,9 +28,41 @@ router.post("/api/v1/transactions/fee", function (req, res) {
   transactionControl.getCalculatedFee(req, res);
 });
 
+router.post("/api/v1/contacts/create", checkAuthentication);
+router.post("/api/v1/contacts/create", function(req, res) {
+  console.log("Router POST /api/v1/contacts/create");
+  contactControl.createContact(req, res);
+});
+
+router.post("/api/v1/contacts/read", checkAuthentication);
+router.post("/api/v1/contacts/read", function(req, res) {
+  console.log("Router GET /api/v1/contacts/read");
+  contactControl.getContacts(req, res);
+});
+
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
+
+//router.post("/api/v1/contacts/read", checkAuthentication);
+router.get("/api/v1/contacts/read", function(req, res) {
+  console.log("Router GET /api/v1/contacts/read");
+  // TEST
+  req.body.userId = "6";
+  // TEST END
+  contactControl.getContacts(req, res);
+});
+
+//router.post("/api/v1/contacts/create", checkAuthentication);
+router.get("/api/v1/contacts/create", function(req, res) {
+  console.log("Router POST /api/v1/contacts/create");
+  // TEST
+  req.body.userId = "6";
+  req.body.contactId = "1";
+  req.body.comment = "n-ter test";
+  // TEST END
+  contactControl.createContact(req, res);
+});
 
 //router.get("/api/v1/transactions/create", checkAuthentication);
 router.get("/api/v1/transactions/create", function (req, res) {
