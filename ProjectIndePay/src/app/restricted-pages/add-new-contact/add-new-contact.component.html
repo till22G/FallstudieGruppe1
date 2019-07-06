@@ -1,6 +1,6 @@
 <hr>
 <div>
-  <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm>
+  <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
     <mat-form-field>
       <input type="text"
         matInput
@@ -23,8 +23,8 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!loginForm.valid"
+      [disabled]="!createContactForm.valid"
       >Add to contacts</button>
   </form>
-  <div *ngIf="!addContectSuccesssful"> {{ errorMessage }} </div>
+  <!-- <div *ngIf="!addContectSuccesssful"> {{ errorMessage }} </div> -->
 </div>

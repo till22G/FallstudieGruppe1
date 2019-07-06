@@ -19,7 +19,7 @@ export class ContactService {
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    this.http.post<{message: string}>('', newContact)
+    this.http.post<{message: string}>('/api/v1/contacts/create', newContact)
       .subscribe( response => {
                     const res = {successfull: true, message: response.message};
                     this.addContactListener.next(res);

@@ -35,11 +35,13 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     if (addContactForm.invalid) {     // check if form is valid
       return;
     } else {
+      console.log(addContactForm.value.contactName);
       const newContact = new ContactModel(addContactForm.value.contactName,
                                           addContactForm.value.contactName);
       this.contactService
         .addNewContact(newContact);
     }
+    addContactForm.reset();
   }
 
 

@@ -30,8 +30,9 @@ import { FilterTransactionsPipe } from './restricted-pages/services/filter-trans
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddNewContactComponent } from './restricted-pages/add-new-contact/add-new-contact.component';
+import { AuthenticationInterceptorService } from './restricted-pages/services/authentication-interceptor.service';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -74,7 +75,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [AuthenticationGuard],
+  providers: [AuthenticationGuard,
+                {
+                  provide: HTTP_INTERCEPTORS,
+                  useClass: AuthenticationInterceptorService
+                }
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
