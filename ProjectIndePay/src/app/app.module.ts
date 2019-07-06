@@ -78,7 +78,8 @@ const appRoutes: Routes = [
   providers: [AuthenticationGuard,
                 {
                   provide: HTTP_INTERCEPTORS,
-                  useClass: AuthenticationInterceptorService
+                  useClass: AuthenticationInterceptorService,
+                  multi: true
                 }
               ],
   bootstrap: [AppComponent]
