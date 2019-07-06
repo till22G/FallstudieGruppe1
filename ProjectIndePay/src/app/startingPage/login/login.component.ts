@@ -12,21 +12,20 @@ import { AuthenticationService } from '../authentication.service';
 export class LoginComponent implements OnInit {
     isLoading = false;
 
-  //@ViewChild('loginForm', {static: false}) loginForm: NgForm;
+  // @ViewChild('loginForm', {static: false}) loginForm: NgForm;
   // attribute for the spinner
-  //isLoading = flase;
+  // isLoading = flase;
 
   constructor(public authenticationService: AuthenticationService ) {}
   user: AuthenticationData;
 
 
 
-  //method is executed when LoginButton pressed and thus loginForm is submitted
+  // method is executed when LoginButton pressed and thus loginForm is submitted
   onLogin(loginForm: NgForm) {
-    if (loginForm.invalid) {     //check if form is valid
+    if (loginForm.invalid) {     // check if form is valid
       return;
-    }
-    else {     // else pass loginName and password to authentication service
+    } else {     // else pass loginName and password to authentication service
       this.authenticationService
       .login( loginForm.value.loginName,
               loginForm.value.password);

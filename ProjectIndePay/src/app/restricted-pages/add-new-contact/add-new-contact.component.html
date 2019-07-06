@@ -1,19 +1,22 @@
 <hr>
 <div>
   <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm>
-    <input type="text"
-      matInput
-      placeholder="contact name"
-      name="contactName"
-      ngModel
-      required><br>
-
-    <input type="text"
-      matInput
-      placeholder="comment (optinal)"
-      name="comment"
-      ngModel>
-
+    <mat-form-field>
+      <input type="text"
+        matInput
+        placeholder="contact name"
+        name="contactName"
+        ngModel
+        required>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+        matInput
+        placeholder="comment (optinal)"
+        name="comment"
+        ngModel>
+    </mat-form-field>
     <br>
     <button
       id="create-contact-button"

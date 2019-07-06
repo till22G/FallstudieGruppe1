@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AddNewContactService } from '../services/add-contact.service';
+import { ContactService } from '../services/contact.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ContactModel } from 'src/app/shared/contact-model';
 
 @Component({
   selector: 'app-add-new-contact',
@@ -14,17 +15,16 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
   errorMessage: string;
   addContectSuccesssful = true;
 
-  constructor(private addNewContactService: AddNewContactService) { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    this.addContactListenerSubs = this.addNewContactService
-      .getAddUserListener()
+    this.addContactListenerSubs = this.contactService
+      .getAddContactListener()
       .subscribe(contactAdded => {
           if (contactAdded.successfull) {
             this.addContectSuccesssful = true;
               // display success message and rerout to next step
-          }
-          else {
+          } else {
             this.errorMessage = contactAdded.message;
             this.addContectSuccesssful = contactAdded.successfull;
           }
@@ -35,9 +35,10 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     if (addContactForm.invalid) {     // check if form is valid
       return;
     } else {
-      this.addNewContactService
-        .addNewContact( addContactForm.value.contactName,
-                        addContactForm.value.comment);
+      const newContact = new ContactModel(addContactForm.value.contactName,
+                                          addContactForm.value.contactName);
+      this.contactService
+        .addNewContact(newContact);
     }
   }
 

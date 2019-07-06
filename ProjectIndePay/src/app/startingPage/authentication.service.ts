@@ -38,7 +38,7 @@ export class AuthenticationService {
       console.log(this.token);
 
       // check if a token was returned
-      if(token) {
+      if (token) {
         // set isAuthenticated to true so other components can get this information from the authentication servive
         // and check if the user is authenticated
         this.isAuthenticated = true;
@@ -64,7 +64,7 @@ export class AuthenticationService {
         const initialBalance = response.balance;
         this.initialBalance = initialBalance;
 
-        //give the local Storage the curent date + the expiration time so we can implements an auto login while token is valid
+        // give the local Storage the curent date + the expiration time so we can implements an auto login while token is valid
         // const now = new Date();
         // const expirationDate = new Date(now.getTime() + (expiresInDuration * 1000));
         // this.saveAuthenticationData(token , expirationDate); ---------------------------> for auto login
