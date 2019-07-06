@@ -37,7 +37,7 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     } else {
       console.log(addContactForm.value.contactName);
       const newContact = new ContactModel(addContactForm.value.contactName,
-                                          addContactForm.value.contactName);
+                                          addContactForm.value.comment);
       this.contactService
         .addNewContact(newContact);
     }

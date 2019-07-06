@@ -21,7 +21,7 @@ export class AuthenticationService {
 
 
   login(loginName: string, password: string) {
-    console.log("login called")
+    console.log('login called')
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response

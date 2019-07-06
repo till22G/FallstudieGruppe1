@@ -9,10 +9,11 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler ) {
     const token = this.authenticationService.getToken();
     if (token) {
+      console.log('token not null');
       request = request.clone({
         setHeaders: {
           'Content-Type': 'appplication/json',
-          Authentication : 'Bearer ${token}'
+          Authentication : 'Bearer ' + token
         }
       });
     }

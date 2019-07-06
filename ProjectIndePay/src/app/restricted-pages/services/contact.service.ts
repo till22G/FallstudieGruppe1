@@ -14,18 +14,20 @@ export class ContactService {
                                                   message: string,
                                                   contactList: [ContactModel]}>();
 
-  constructor(  private authenticationService: AuthenticationService,
-                private http: HttpClient,
+  constructor(  private http: HttpClient,
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    this.http.post<{message: string}>('/api/v1/contacts/create', newContact)
+    console.log(newContact);
+    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', newContact)
       .subscribe( response => {
+                    console.log('contact created' + response.message);
                     const res = {successfull: true, message: response.message};
                     this.addContactListener.next(res);
                     this.router.navigate(['']); // navigate to next page
                   },
                   error => {
+                    console.log('error from backend');
                     const eRes = {successfull: false, message: error.message};
                     this.addContactListener.next(eRes);
                   });

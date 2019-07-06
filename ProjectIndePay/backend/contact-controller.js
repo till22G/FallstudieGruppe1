@@ -26,7 +26,7 @@ exports.createContact = function(req, res) {
         DBService.createContact(data, function(err, result) {
           if (err) {
             console.log(err);
-            res.send(err);
+            res.send(null, err);
           } else {
             res.status(201).json({
               message: "Contact successfully created!"
