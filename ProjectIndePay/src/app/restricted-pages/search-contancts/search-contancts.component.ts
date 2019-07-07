@@ -23,7 +23,8 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
                     {loginName: 'Mario', comment: ''},
                     {loginName: 'Hella', comment: 'btfzju'},
                     {loginName: 'Dirk', comment: 'wrbarebvszxrcs'},
-                    {loginName: 'Gwen', comment: 'uzo,zg8o'}];
+                    {loginName: 'Gwen', comment: 'uzo,zg8o'},
+                    {loginName: 'Glen', comment: 'uzo,zg8o'}];
 
 
 
@@ -55,6 +56,18 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
   onRefreshContactList() {
     console.log('onRefreshContactList called');
     this.getContactList();
+  }
+
+  onEditContact() {
+    // for now no coding, just 'interface' option
+    // idea: send forward with loginName to modefied add-contact module
+    // => insert a edit and delete button and make input field for login name
+    // no changeable when redirected with this method
+  }
+
+  onSelectContact(loginName: string) {
+    console.log(loginName);
+    // forward to send mony module with login name
   }
 
   private getContactList() {
