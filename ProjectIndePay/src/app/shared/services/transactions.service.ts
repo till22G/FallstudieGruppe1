@@ -6,16 +6,34 @@ import { TransactionData } from 'src/app/shared/models/transaction-data.model';
 
 @Injectable({providedIn: 'root'})
 export class TransactionsService {
-  private currentListCountListener = new Subject<number>();
+  private ongoingTransactionListener = new Subject<TransactionData>();
   private transactions: Array<TransactionData> = [];
+  private ongoingTransactionData: TransactionData;
 
-    constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
 
+    constructor(private http: HttpClient) {}
     // implement getTransactions here
     getTransactions() {
       this.http.get('')
         .subscribe(response => {
 
         });
+    }
+
+    forwardToCheckTransaction(transactionData: TransactionData) {
+      this.ongoingTransactionData = transactionData;
+      this.ongoingTransactionListener.next(transactionData);
+    }
+
+    getOngoingTransactionData() {
+      return this.ongoingTransactionData;
+    }
+
+    placeTransaction() {
+
+    }
+
+    getOngoingTransactionListener() {
+      return this.ongoingTransactionListener.asObservable();
     }
 }

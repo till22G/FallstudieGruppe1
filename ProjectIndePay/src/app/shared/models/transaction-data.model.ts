@@ -1,3 +1,5 @@
+import { getMatIconNameNotFoundError } from '@angular/material';
+
 export class TransactionData {
 
   constructor(  private transactionDate: Date,
@@ -9,4 +11,16 @@ export class TransactionData {
                 private sender: string,
                 private category: string,
                 private comment: string) {}
+
+  getAmount() {
+    return this.amount;
+  }
+
+  getReceiver() {
+    return this.receiver;
+  }
+
+  getComment() {
+    return this.comment;
+  }
 }

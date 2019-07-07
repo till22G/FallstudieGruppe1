@@ -1,28 +1,44 @@
 <div class="div-send-money">
-  <form (ngSubmit)="onContinueSendMoney(sendMoneyForm)" #sendMoneyForm>
+  <form (ngSubmit)="onContinueSendMoney(sendMoneyForm)" #sendMoneyForm="ngForm">
     <div>
       <mat-form-field>
           <input type="number"
           matInput
           placeholder="amount"
-          name="transferAmount"
-          [(ngModel)]="transactionAmount"
-          [value]="transactionAmount"
-          required>
+          name="transactionAmount"
+          required
+          ngModel>
       </mat-form-field>
     </div>
+
     <div>
       Currency: {{ currentBalanceData.getCurrency() }}
     </div>
+
     <div>
       Current balance: {{ currentBalanceData.getBalance() }}
     </div>
+
+    <mat-form-field>
+        <input
+          matInput
+          name="comment"
+          placeholder="comment"
+          ngModel>
+    </mat-form-field>
+
     <div>
       <button mat-raised-button color="primary">Search in contacts</button>
       <button mat-raised-button color="primary">New contact</button>
       <br>
       <mat-form-field>
-        <input matInput required [value]="selectedContact" placeholder="select contact">
+        <input
+          matInput
+          required
+          name="selectedContact"
+          [value]="selectedContact"
+          placeholder="select contact"
+          ngModel>
       </mat-form-field>
     </div>
     <button mat-raised-button color="primary" type="submit">Continue</button>
