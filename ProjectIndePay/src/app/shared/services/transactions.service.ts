@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from 'src/app/startingPage/authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { TransactionData } from 'src/app/shared/transaction-data.model';
+import { TransactionData } from 'src/app/shared/models/transaction-data.model';
 
 @Injectable({providedIn: 'root'})
 export class TransactionsService {

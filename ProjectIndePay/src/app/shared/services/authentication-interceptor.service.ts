@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
-import { AuthenticationService } from 'src/app/startingPage/authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()

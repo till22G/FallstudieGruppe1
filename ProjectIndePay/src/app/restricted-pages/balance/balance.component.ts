@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BalanceService } from '../services/balance.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BalanceService } from '../../shared/services/balance.service';
+import { Subscription } from 'rxjs';
+import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 @Component({
   selector: 'app-balance',
@@ -7,15 +9,22 @@ import { BalanceService } from '../services/balance.service';
   styleUrls: ['./balance.component.css']
 })
 
-export class BalanceComponent implements OnInit {
-  currentBalance: number;
+export class BalanceComponent implements OnInit, OnDestroy {
+  private currentBalanceListenerSub = new Subscription();
+  currentBalanceData: BalanceData;
 
   constructor(private balanceService: BalanceService) { }
 
 
   ngOnInit() {
-    const currentBalance = this.balanceService.getInitialBalance();
-    this.currentBalance = currentBalance;
+    this.currentBalanceListenerSub = this.balanceService
+                                      .getCurrentBalanceListener()
+                                      .subscribe(currentBalanceData => {
+                                        this.currentBalanceData = currentBalanceData;
+                                      });
   }
 
+  ngOnDestroy() {
+    this.currentBalanceListenerSub.unsubscribe();
+  }
 }

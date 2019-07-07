@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ContactModel } from 'src/app/shared/contact-model';
+import { ContactModel } from 'src/app/shared/models/contact-model';
 import { Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 

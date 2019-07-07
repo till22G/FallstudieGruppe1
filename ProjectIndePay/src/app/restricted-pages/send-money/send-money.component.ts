@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BalanceService } from '../services/balance.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BalanceService } from '../../shared/services/balance.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './send-money.component.html',
   styleUrls: ['./send-money.component.css']
 })
-export class SendMoneyComponent implements OnInit {
+export class SendMoneyComponent implements OnInit, OnDestroy {
   private currentBalanceListenerSub = new Subscription();
   currentBalanceData = null;
   transactionAmount = 0;
@@ -26,6 +26,10 @@ export class SendMoneyComponent implements OnInit {
 
   onContinueSendMoney() {
     // implement send Money here
+  }
+
+  ngOnDestroy() {
+    this.currentBalanceListenerSub.unsubscribe();
   }
 
 }

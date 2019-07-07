@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthenticationData } from '../shared/authentication-data.model';
-import { RegisterUser } from '../shared/register-user.model';
+import { AuthenticationData } from '../models/authentication-data.model';
+import { RegisterUser } from '../models/register-user.model';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 

@@ -10,9 +10,6 @@
           [value]="transactionAmount"
           required>
       </mat-form-field>
-      <p>
-        fee: {{ (transactionAmount * currentBalanceData.fee / 100) }}
-      </p>
     </div>
     <div>
       Currency: {{ currentBalanceData.getCurrency() }}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthenticationData } from 'src/app/shared/authentication-data.model';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationData } from 'src/app/shared/models/authentication-data.model';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 
 @Component({

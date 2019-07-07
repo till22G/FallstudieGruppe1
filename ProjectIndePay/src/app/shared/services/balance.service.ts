@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from 'src/app/startingPage/authentication.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { BalanceData } from 'src/app/shared/balance-data.model';
+import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 @Injectable({ providedIn: 'root'})
 export class BalanceService {

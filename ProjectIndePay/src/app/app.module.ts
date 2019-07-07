@@ -14,7 +14,7 @@ import {MatToolbarModule,
 
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { LoginComponent } from './startingPage/login/login.component';
 import { RegisterComponent } from './startingPage/register/register.component';
 import { InfoPageComponent } from './startingPage/info-page/info-page.component';
@@ -25,15 +25,16 @@ import { LastTransactionsComponent } from './restricted-pages/last-transactions/
 import { SendMoneyComponent } from './restricted-pages/send-money/send-money.component';
 import { SearchContanctsComponent } from './restricted-pages/search-contancts/search-contancts.component';
 
-import { AuthenticationGuard } from './restricted-pages/services/authentication.guard';
-import { FilterTransactionsPipe } from './restricted-pages/services/filter-transactions.pipe';
+import { AuthenticationGuard } from './shared/guards/authentication.guard';
+import { FilterTransactionsPipe } from './shared/pipes/filter-transactions.pipe';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddNewContactComponent } from './restricted-pages/add-new-contact/add-new-contact.component';
-import { AuthenticationInterceptorService } from './restricted-pages/services/authentication-interceptor.service';
-import { FilterContactsPipe } from './restricted-pages/services/filter-contacts.pipe';
+import { AuthenticationInterceptorService } from './shared/services/authentication-interceptor.service';
+import { FilterContactsPipe } from './shared/pipes/filter-contacts.pipe';
+import { CheckTransactionComponent } from './restricted-pages/check-transaction/check-transaction.component';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     SearchContanctsComponent,
     SendMoneyComponent,
     AddNewContactComponent,
+    CheckTransactionComponent,
   ],
   imports: [
     BrowserModule,

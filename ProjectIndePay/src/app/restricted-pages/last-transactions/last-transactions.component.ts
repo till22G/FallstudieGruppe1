@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TransactionsService } from '../services/transactions.service';
+import { TransactionsService } from '../../shared/services/transactions.service';
 import { PageEvent } from '@angular/material';
 
 @Component({
