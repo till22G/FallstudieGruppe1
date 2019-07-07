@@ -19,6 +19,7 @@
     </mat-form-field>
     <br>
     <button
+      *ngIf="!errorMessage"
       id="create-contact-button"
       mat-raised-button
       color="primary"
@@ -26,5 +27,12 @@
       [disabled]="!createContactForm.valid"
       >Add to contacts</button>
   </form>
-  <!-- <div *ngIf="!addContectSuccesssful"> {{ errorMessage }} </div> -->
+  <div *ngIf="errorMessage"> {{ errorMessage }}
+    <button
+      *ngIf="errorMessage"
+      id="resetErrorMessage"
+      mat-raised-button
+      color="primary"
+      (click)="onResetErrorMessage()">ok</button>
+  </div>
 </div>

@@ -2,6 +2,7 @@
 <div>
   Search Contacts
   <button mat-raised-button color="primary">Add new contact</button>
+  <button mat-raised-button color="primary" (click)="onRefreshContactList()">refresh contact list</button>
 </div>
 
 <div>
@@ -10,15 +11,22 @@
     placeholder="search contact"
     name="searchContact"
     ngModel
-    required>
+    [(ngModel)]="pipeFilterValue">
 </div>
+
 <div>
   <p>recent contacts</p>
 </div>
+
 <div>
   <p>All contacts</p>
-  <div *ngFor="let contact of contactList">
-      {{ contact.loginName }}
+
+  <div *ngFor="let contact of testContactList | filterContacts: pipeFilterValue">
+      <div>
+        {{ contact.loginName }} <span>     </span> {{ contact.comment }}
+      </div>
   </div>
 </div>
+
+<div *ngIf="errorMessage"> {{ errorMessage }}
 

@@ -33,6 +33,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddNewContactComponent } from './restricted-pages/add-new-contact/add-new-contact.component';
 import { AuthenticationInterceptorService } from './restricted-pages/services/authentication-interceptor.service';
+import { FilterContactsPipe } from './restricted-pages/services/filter-contacts.pipe';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     BalanceComponent,
     LastTransactionsComponent,
     FilterTransactionsPipe,
+    FilterContactsPipe,
     SearchContanctsComponent,
     SendMoneyComponent,
     AddNewContactComponent,

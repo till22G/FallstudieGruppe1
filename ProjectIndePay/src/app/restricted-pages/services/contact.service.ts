@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from 'src/app/startingPage/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { ContactModel } from 'src/app/shared/contact-model';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
@@ -13,6 +13,8 @@ export class ContactService {
   private getContactListListener = new Subject<{  successful: boolean,
                                                   message: string,
                                                   contactList: [ContactModel]}>();
+
+  private getContactListErrorListener = new Subject<{errorMessage: string}>();
 
   constructor(  private http: HttpClient,
                 private router: Router) {}
@@ -34,6 +36,7 @@ export class ContactService {
   }
 
   getContactList() {
+    console.log('getContactList.service called');
     this.http.get<{message: string, contactList: [ContactModel]}>('')
       .subscribe( response => {
                     const res = { successful: true,
@@ -42,7 +45,8 @@ export class ContactService {
                     this.getContactListListener.next(res);
                   },
                   error => {
-                    // implement the error case here => figure out what to do
+                    console.log(error);
+                    this.getContactListErrorListener.next(error.message);
                   });
   }
 
@@ -50,7 +54,11 @@ export class ContactService {
     return this.addContactListener.asObservable();
   }
 
-  gerGetContactListListener() {
+  getGetContactListListener() {
     return this.getContactListListener.asObservable();
+  }
+
+  getGetContactListErrorListener() {
+    return this.getContactListErrorListener.asObservable();
   }
 }

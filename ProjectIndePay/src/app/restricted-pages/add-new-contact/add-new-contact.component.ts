@@ -12,7 +12,7 @@ import { ContactModel } from 'src/app/shared/contact-model';
 export class AddNewContactComponent implements OnInit, OnDestroy {
 
   private addContactListenerSubs: Subscription;
-  errorMessage: string;
+  errorMessage: string = null;
   addContectSuccesssful = true;
 
   constructor(private contactService: ContactService) { }
@@ -34,14 +34,17 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
   onAddContact(addContactForm: NgForm) {
     if (addContactForm.invalid) {     // check if form is valid
       return;
-    } else {
-      console.log(addContactForm.value.contactName);
-      const newContact = new ContactModel(addContactForm.value.contactName,
-                                          addContactForm.value.comment);
-      this.contactService
-        .addNewContact(newContact);
     }
+    console.log(addContactForm.value.contactName);
+    const newContact = new ContactModel(addContactForm.value.contactName,
+                                        addContactForm.value.comment);
+    this.contactService
+        .addNewContact(newContact);
     addContactForm.reset();
+  }
+
+  onResetErrorMessage() {
+    this.errorMessage = null;
   }
 
 
