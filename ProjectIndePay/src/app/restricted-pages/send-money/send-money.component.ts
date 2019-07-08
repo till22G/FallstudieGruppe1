@@ -26,6 +26,8 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     this.balanceService.getCurrentBalance();
   }
 
+  // create transaction data based on the model
+  // other attributes are filled an handled in the backend
   onContinueSendMoney(transactionForm: NgForm) {
     const transactionData = new TransactionData(
        null,
