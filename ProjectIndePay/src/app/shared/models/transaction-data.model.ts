@@ -23,4 +23,8 @@ export class TransactionData {
   getComment() {
     return this.comment;
   }
+
+  setFee(fee: number) {
+    this.fee = fee;
+  }
 }

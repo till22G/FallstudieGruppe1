@@ -24,6 +24,10 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
     console.log(this.ongoingTransactionData);
   }
 
+  onConfirmTransaction() {
+
+  }
+
   ngOnDestroy()  {
     this.ongoingTransactioinsListenerSub.unsubscribe();
   }

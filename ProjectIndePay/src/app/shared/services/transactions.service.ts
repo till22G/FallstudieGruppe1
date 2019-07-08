@@ -22,6 +22,12 @@ export class TransactionsService {
 
     forwardToCheckTransaction(transactionData: TransactionData) {
       this.ongoingTransactionData = transactionData;
+      this.http.get<{fee: number}>('')
+        .subscribe(response => {
+          this.ongoingTransactionData.setFee(response.fee); // get curren fee in % for frontend calculation of fee
+        }, error => {
+          // implement error case
+        });
       this.ongoingTransactionListener.next(transactionData);
     }
 
@@ -30,7 +36,14 @@ export class TransactionsService {
     }
 
     placeTransaction() {
-
+      this.http.post<{message: string}>('', this.ongoingTransactionData)
+        .subscribe(response => {
+          // ...response message
+          this.ongoingTransactionData = null;
+          // rerout to home here
+        }, error => {
+          // implement error cases here
+        });
     }
 
     getOngoingTransactionListener() {
