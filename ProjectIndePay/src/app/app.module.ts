@@ -41,8 +41,13 @@ const appRoutes: Routes = [
   { path: 'info', component: InfoPageComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
+
   { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard]},
-  { path: 'lastTransactions', component: LastTransactionsComponent, canActivate: [AuthenticationGuard]}
+  { path: 'lastTransactions', component: LastTransactionsComponent, canActivate: [AuthenticationGuard]},
+  { path: 'searchContacts', component: SearchContanctsComponent, canActivate: [AuthenticationGuard]},
+  { path: 'addNewContact', component: AddNewContactComponent, canActivate: [AuthenticationGuard]},
+  { path: 'sendMoney', component: SendMoneyComponent, canActivate: [AuthenticationGuard]},
+  { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard]}
 ];
 
 @NgModule({
