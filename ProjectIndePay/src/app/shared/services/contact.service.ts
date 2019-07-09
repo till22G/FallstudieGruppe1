@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ContactModel } from 'src/app/shared/models/contact-model';
+import { ContactModel } from '../models/contact-model';
 import { Subject, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -18,8 +18,9 @@ export class ContactService {
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    console.log('addNewContact:' + newContact);
-    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', newContact)
+    const test: ContactModel = {contactLoginName: 'adreher1', comment: 'test comment'};
+    console.log('addNewContact:' + test.contactLoginName);
+    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', test)
       .subscribe( response => {
                     console.log('contact created' + response.message);
                     const res = {successfull: true, message: response.message};

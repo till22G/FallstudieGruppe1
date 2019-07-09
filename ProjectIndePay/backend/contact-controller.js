@@ -4,9 +4,7 @@ const jwt = require("jsonwebtoken");
 //-----------------------------------------------------//
 exports.createContact = function(req, res) {
   console.log("ContactController createContact ");
-
-  console.log("alex test " + req.body);
-  DBService.getUserByName(req.body.newContact.contactLoginName, function(err, result) {
+  DBService.getUserByName(req.body.contactLoginName, function(err, result) {
     if (err) {
       console.log(err);
       res.send(err);

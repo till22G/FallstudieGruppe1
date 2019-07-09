@@ -2,8 +2,10 @@ const DBService = require("./service");
 const userControl = require("./user-controller");
 
 function calculateFee(amount) {
+  console.log("calculateFee + " + amount);
   var fee = amount * process.env.FEE_PERCENTAGE;
   fee = Math.floor(fee * 100) / 100;
+  console.log("calculateFee + " + fee);
   return fee;
 }
 
@@ -70,7 +72,7 @@ exports.createTransaction = function(req, res) {
 
 //-----------------------------------------------------//
 exports.getCalculatedFee = function(req, res) {
-  console.log("transaction-controller getCalculatedFee ");
+  console.log("transaction-controller getCalculatedFee " + req.body.amount);
   var amount = req.body.amount;
   if (amount <= process.env.MINIMAL_AMOUNT) {
     res.status(201).json({
@@ -83,6 +85,7 @@ exports.getCalculatedFee = function(req, res) {
     });
   } else {
     var fee = calculateFee(amount);
+    console.log("transaction-controller getCalculatedFee sending fee " + fee);
     res.status(201).json({
       message: "Calculation successful!",
       fee: fee,

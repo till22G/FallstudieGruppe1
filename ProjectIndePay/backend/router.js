@@ -49,10 +49,7 @@ router.post("/api/v1/contacts/read", function(req, res) {
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
-router.get("/api/v1/contacts/read", function(req, res) {
-  console.log("Router GET /api/v1/contacts/read");
-  contactControl.getContacts(req, res);
-});
+
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //

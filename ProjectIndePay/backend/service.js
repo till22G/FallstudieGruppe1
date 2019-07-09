@@ -52,7 +52,11 @@ exports.getUserByName = function(loginName, callback) {
       callback(err, null);
     } else {
       console.log("DBService getUserByName ROWS = " + rows);
-      callback(null, rows);
+      if (rows && rows.length > 0) {
+        callback(null, rows);
+      }else{
+        callback("No Results found!", null);
+      }
     }
   });
   connection.end();
@@ -73,7 +77,11 @@ exports.getUserById = function(userId, callback) {
       callback(err, null);
     } else {
       console.log("DBService getUserById ROWS = " + rows);
-      callback(null, rows);
+      if (rows && rows.length > 0) {
+        callback(null, rows);
+      }else{
+        callback("No Results found!", null);
+      }
     }
   });
   connection.end();
