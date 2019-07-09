@@ -41,6 +41,7 @@
           [value]="this.ongoingTransactionData.getReceiver()"
           placeholder="select contact"
           ngModel>
+          {{ ongoingTransactionData.getReceiver()}}
       </mat-form-field>
     </div>
     <button mat-raised-button color="primary" type="submit">Continue</button>

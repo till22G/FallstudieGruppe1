@@ -14,6 +14,7 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 })
 export class SendMoneyComponent implements OnInit, OnDestroy {
   private currentBalanceListenerSub: Subscription;
+  private ongoingTransactionListenerSub: Subscription;
   currentBalanceData = new BalanceData(null, null, null);
   ongoingTransactionData: TransactionData = null;
 
@@ -27,13 +28,19 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
       .subscribe(currentBalanceData => {
         this.currentBalanceData = currentBalanceData;
       });
+    this.ongoingTransactionListenerSub = this.transactionService
+      .getOngoingTransactionListener()
+      .subscribe(ongoingTransaction => {
+        this.ongoingTransactionData = ongoingTransaction;
+        console.log('subs triggered');
+      });
+
     this.balanceService.submitCurrentBalanceData();
-    console.log('transactionService.transactionData is ' + this.transactionService.getOngoingTransactionData());
+
     if (this.transactionService.getOngoingTransactionData() == null) {
       this.transactionService.createTransaction();
     }
-    this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
-    console.log(this.ongoingTransactionData.getReceiver());
+    // this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
   }
 
   // create transaction data based on the model

@@ -65,6 +65,7 @@ export class TransactionsService {
     setOngoingTransactionDataReceiver(receiver: string) {
       console.log(' setOngoingTransactionDataReceiver called with:' + receiver );
       this.ongoingTransactionData.setReceiver(receiver);
+      this.ongoingTransactionListener.next(this.ongoingTransactionData);
     }
 
     placeTransaction() {
