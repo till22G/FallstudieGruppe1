@@ -6,22 +6,23 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 @Injectable({ providedIn: 'root'})
 export class BalanceService {
-  private currentBalanceData: BalanceData;
+  private currentBalanceData = new BalanceData(0, '', 0);
   private currentBalanceListener = new Subject<BalanceData>();
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
 
    getCurrentBalance() {
-    this.currentBalanceData = new BalanceData(100, 'USh', 2);
-
-    this.currentBalanceListener.next(this.currentBalanceData);
-
-  //   this.http.get('')
-  //   .subscribe(response => {
-  //     const currentBalance = response.balance;
-  //     this.currentBalance = currentBalance;
-  //     this.currentBalanceListener.next(this.currentBalance);
-  //   });
+     console.log('getCurrentBalance called');
+     this.http.post<{balance: number}>('http://localhost:3000/api/v1/users/balance', {num: 0})
+     .subscribe(response => {
+       const currentBalance = response.balance;
+       // const currency = response.currency;
+       // this.currentBalanceData.setCurrency(currency); => implement getCurrency()
+       console.log(response.balance);
+       this.currentBalanceData.setBalance(currentBalance);
+       this.currentBalanceListener.next(this.currentBalanceData);
+       console.log('current balance: ' + this.currentBalanceData.getBalance());
+     });
    }
 
   getCurrentBalanceListener() {

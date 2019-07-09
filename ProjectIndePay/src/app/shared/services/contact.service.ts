@@ -9,8 +9,7 @@ export class ContactService {
   private addContactListener = new Subject<{ successfull: boolean,
                                              message: string}>();
 
-  private getContactListListener = new Subject<{  successful: boolean,
-                                                  message: string,
+  private getContactListListener = new Subject<{  successful: boolean
                                                   contactList: [ContactModel]}>();
 
   private getContactListErrorListener = new Subject<{errorMessage: string}>();
@@ -19,7 +18,7 @@ export class ContactService {
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    console.log(newContact);
+    console.log('addNewContact:' + newContact);
     this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', newContact)
       .subscribe( response => {
                     console.log('contact created' + response.message);
@@ -36,12 +35,12 @@ export class ContactService {
 
   getContactList() {
     console.log('getContactList.service called');
-    this.http.get<{message: string, contactList: [ContactModel]}>('')
+    this.http.post<{message: string, contactList: [ContactModel]}>('http://localhost:3000/api/v1/contacts/read', {})
       .subscribe( response => {
                     const res = { successful: true,
-                                  message: response.message,
                                   contactList: response.contactList};
                     this.getContactListListener.next(res);
+                    console.log(res.contactList);
                   },
                   error => {
                     console.log(error);

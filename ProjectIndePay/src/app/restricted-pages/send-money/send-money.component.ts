@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ["./send-money.component.css"]
 })
 export class SendMoneyComponent implements OnInit, OnDestroy {
-  private currentBalanceListenerSub = new Subscription();
-  currentBalanceData = null;
-  selectedContact = 'tgalla';
+  private currentBalanceListenerSub = this.balanceService.getCurrentBalanceListener();
+  private currentBalancData = {};
+  selectedContact = 'tgalla'
 
   constructor(private balanceService: BalanceService,
               private transactionService: TransactionsService,

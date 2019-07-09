@@ -141,7 +141,8 @@ exports.getUserBalance = function(req, res) {
     } else {
       res.status(201).json({
         message: "success",
-        balance: result[0].balance
+        balance: result[0].BALANCE,
+        currency: result[0].CURRENCY
       });
     }
   });

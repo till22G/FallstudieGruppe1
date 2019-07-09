@@ -14,4 +14,8 @@ export class BalanceData {
   getFee() {
     return this.fee;
   }
+
+  setBalance(balance: number) {
+    this.balance = balance;
+  }
 }
