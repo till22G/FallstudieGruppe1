@@ -66,7 +66,8 @@ exports.getCalculatedFee = function(req, res) {
     fee = Math.floor(fee * 100) / 100;
     res.status(201).json({
       message: "Calculation successful!",
-      fee: fee
+      fee: fee,
+      feePercentage: process.env.FEE_PERCENTAGE
     });
   }
 };
