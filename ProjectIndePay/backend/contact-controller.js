@@ -1,55 +1,78 @@
 const DBService = require("./service");
+const jwt = require("jsonwebtoken");
 
 //-----------------------------------------------------//
 exports.createContact = function(req, res) {
   console.log("ContactController createContact ");
 
-  var data = [req.body.userId, req.body.contactId];
-
-  DBService.checkContact(data, function(err, result) {
+  DBService.getUserByName(req.body.contactLoginName, function(err, result) {
     if (err) {
       console.log(err);
       res.send(err);
     } else {
-      if (result.length > 0) {
-        res.status(201).json({
-          message: "Contact already exists!"
-        });
-      } else {
-        data = [
-          new Date(),
-          req.body.userId,
-          req.body.contactId,
-          req.body.comment
-        ];
+      console.log("ContactController createContact 1");
+      var row = result[0];
+      var token = jwt.verify(
+        req.headers.authentication.split(" ")[1],
+        process.env.SECRET_KEY
+      );
+      var data = [token.userId, row.USERID];
 
-        DBService.createContact(data, function(err, result) {
-          if (err) {
-            console.log(err);
-            res.send(null, err);
-          } else {
+      DBService.checkContact(data, function(err, result) {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        } else {
+          console.log("ContactController createContact 2");
+          if (result.length > 0) {
             res.status(201).json({
-              message: "Contact successfully created!"
+              message: "Contact already exists!"
+            });
+          } else {
+            data = [new Date(), token.userId, row.USERID, req.body.comment];
+
+            DBService.createContact(data, function(err, result) {
+              if (err) {
+                console.log(err);
+                res.send(null, err);
+              } else {
+                res.status(201).json({
+                  message: "Contact successfully created!"
+                });
+              }
             });
           }
-        });
-      }
+        }
+      });
     }
   });
 };
 //-----------------------------------------------------//
 
 //-----------------------------------------------------//
-exports.getContacts = function (req, res) {
+exports.getContacts = function(req, res) {
   console.log("ContactController getContacts ");
 
-  DBService.getContacts(req.body.userId, function (err, result) {
+  var token = jwt.verify(
+    req.headers.authentication.split(" ")[1],
+    process.env.SECRET_KEY
+  );
+  var data = [token.userId];
+
+  DBService.getContacts(data, function(err, results) {
     if (err) {
       console.log(err);
       res.send(err);
     } else {
-      console.log(result);
+      var returnObject = results.map(result => ({
+        contactLoginName: result.LOGINNAME,
+        comment: result.COMMENT
+      }));
+
+      res.status(201).json({
+        contactList: returnObject
+      });
     }
-  })
-}
+  });
+};
 //-----------------------------------------------------//

@@ -3,25 +3,25 @@ const DBService = require("./service");
 const jwt = require("jsonwebtoken");
 
 //-----------------------------------------------------//
-function sendUserData(row, res){
+function sendUserData(row, res) {
   var claims = {
-    userId    : row.USERID,
-    loginName : row.LOGINNAME,
-    role      : row.ROLE
-  }
-  var token = jwt.sign(claims, process.env.SECRET_KEY, {expiresIn: "10m" });
+    userId: row.USERID,
+    loginName: row.LOGINNAME,
+    role: row.ROLE
+  };
+  var token = jwt.sign(claims, process.env.SECRET_KEY, { expiresIn: "10m" });
 
   // sending response
   res.status(201).json({
-    jwt       : token,
-    expiresIn : "600",  // token expires after 600 seconds => give this information to frontend
-    message   : "Success!",
-    firstName : row.RU_FIRSTNAME,
-    surname   : row.RU_SURNAME,
-    balance   : row.BALANCE,
-    currency  : row.CURRENCY,
-    role      : row.ROLE,
-    language  : row.LANGUAGE
+    jwt: token,
+    expiresIn: "600", // token expires after 600 seconds => give this information to frontend
+    message: "Success!",
+    firstName: row.RU_FIRSTNAME,
+    surname: row.RU_SURNAME,
+    balance: row.BALANCE,
+    currency: row.CURRENCY,
+    role: row.ROLE,
+    language: row.LANGUAGE
   });
 }
 //-----------------------------------------------------//
@@ -32,21 +32,15 @@ exports.createUser = function(req, res) {
   // check for user existance
   DBService.getUserByName(req.body.loginName, function(err, result) {
     if (err) {
-
       console.log(err);
       res.send(err);
-
     } else {
-
       console.log("UserController createUser RESULT = " + result);
       if (result != null && result.length > 0) {
-
         res.status(201).json({
           message: "User already exists!"
         });
-
       } else {
-
         var data = [
           new Date(),
           req.body.loginName,
@@ -64,16 +58,12 @@ exports.createUser = function(req, res) {
 
         DBService.createUser(data, function(err, result) {
           if (err) {
-
             console.log(err);
             res.send(err);
-
           } else {
-
             res.status(201).json({
               message: "User successfully created!"
             });
-
           }
         });
       }
@@ -85,15 +75,15 @@ exports.createUser = function(req, res) {
 //-----------------------------------------------------//
 exports.getUser = function(req, res) {
   console.log("UserController getUser ");
-  if (req.body.loginName){
+  if (req.body.loginName) {
     DBService.getUserByName(req.body.loginName, function(err, result) {
       if (err) {
         console.log(err);
         res.send(err);
       } else {
         var row = result[0];
-        if (row.LOCKED == 0){
-          if (row.PASSWORD == req.body.password){
+        if (row.LOCKED == 0) {
+          if (row.PASSWORD == req.body.password) {
             sendUserData(result[0], res);
           } else {
             res.status(201).json({
@@ -108,29 +98,52 @@ exports.getUser = function(req, res) {
       }
     });
   } else {
-    if (req.body.userId){
+    if (req.body.userId) {
       DBService.getUserById(req.body.userId, function(err, result) {
         if (err) {
           console.log(err);
           res.send(err);
         } else {
           var row = result[0];
-        if (row.LOCKED == 0){
-          if (row.PASSWORD == req.body.password){
-            sendUserData(result[0], res);
+          if (row.LOCKED == 0) {
+            if (row.PASSWORD == req.body.password) {
+              sendUserData(result[0], res);
+            } else {
+              res.status(201).json({
+                message: "Wrong password!"
+              });
+            }
           } else {
             res.status(201).json({
-              message: "Wrong password!"
+              message: "User has been locked!"
             });
           }
-        } else {
-          res.status(201).json({
-            message: "User has been locked!"
-          });
-        }
         }
       });
     }
   }
+};
+//-----------------------------------------------------//
+
+//-----------------------------------------------------//
+exports.getUserBalance = function(req, res) {
+  console.log("UserController getUserBalance ");
+
+  var token = jwt.verify(
+    req.headers.authentication.split(" ")[1],
+    process.env.SECRET_KEY
+  );
+
+  DBService.getUserById(token.userId, function(err, result) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.status(201).json({
+        message: "success",
+        balance: result[0].balance
+      });
+    }
+  });
 };
 //-----------------------------------------------------//

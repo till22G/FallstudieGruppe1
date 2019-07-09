@@ -135,7 +135,7 @@ exports.createContact = function(data, callback) {
 //-----------------------------------------------------//
 exports.getContacts = function (userId, callback) {
   console.log("DBService getContacts ");
-  var selectQuery = "SELECT * FROM CONTACTLINKS WHERE USER = ?;";
+  var selectQuery = "SELECT * FROM CONTACTLINKS CL JOIN REGUSER RU ON CL.USERCONTACT = RU.USERID WHERE USER = ?;";
   var query = mysql.format(selectQuery, [userId]);
 
   var connection = createNewConnection(false);

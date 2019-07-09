@@ -16,6 +16,12 @@ router.post("/api/v1/users/read", function(req, res) {
   userControl.getUser(req, res);
 });
 
+router.post("/api/v1/users/balance", checkAuthentication);
+router.post("/api/v1/users/balance", function(req, res) {
+  console.log("Router GET /api/v1/users/balance");
+  userControl.getUserBalance(req, res);
+});
+
 router.post("/api/v1/transactions/create", checkAuthentication);
 router.post("/api/v1/transactions/create", function (req, res) {
   console.log("Router POST api/v1/transactions/create");
@@ -43,42 +49,10 @@ router.post("/api/v1/contacts/read", function(req, res) {
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
-
-//router.post("/api/v1/contacts/read", checkAuthentication);
 router.get("/api/v1/contacts/read", function(req, res) {
   console.log("Router GET /api/v1/contacts/read");
-  // TEST
-  req.body.userId = "6";
-  // TEST END
   contactControl.getContacts(req, res);
 });
-
-//router.post("/api/v1/contacts/create", checkAuthentication);
-router.get("/api/v1/contacts/create", function(req, res) {
-  console.log("Router POST /api/v1/contacts/create");
-  // TEST
-  req.body.userId = "6";
-  req.body.contactId = "1";
-  req.body.comment = "n-ter test";
-  // TEST END
-  contactControl.createContact(req, res);
-});
-
-//router.get("/api/v1/transactions/create", checkAuthentication);
-router.get("/api/v1/transactions/create", function (req, res) {
-  console.log("Router GET api/v1/transactions/create");
-  // TEST
-  req.body.amount = "11.73";
-  req.body.fee = "0.23";
-  req.body.currency = "1";
-  req.body.receiver = "1";
-  req.body.sender = "6";
-  req.body.category = "1";
-  req.body.comment = "funny toilet paper";
-  // TEST END
-  transactionControl.createTransaction(req, res);
-});
-
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
