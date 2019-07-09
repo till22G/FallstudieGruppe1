@@ -11,21 +11,21 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 export class BalanceComponent implements OnInit, OnDestroy {
   private currentBalanceListenerSub = new Subscription();
-  currentBalanceData = new BalanceData (0, '', 0);
+  currentBalanceData = new BalanceData (null, null, null);
 
   constructor(private balanceService: BalanceService) { }
 
 
   ngOnInit() {
-    console.log('onInit called');
     this.currentBalanceListenerSub = this.balanceService
       .getCurrentBalanceListener()
       .subscribe(currentBalanceData => {
          this.currentBalanceData = currentBalanceData;
+         console.log('balComp: ' + currentBalanceData.getBalance());
       }, error => {
         console.log('error');
       });
-    this.balanceService.getCurrentBalance();
+    this.balanceService.submitCurrentBalanceData();
   }
 
   ngOnDestroy() {

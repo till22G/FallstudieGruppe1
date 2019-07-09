@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class TransactionsService {
   private ongoingTransactionListener = new Subject<TransactionData>();
   private transactions: Array<TransactionData> = [];
-  private ongoingTransactionData: TransactionData;
+  ongoingTransactionData: TransactionData = null;
 
 
     constructor(private http: HttpClient, private router: Router) {}
@@ -35,8 +35,36 @@ export class TransactionsService {
         });
     }
 
+    setOngoingTransactionData(transactionData: TransactionData) {
+      this.ongoingTransactionData = transactionData;
+    }
+
     getOngoingTransactionData() {
       return this.ongoingTransactionData;
+    }
+
+    createTransaction() {
+      this.ongoingTransactionData = new TransactionData(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      );
+      console.log('empty transaction created');
+    }
+
+    clearOngoingTransaction() {
+      this.ongoingTransactionData = null;
+    }
+
+    setOngoingTransactionDataReceiver(receiver: string) {
+      console.log(' setOngoingTransactionDataReceiver called with:' + receiver );
+      this.ongoingTransactionData.setReceiver(receiver);
     }
 
     placeTransaction() {

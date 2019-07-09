@@ -13,18 +13,28 @@ export class TransactionData {
                 private comment: string) {}
 
   getAmount() {
-    return this.amount;
+    if (this.amount == null) {
+     return  0;
+    } else { return this.amount; }
   }
 
   getReceiver() {
-    return this.receiver;
+    if (this.receiver == null) {
+      return '';
+    } else {return this.receiver; }
   }
 
   getComment() {
-    return this.comment;
+    if (this.comment == null) {
+      return '';
+    } else {return this.comment; }
   }
 
   setFee(fee: number) {
     this.fee = fee;
+  }
+
+  setReceiver(receiver: string) {
+    this.receiver = receiver;
   }
 }

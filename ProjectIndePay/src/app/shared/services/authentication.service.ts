@@ -4,6 +4,8 @@ import { AuthenticationData } from '../models/authentication-data.model';
 import { RegisterUser } from '../models/register-user.model';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { BalanceService } from './balance.service';
+import { BalanceData } from '../models/balance-data.model';
 
 @Injectable({ providedIn: 'root'})
 export class AuthenticationService {
@@ -16,7 +18,7 @@ export class AuthenticationService {
 
   private initialBalance: number;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private balanceService: BalanceService) {}
 
 
 
@@ -36,6 +38,10 @@ export class AuthenticationService {
       const token = response.jwt;
       this.token = token;
       console.log(this.token);
+
+      const balanceData = new BalanceData(response.balance, '', 0); // => check model and get the currency from backend
+      this.balanceService.updateBalanceData(balanceData);
+      console.log('auth: updateBalanceCalled');
 
       // check if a token was returned
       if (token) {
@@ -64,6 +70,8 @@ export class AuthenticationService {
         const initialBalance = response.balance;
         this.initialBalance = initialBalance;
 
+
+
         // give the local Storage the curent date + the expiration time so we can implements an auto login while token is valid
         // const now = new Date();
         // const expirationDate = new Date(now.getTime() + (expiresInDuration * 1000));
@@ -71,6 +79,8 @@ export class AuthenticationService {
         // call router an navigate to the home page
         this.router.navigate(['/home']);
       }
+    }, error => {
+      // implement error case here
     });
   }
 

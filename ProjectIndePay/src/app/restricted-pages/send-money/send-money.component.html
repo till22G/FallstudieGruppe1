@@ -32,17 +32,13 @@
         mat-raised-button
         color="primary"
         (click)="onSearchInContacts()">Search in contacts</button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onAddNewContact()">New contact</button>
       <br>
       <mat-form-field>
         <input
           matInput
           required
           name="selectedContact"
-          [value]="selectedContact"
+          [value]="this.ongoingTransactionData.getReceiver()"
           placeholder="select contact"
           ngModel>
       </mat-form-field>

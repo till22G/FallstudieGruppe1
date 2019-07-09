@@ -9,7 +9,7 @@ export class BalanceService {
   private currentBalanceData = new BalanceData(0, '', 0);
   private currentBalanceListener = new Subject<BalanceData>();
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
+  constructor(private http: HttpClient) {}
 
    getCurrentBalance() {
      console.log('getCurrentBalance called');
@@ -20,10 +20,24 @@ export class BalanceService {
        // this.currentBalanceData.setCurrency(currency); => implement getCurrency()
        console.log(response.balance);
        this.currentBalanceData.setBalance(currentBalance);
-       this.currentBalanceListener.next(this.currentBalanceData);
        console.log('current balance: ' + this.currentBalanceData.getBalance());
-     });
-   }
+       this.updateBalanceData(this.currentBalanceData);
+      });
+    }
+
+  // if the currentBalanceData has to be updated througth another component or service,
+  // the new Data will be submitted to all interested listeners
+  updateBalanceData(currentBalanceData: BalanceData) {
+    this.currentBalanceListener.next(currentBalanceData);
+    this.currentBalanceData = currentBalanceData;
+    console.log('uBD:' + currentBalanceData.getBalance());
+  }
+
+  // since services and components which need access to the current balance always listen to it,
+  // an easy way to get the currentBalnceData is to send it again
+  submitCurrentBalanceData() {
+    this.currentBalanceListener.next(this.currentBalanceData);
+  }
 
   getCurrentBalanceListener() {
     return this.currentBalanceListener.asObservable();

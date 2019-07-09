@@ -48,8 +48,8 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     this.errorMessage = null;
   }
 
-  onBackToSendMoney() {
-    this.router.navigate(['/sendMoney']);
+  onBackToSearchContacts() {
+    this.router.navigate(['/searchContacts']);
   }
 
   ngOnDestroy() {

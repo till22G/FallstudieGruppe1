@@ -5,6 +5,7 @@ import { NgForm } from "@angular/forms";
 import { TransactionData } from "src/app/shared/models/transaction-data.model";
 import { TransactionsService } from 'src/app/shared/services/transactions.service';
 import { Router } from '@angular/router';
+import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 @Component({
   selector: "app-send-money",
@@ -12,9 +13,9 @@ import { Router } from '@angular/router';
   styleUrls: ["./send-money.component.css"]
 })
 export class SendMoneyComponent implements OnInit, OnDestroy {
-  private currentBalanceListenerSub = this.balanceService.getCurrentBalanceListener();
-  private currentBalancData = {};
-  selectedContact = 'tgalla'
+  private currentBalanceListenerSub: Subscription;
+  currentBalanceData = new BalanceData(null, null, null);
+  ongoingTransactionData = null;
 
   constructor(private balanceService: BalanceService,
               private transactionService: TransactionsService,
@@ -26,33 +27,25 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
       .subscribe(currentBalanceData => {
         this.currentBalanceData = currentBalanceData;
       });
-    this.balanceService.getCurrentBalance();
+    this.balanceService.submitCurrentBalanceData();
+    console.log('transactionService.transactionData is ' + this.transactionService.getOngoingTransactionData());
+    if (this.transactionService.getOngoingTransactionData() == null) {
+      this.transactionService.createTransaction();
+    } else {
+      this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
+    }
+    this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
+    console.log(this.ongoingTransactionData.getReceiver());
   }
 
   // create transaction data based on the model
   // other attributes are filled an handled in the backend
   onContinueSendMoney(transactionForm: NgForm) {
-    const transactionData = new TransactionData(
-       null,
-       null,
-       transactionForm.value.transactionAmount,
-       null,
-       null,
-       transactionForm.value.selectedContact,
-       null,
-       null,
-       transactionForm.value.comment
-     );
-    console.log(transactionData);
-    this.transactionService.forwardToCheckTransaction(transactionData);
+    // yet to be implemented
   }
 
   onSearchInContacts() {
   this.router.navigate(['/searchContacts']);
-  }
-
-  onAddNewContact() {
-    this.router.navigate(['/addNewContact']);
   }
 
   ngOnDestroy() {
