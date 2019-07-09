@@ -15,7 +15,7 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 export class SendMoneyComponent implements OnInit, OnDestroy {
   private currentBalanceListenerSub: Subscription;
   currentBalanceData = new BalanceData(null, null, null);
-  ongoingTransactionData = null;
+  ongoingTransactionData: TransactionData = null;
 
   constructor(private balanceService: BalanceService,
               private transactionService: TransactionsService,
@@ -31,8 +31,6 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     console.log('transactionService.transactionData is ' + this.transactionService.getOngoingTransactionData());
     if (this.transactionService.getOngoingTransactionData() == null) {
       this.transactionService.createTransaction();
-    } else {
-      this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
     }
     this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
     console.log(this.ongoingTransactionData.getReceiver());
