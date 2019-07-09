@@ -1,8 +1,15 @@
 <hr>
-<button mat-raised-button color="primary" >back</button>
+<button
+  mat-raised-button
+  color="primary"
+  (click)="onBackToSendMoney()"
+  >back</button>
 <div>
   Search Contacts
-  <button mat-raised-button color="primary">Add new contact</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onAddNewContact()">Add new contact</button>
   <button mat-raised-button color="primary" (click)="onRefreshContactList()">refresh contact list</button>
 </div>
 

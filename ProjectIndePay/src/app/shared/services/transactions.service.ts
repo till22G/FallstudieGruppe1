@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TransactionData } from 'src/app/shared/models/transaction-data.model';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class TransactionsService {
@@ -11,7 +12,7 @@ export class TransactionsService {
   private ongoingTransactionData: TransactionData;
 
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router) {}
     // implement getTransactions here
     getTransactions() {
       this.http.get('')
@@ -29,6 +30,7 @@ export class TransactionsService {
           // implement error case
         });
       this.ongoingTransactionListener.next(transactionData);
+      this.router.navigate(['/checkTransaction']);
     }
 
     getOngoingTransactionData() {

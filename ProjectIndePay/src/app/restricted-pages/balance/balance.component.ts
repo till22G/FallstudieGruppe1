@@ -18,10 +18,11 @@ export class BalanceComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentBalanceListenerSub = this.balanceService
-                                      .getCurrentBalanceListener()
-                                      .subscribe(currentBalanceData => {
-                                        this.currentBalanceData = currentBalanceData;
-                                      });
+      .getCurrentBalanceListener()
+      .subscribe(currentBalanceData => {
+         this.currentBalanceData = currentBalanceData;
+      });
+    this.balanceService.getCurrentBalance();
   }
 
   ngOnDestroy() {

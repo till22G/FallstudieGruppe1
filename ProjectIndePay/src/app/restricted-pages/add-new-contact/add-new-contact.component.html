@@ -1,5 +1,10 @@
 <hr>
 <div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onBackToSendMoney()"
+    >back</button>
   <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
     <mat-form-field>
       <input type="text"

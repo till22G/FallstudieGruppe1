@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { TransactionData } from "src/app/shared/models/transaction-data.model";
 import { TransactionsService } from 'src/app/shared/services/transactions.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-send-money",
@@ -15,7 +16,9 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
   currentBalanceData = null;
   selectedContact = 'tgalla';
 
-  constructor(private balanceService: BalanceService, private transactionService: TransactionsService) {}
+  constructor(private balanceService: BalanceService,
+              private transactionService: TransactionsService,
+              private router: Router) {}
 
   ngOnInit() {
     this.currentBalanceListenerSub = this.balanceService
@@ -42,7 +45,14 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
      );
     console.log(transactionData);
     this.transactionService.forwardToCheckTransaction(transactionData);
-    // rerout to check-transaction.component
+  }
+
+  onSearchInContacts() {
+  this.router.navigate(['/searchContacts']);
+  }
+
+  onAddNewContact() {
+    this.router.navigate(['/addNewContact']);
   }
 
   ngOnDestroy() {

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContactModel } from 'src/app/shared/models/contact-model';
 import { ContactService } from '../../shared/services/contact.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-contancts',
@@ -34,7 +35,7 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
 
 
 
-  constructor( private contactService: ContactService ) { }
+  constructor( private contactService: ContactService, private router: Router ) { }
 
   ngOnInit() {
     this.getContactListListenerSubs = this.contactService
@@ -68,6 +69,14 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
   onSelectContact(loginName: string) {
     console.log(loginName);
     // forward to send mony module with login name
+  }
+
+  onBackToSendMoney() {
+    this.router.navigate(['/sendMoney']);
+  }
+
+  onAddNewContact() {
+    this.router.navigate(['/addNewContact']);
   }
 
   private getContactList() {

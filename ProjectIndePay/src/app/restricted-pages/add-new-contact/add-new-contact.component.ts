@@ -3,6 +3,7 @@ import { ContactService } from '../../shared/services/contact.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ContactModel } from 'src/app/shared/models/contact-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-new-contact',
@@ -15,7 +16,7 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
   errorMessage: string = null;
   addContectSuccesssful = true;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, private router: Router) { }
 
   ngOnInit() {
     this.addContactListenerSubs = this.contactService
@@ -47,6 +48,9 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     this.errorMessage = null;
   }
 
+  onBackToSendMoney() {
+    this.router.navigate(['/sendMoney']);
+  }
 
   ngOnDestroy() {
     this.addContactListenerSubs.unsubscribe();

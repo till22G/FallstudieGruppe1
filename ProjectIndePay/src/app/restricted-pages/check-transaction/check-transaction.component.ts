@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TransactionsService } from 'src/app/shared/services/transactions.service';
 import { TransactionData } from 'src/app/shared/models/transaction-data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-transaction',
@@ -12,7 +13,7 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
   private ongoingTransactioinsListenerSub = new Subscription();
   ongoingTransactionData = null;
 
-  constructor(private transactionService: TransactionsService) { }
+  constructor(private transactionService: TransactionsService, private router: Router) { }
 
   ngOnInit() {
     this.ongoingTransactioinsListenerSub = this.transactionService
@@ -26,6 +27,10 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
 
   onConfirmTransaction() {
 
+  }
+
+  onBackToSendMoney() {
+    this.router.navigate(['/sendMoney']);
   }
 
   ngOnDestroy()  {
