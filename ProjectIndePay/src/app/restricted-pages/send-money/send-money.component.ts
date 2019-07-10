@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { BalanceService } from "../../shared/services/balance.service";
 import { Subscription } from "rxjs";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormGroup, FormControl } from "@angular/forms";
 import { TransactionData } from "src/app/shared/models/transaction-data.model";
 import { TransactionsService } from 'src/app/shared/services/transactions.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,12 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
   private ongoingTransactionListenerSub: Subscription;
   currentBalanceData = new BalanceData(null, null, null);
   ongoingTransactionData: TransactionData = null;
+
+  sendMoneyForm = new FormGroup({
+    transactionAmount: new FormControl(),
+    comment: new FormControl(),
+    selectedContact: new FormControl()
+  });
 
   constructor(private balanceService: BalanceService,
               private transactionService: TransactionsService,
@@ -40,7 +46,12 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     if (this.transactionService.getOngoingTransactionData() == null) {
       this.transactionService.createTransaction();
     }
-    // this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
+    this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
+    this.sendMoneyForm.setValue({
+      transactionAmount: this.ongoingTransactionData.getAmount(),
+      comment: this.ongoingTransactionData.getComment(),
+      selectedContact: this.ongoingTransactionData.getReceiver()
+    });
   }
 
   // create transaction data based on the model

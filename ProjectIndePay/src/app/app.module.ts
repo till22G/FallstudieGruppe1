@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     SearchContanctsComponent,
     SendMoneyComponent,
     AddNewContactComponent,
-    CheckTransactionComponent,
+    CheckTransactionComponent
   ],
   imports: [
     BrowserModule,
