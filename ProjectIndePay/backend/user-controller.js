@@ -31,7 +31,7 @@ exports.createUser = function(req, res) {
   console.log("UserController createUser ");
   // check for user existance
   DBService.getUserByName(req.body.loginName, function(err, result) {
-    if (err) {
+    if (err && err != "No Results found!") {
       console.log(err);
       res.send(err);
     } else {
