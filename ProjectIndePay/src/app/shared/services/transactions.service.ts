@@ -37,6 +37,8 @@ export class TransactionsService {
 
     setOngoingTransactionData(transactionData: TransactionData) {
       this.ongoingTransactionData = transactionData;
+      console.log(transactionData);
+      this.ongoingTransactionListener.next(transactionData);
     }
 
     getOngoingTransactionData() {
@@ -62,8 +64,9 @@ export class TransactionsService {
       this.ongoingTransactionData = null;
     }
 
+
+    // TODO: change this to setOngoingTransactionData(), so everything can be handeled by one method
     setOngoingTransactionDataReceiver(receiver: string) {
-      console.log(' setOngoingTransactionDataReceiver called with:' + receiver );
       this.ongoingTransactionData.setReceiver(receiver);
       this.ongoingTransactionListener.next(this.ongoingTransactionData);
     }

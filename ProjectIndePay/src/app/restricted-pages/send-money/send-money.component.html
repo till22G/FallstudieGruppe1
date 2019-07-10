@@ -1,5 +1,5 @@
 <div class="div-send-money">
-  <form [formGroup]="sendMoneyForm" (ngSubmit)="onContinueSendMoney(sendMoneyForm)" >
+  <form [formGroup]="sendMoneyForm" >
     <div>
       <mat-form-field>
           <input type="number"
@@ -29,17 +29,21 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="onSearchInContacts()">Search in contacts</button>
+        type="searchContacts"
+        (click)="onSubmit('selectContact', sendMoneyForm)">Search in contacts</button>
       <br>
       <mat-form-field>
         <input
           matInput
           required
           formControlName="selectedContact"
-          [value]="this.ongoingTransactionData.getReceiver()"
           placeholder="select contact">
       </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit">Continue</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      (click)="onSubmit('checkTransaction', sendMoneyForm)">Continue</button>
   </form>
 </div>

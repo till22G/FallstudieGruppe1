@@ -56,15 +56,25 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
 
   // create transaction data based on the model
   // other attributes are filled an handled in the backend
-  onContinueSendMoney(transactionForm: NgForm) {
-    // yet to be implemented
+  onSubmit(type: string, transactionForm: NgForm) {
+    this.ongoingTransactionData.setComment(transactionForm.value.comment);
+    this.ongoingTransactionData.setAmount(transactionForm.value.transactionAmount);
+    this.ongoingTransactionData.setReceiver(transactionForm.value.selectedContact);
+    this.transactionService.setOngoingTransactionData(this.ongoingTransactionData);
+    if (type === 'checkTransaction') {
+      this.router.navigate(['/checkTransaction']);
+    } else if ( type === 'selectContact') {
+      this.router.navigate(['/searchContacts']);
+    }
   }
 
   onSearchInContacts() {
+
   this.router.navigate(['/searchContacts']);
   }
 
   ngOnDestroy() {
     this.currentBalanceListenerSub.unsubscribe();
+    this.ongoingTransactionListenerSub.unsubscribe();
   }
 }

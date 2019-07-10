@@ -37,4 +37,12 @@ export class TransactionData {
   setReceiver(receiver: string) {
     this.receiver = receiver;
   }
+
+  setAmount(amount: number) {
+    this.amount = amount;
+  }
+
+  setComment(comment: string) {
+    this.comment = comment;
+  }
 }
