@@ -18,7 +18,7 @@ exports.createUser = function(data, callback) {
   console.log("DBService createUser " + data);
 
   var insertQuery =
-    "INSERT INTO REGUSER ('SYS_CREATE_DATE', 'LOGINNAME', 'PASSWORD', 'RU_FIRSTNAME', 'RU_SURNAME', 'LOCKED', 'BALANCE', 'CURRENCY', 'COUNTRY', 'ROLE', 'LANGUAGE', 'LAST_LOGIN_DATE') VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+    "INSERT INTO REGUSER (`SYS_CREATE_DATE`,`LOGINNAME`,`PASSWORD`,`RU_FIRSTNAME`,`RU_SURNAME`,`LOCKED`,`BALANCE`,`CURRENCY`,`COUNTRY`,`ROLE`,`LANGUAGE`,`LAST_LOGIN_DATE`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
   query = mysql.format(insertQuery, data);
 
   var connection = createNewConnection(false);
