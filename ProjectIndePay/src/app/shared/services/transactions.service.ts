@@ -26,7 +26,7 @@ export class TransactionsService {
       this.ongoingTransactionData = transactionData;
       const amount  = this.ongoingTransactionData.getAmount();
       console.log('this amount is: ' + this.ongoingTransactionData.getAmount());
-      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount})
+      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount}) // <= change this to an 'real' object
         .subscribe(response => {
 
           console.log(response);
@@ -53,7 +53,7 @@ export class TransactionsService {
       return this.ongoingTransactionData;
     }
 
-    createTransaction() {
+    createTransactionData() {
       this.ongoingTransactionData = new TransactionData(
         null,
         null,
@@ -80,13 +80,15 @@ export class TransactionsService {
     }
 
     placeTransaction() {
-      this.http.post<{message: string}>('', this.ongoingTransactionData)
+      this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions/create', this.ongoingTransactionData)
         .subscribe(response => {
           // ...response message
+          console.log('transaction successfully created');
           this.ongoingTransactionData = null;
-          // rerout to home here
+          this.router.navigate(['/home']);
         }, error => {
           // implement error cases here
+          console.log('transaction failed');
         });
     }
 

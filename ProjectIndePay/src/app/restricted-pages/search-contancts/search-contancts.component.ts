@@ -35,7 +35,9 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
         console.log(error.errorMessage);
         this.errorMessage = error.errorMessage;
       });
-    this.getContactList();
+    if (this.contactList == null) {
+      this.getContactList();
+    }
   }
 
   onRefreshContactList() {

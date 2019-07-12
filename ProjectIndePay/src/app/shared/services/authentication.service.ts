@@ -23,12 +23,12 @@ export class AuthenticationService {
 
 
   login(loginName: string, password: string) {
-    console.log('login called')
+    console.log('login called');
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number}>
+    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string}>
     ('http://localhost:3000/api/v1/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
@@ -39,7 +39,7 @@ export class AuthenticationService {
       this.token = token;
       console.log(this.token);
 
-      const balanceData = new BalanceData(response.balance, '', 0); // => check model and get the currency from backend
+      const balanceData = new BalanceData(response.balance, response.currency, 0); // => check model and get the currency from backend
       this.balanceService.updateBalanceData(balanceData);
       console.log('auth: updateBalanceCalled');
 
@@ -127,8 +127,8 @@ export class AuthenticationService {
     }
 
     // save the token (and expiration date) in the local storage of the brwoser so a user is not logged
-    // out after the angular app reloads. Since the token expires after 10 minutes he will get logged out after
-    // thit time if he forgets to log out mannually
+    // out after the angular app reloads. Since the token expires after 10 minutes the user will get logged out after
+    // this time if the user forgets to log out mannually
     // private saveAuthenticationData(token: string, expirationDate: Date) {
     //   localStorage.setItem('token', token);
     //   localStorage.setItem('expiration', expirationDate.toISOString());
@@ -150,7 +150,7 @@ export class AuthenticationService {
     //     token: token;
     //     expirationDate: new Date(expirationDate);
     //   }
-    // }---------------------------> for auto login => still under construction => is it needed??
+    // }---------------------------> for auto login => still under construction => implement only if other functions work
 
 
     getToken() {

@@ -2,7 +2,11 @@
 
 <div>
   Currency: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getCurrency() }}</span><br>
-  Contact: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getReceiver() }}</span>
+  <hr>
+  Contact: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getReceiver() }}</span><br>
+  <hr>
+  Comment: <br>
+  <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getComment() }}</span>
 </div>
 <br>
 <br>

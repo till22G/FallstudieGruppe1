@@ -28,12 +28,14 @@
 
 <div>
   <p>All contacts</p>
+
+<div *ngIf="contactList == null">Constact List loading...</div>
 <mat-action-list *ngIf="contactList != null">
   <mat-list-item *ngFor="let contact of contactList | filterContacts: pipeFilterValue">
       <div>
-        {{ contact.loginName }} <span>     </span> {{ contact.comment }}
-        <button mat-raised-button color="primary" (click)="onEditContact(contact.loginName)">edit</button>
-        <button mat-raised-button color="primary" (click)="onSelectContact(contact.loginName)">select</button>
+        {{ contact.contactLoginName }} <span>     </span> {{ contact.comment }}
+        <button mat-raised-button color="primary" (click)="onEditContact(contact.contactLoginName)">edit</button>
+        <button mat-raised-button color="primary" (click)="onSelectContact(contact.contactLoginName)">select</button>
       </div>
   </mat-list-item>
 </mat-action-list>

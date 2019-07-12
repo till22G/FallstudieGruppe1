@@ -26,7 +26,7 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
   }
 
   onConfirmTransaction() {
-
+    this.transactionService.placeTransaction();
   }
 
   onBackToSendMoney() {

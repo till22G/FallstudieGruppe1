@@ -44,7 +44,7 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     this.balanceService.submitCurrentBalanceData();
 
     if (this.transactionService.getOngoingTransactionData() == null) {
-      this.transactionService.createTransaction();
+      this.transactionService.createTransactionData();
     }
     this.ongoingTransactionData = this.transactionService.getOngoingTransactionData();
     this.sendMoneyForm.setValue({
