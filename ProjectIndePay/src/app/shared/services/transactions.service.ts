@@ -8,16 +8,21 @@ import { Router } from '@angular/router';
 @Injectable({providedIn: 'root'})
 export class TransactionsService {
   private ongoingTransactionListener = new Subject<TransactionData>();
-  private transactions: Array<TransactionData> = [];
+  private lastTransactionsListener = new Subject<TransactionData[]>();
+  private lastTransactions: TransactionData[] = [];
   ongoingTransactionData: TransactionData = null;
 
 
     constructor(private http: HttpClient, private router: Router) {}
     // implement getTransactions here
-    getTransactions() {
-      this.http.get('')
+    getTransactions(transactionsPerPage: number, currentPage: number) {
+      const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
+      this.http.get<{message: string, transactionArray: [TransactionData]}>('')
         .subscribe(response => {
-
+          this.lastTransactions = response.transactionArray;
+        }, error => {
+          // implement error case here
+          console.log('error at fetching the last tranasactions');
         });
     }
 
@@ -94,5 +99,9 @@ export class TransactionsService {
 
     getOngoingTransactionListener() {
       return this.ongoingTransactionListener.asObservable();
+    }
+
+    getlastTransactionsListener() {
+      return this.lastTransactionsListener.asObservable();
     }
 }
