@@ -21,10 +21,12 @@ exports.createContact = function(req, res) {
       DBService.checkContact(data, function(err, result) {
         if (err) {
           console.log(err);
+          console.log("ContactController createContact sending Response...");
           res.send(err);
         } else {
           console.log("ContactController createContact 2");
           if (result.length > 0) {
+            console.log("ContactController createContact sending Response...");
             res.status(201).json({
               message: "Contact already exists!"
             });
@@ -34,8 +36,10 @@ exports.createContact = function(req, res) {
             DBService.createContact(data, function(err, result) {
               if (err) {
                 console.log(err);
+                console.log("ContactController createContact sending Response...");
                 res.send(null, err);
               } else {
+                console.log("ContactController createContact sending Response...");
                 res.status(201).json({
                   message: "Contact successfully created!"
                 });
@@ -62,13 +66,14 @@ exports.getContacts = function(req, res) {
   DBService.getContacts(data, function(err, results) {
     if (err) {
       console.log(err);
+      console.log("ContactController getContacts sending Response...");
       res.send(err);
     } else {
       var returnObject = results.map(result => ({
         contactLoginName: result.LOGINNAME,
         comment: result.COMMENT
       }));
-
+      console.log("ContactController getContacts sending Response...");
       res.status(201).json({
         contactList: returnObject
       });

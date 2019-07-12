@@ -1,12 +1,12 @@
 const DBService = require("./service");
 const userControl = require("./user-controller");
 
-function calculateFee(amount) {
+function calculateFee(amount, callback) {
   console.log("calculateFee + " + amount);
   var fee = amount * process.env.FEE_PERCENTAGE;
   fee = Math.floor(fee * 100) / 100;
   console.log("calculateFee + " + fee);
-  return fee;
+  callback(null, fee);
 }
 
 //-----------------------------------------------------//
@@ -75,6 +75,7 @@ exports.getCalculatedFee = function(req, res) {
   console.log("transaction-controller getCalculatedFee " + req.body.amount);
   var amount = req.body.amount;
   if (amount <= process.env.MINIMAL_AMOUNT) {
+    console.log("transaction-controller getCalculatedFee sending Response...");
     res.status(201).json({
       message:
         "Amount of " +
@@ -84,12 +85,16 @@ exports.getCalculatedFee = function(req, res) {
         "!"
     });
   } else {
-    var fee = calculateFee(amount);
-    console.log("transaction-controller getCalculatedFee sending fee " + fee);
-    res.status(201).json({
-      message: "Calculation successful!",
-      fee: fee,
-      feePercentage: process.env.FEE_PERCENTAGE
+    calculateFee(amount, function(err, fee) {
+      console.log("transaction-controller getCalculatedFee sending fee " + fee);
+      console.log(
+        "transaction-controller getCalculatedFee sending Response..."
+      );
+      res.status(201).json({
+        message: "Calculation successful!",
+        fee: fee,
+        feePercentage: process.env.FEE_PERCENTAGE
+      });
     });
   }
 };

@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+console.log("Server has started!");
 
 //--------------------------------------------------//
 // Necessary to have an easier request body to work with

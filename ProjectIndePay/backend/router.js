@@ -16,31 +16,31 @@ router.post("/api/v1/users/read", function(req, res) {
   userControl.getUser(req, res);
 });
 
-// router.post("/api/v1/users/balance", checkAuthentication);
+router.post("/api/v1/users/balance", checkAuthentication);
 router.post("/api/v1/users/balance", function(req, res) {
   console.log("Router GET /api/v1/users/balance");
   userControl.getUserBalance(req, res);
 });
 
-// router.post("/api/v1/transactions/create", checkAuthentication);
+router.post("/api/v1/transactions/create", checkAuthentication);
 router.post("/api/v1/transactions/create", function (req, res) {
   console.log("Router POST api/v1/transactions/create");
   transactionControl.createTransaction(req, res);
 });
 
-// router.post("/api/v1/transactions/fee", checkAuthentication);
+router.post("/api/v1/transactions/fee", checkAuthentication);
 router.post("/api/v1/transactions/fee", function (req, res) {
   console.log("Router GET api/v1/transactions/create");
   transactionControl.getCalculatedFee(req, res);
 });
 
-// router.post("/api/v1/contacts/create", checkAuthentication);
+router.post("/api/v1/contacts/create", checkAuthentication);
 router.post("/api/v1/contacts/create", function(req, res) {
   console.log("Router POST /api/v1/contacts/create");
   contactControl.createContact(req, res);
 });
 
-// router.post("/api/v1/contacts/read", checkAuthentication);
+router.post("/api/v1/contacts/read", checkAuthentication);
 router.post("/api/v1/contacts/read", function(req, res) {
   console.log("Router GET /api/v1/contacts/read");
   contactControl.getContacts(req, res);

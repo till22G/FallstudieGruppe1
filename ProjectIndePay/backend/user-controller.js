@@ -33,10 +33,12 @@ exports.createUser = function(req, res) {
   DBService.getUserByName(req.body.loginName, function(err, result) {
     if (err && err != "No Results found!") {
       console.log(err);
+      console.log("UserController createUser sending Response...");
       res.send(err);
     } else {
       console.log("UserController createUser RESULT = " + result);
       if (result != null && result.length > 0) {
+        console.log("UserController createUser sending Response...");
         res.status(201).json({
           message: "User already exists!"
         });
@@ -59,8 +61,10 @@ exports.createUser = function(req, res) {
         DBService.createUser(data, function(err, result) {
           if (err) {
             console.log(err);
+            console.log("UserController createUser sending Response...");
             res.send(err);
           } else {
+            console.log("UserController createUser sending Response...");
             res.status(201).json({
               message: "User successfully created!"
             });
@@ -80,18 +84,22 @@ exports.getUser = function(req, res) {
     DBService.getUserByName(req.body.loginName, function(err, result) {
       if (err) {
         console.log(err);
+        console.log("UserController getUser sending Response...");
         res.send(err);
       } else {
         var row = result[0];
         if (row.LOCKED == 0) {
           if (row.PASSWORD == req.body.password) {
+            console.log("UserController getUser sending Response...");
             sendUserData(result[0], res);
           } else {
+            console.log("UserController getUser sending Response...");
             res.status(201).json({
               message: "Wrong password!"
             });
           }
         } else {
+          console.log("UserController getUser sending Response...");
           res.status(201).json({
             message: "User has been locked!"
           });
@@ -103,18 +111,22 @@ exports.getUser = function(req, res) {
       DBService.getUserById(req.body.userId, function(err, result) {
         if (err) {
           console.log(err);
+          console.log("UserController getUser sending Response...");
           res.send(err);
         } else {
           var row = result[0];
           if (row.LOCKED == 0) {
             if (row.PASSWORD == req.body.password) {
+              console.log("UserController getUser sending Response...");
               sendUserData(result[0], res);
             } else {
+              console.log("UserController getUser sending Response...");
               res.status(201).json({
                 message: "Wrong password!"
               });
             }
           } else {
+            console.log("UserController getUser sending Response...");
             res.status(201).json({
               message: "User has been locked!"
             });
@@ -138,8 +150,10 @@ exports.getUserBalance = function(req, res) {
   DBService.getUserById(token.userId, function(err, result) {
     if (err) {
       console.log(err);
+      console.log("UserController getUserBalance sending Response...");
       res.send(err);
     } else {
+      console.log("UserController getUserBalance sending Response...");
       res.status(201).json({
         message: "success",
         balance: result[0].BALANCE,
