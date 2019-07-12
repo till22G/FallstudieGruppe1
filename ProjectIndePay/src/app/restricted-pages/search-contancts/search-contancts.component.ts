@@ -14,27 +14,8 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
   private getContactListListenerSubs: Subscription;
   private getContactListErrorListenerSubs: Subscription;
   errorMessage = null;
-  contactList: [ContactModel];
+  contactList: [ContactModel] = null;
   pipeFilterValue = '';
-
-
-  testContactList = [{loginName: 'tgalla', comment: 'blubb'},
-                    {loginName: 'phil', comment: 'basda'},
-                    {loginName: 'Jonathan', comment: 'bgfhfc'},
-                    {loginName: 'Lucas', comment: 'mzf'},
-                    {loginName: 'Mario', comment: ''},
-                    {loginName: 'Hella', comment: 'btfzju'},
-                    {loginName: 'Dirk', comment: 'wrbarebvszxrcs'},
-                    {loginName: 'Gwen', comment: 'uzo,zg8o'},
-                    {loginName: 'Glen', comment: 'uzo,zg8o'}];
-
-
-
-
-
-
-
-
 
   constructor(private contactService: ContactService,
               private transactionService: TransactionsService,

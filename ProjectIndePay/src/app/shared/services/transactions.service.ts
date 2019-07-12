@@ -22,14 +22,22 @@ export class TransactionsService {
     }
 
     forwardToCheckTransaction(transactionData: TransactionData) {
+
       this.ongoingTransactionData = transactionData;
+      const amount  = this.ongoingTransactionData.getAmount();
       console.log('this amount is: ' + this.ongoingTransactionData.getAmount());
-      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', this.ongoingTransactionData.getAmount())
+      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount})
         .subscribe(response => {
-          this.ongoingTransactionData.setFee(response.fee); // get curren fee in % for frontend calculation of fee
+
           console.log(response);
+          this.ongoingTransactionData.setFee(response.fee); // get curren fee in % for frontend calculation of fee
+          this.ongoingTransactionData
+            .setTotalAmount((
+                this.ongoingTransactionData.getAmount() + this.ongoingTransactionData.getFee()));
+          console.log(this.ongoingTransactionData);
           this.ongoingTransactionListener.next(this.ongoingTransactionData);
           this.router.navigate(['/checkTransaction']);
+
         }, error => {
           // implement error case
         });

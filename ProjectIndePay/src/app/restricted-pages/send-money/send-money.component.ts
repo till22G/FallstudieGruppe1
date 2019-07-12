@@ -62,7 +62,8 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     this.ongoingTransactionData.setReceiver(transactionForm.value.selectedContact);
     this.transactionService.setOngoingTransactionData(this.ongoingTransactionData);
     if (type === 'checkTransaction') {
-      this.router.navigate(['/checkTransaction']);
+      console.log('send-money.comp: ' + this.ongoingTransactionData);
+      this.transactionService.forwardToCheckTransaction(this.ongoingTransactionData);
     } else if ( type === 'selectContact') {
       this.router.navigate(['/searchContacts']);
     }

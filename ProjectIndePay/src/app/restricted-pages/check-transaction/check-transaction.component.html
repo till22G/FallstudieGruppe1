@@ -1,8 +1,8 @@
 <h3>check your transaction</h3>
 
 <div>
-  Amout and currency<br>
-  Contact
+  Currency: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getCurrency() }}</span><br>
+  Contact: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getReceiver() }}</span>
 </div>
 <br>
 <br>
@@ -12,15 +12,15 @@
   <p>Details</p>
   <hr>
   <div>
-    Amount:
+    Amount: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getAmount() }}</span>
   </div>
   <hr>
   <div>
-    Transaction fees:
+    Transaction fees:<span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getFee() }}</span>
   </div>
   <hr>
   <div>
-    Total Payment: ...
+    Total Payment: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getTotalAmount() }}</span>
   </div>
     <hr>
   <button

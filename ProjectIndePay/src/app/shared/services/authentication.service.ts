@@ -98,9 +98,12 @@ export class AuthenticationService {
       repeatPassword : repeatPassword};
 
       // implement path for user registration
-    this.http.post('http://localhost:3000/api/v1/users/create', registerUser).subscribe(response => {
+    this.http.post('http://localhost:3000/api/v1/users/create', registerUser)
+      .subscribe(response => {
         console.log('registration worked');
         console.log(response);
+      }, error => {
+        console.log('registraition failed');
       });
     }
 

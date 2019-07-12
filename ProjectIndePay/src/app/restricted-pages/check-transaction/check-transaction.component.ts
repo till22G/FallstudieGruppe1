@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CheckTransactionComponent implements OnInit, OnDestroy {
   private ongoingTransactioinsListenerSub = new Subscription();
-  ongoingTransactionData = null;
+  ongoingTransactionData: TransactionData = null;
 
   constructor(private transactionService: TransactionsService, private router: Router) { }
 

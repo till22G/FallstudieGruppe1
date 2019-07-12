@@ -30,6 +30,26 @@ export class TransactionData {
     } else {return this.comment; }
   }
 
+  getFee() {
+    if (this.comment == null) {
+      return 0;
+    } else { return this.fee; }
+  }
+
+  getTotalAmount() {
+    if (this.totalAmount == null) {
+      return 0;
+    } else { return this.totalAmount; }
+  }
+
+  getCurrency() {
+    if (this.currency == null) {
+      return '';
+    } else { return this.currency; }
+  }
+
+
+
   setFee(fee: number) {
     this.fee = fee;
   }
@@ -44,5 +64,9 @@ export class TransactionData {
 
   setComment(comment: string) {
     this.comment = comment;
+  }
+
+  setTotalAmount(totalAmount: number) {
+    this.totalAmount = totalAmount;
   }
 }

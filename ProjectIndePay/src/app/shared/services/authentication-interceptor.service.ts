@@ -12,7 +12,7 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
       console.log('token not null');
       request = request.clone({
         setHeaders: {
-          'Content-Type': 'appplication/json',
+          'Content-Type': 'application/json',
           Authentication : 'Bearer ' + token
         }
       });
