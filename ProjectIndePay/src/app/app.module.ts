@@ -36,6 +36,7 @@ import { FilterTransactionsPipe } from './shared/pipes/filter-transactions.pipe'
 import { FilterContactsPipe } from './shared/pipes/filter-contacts.pipe';
 import { CheckTransactionComponent } from './restricted-pages/check-transaction/check-transaction.component';
 import { NotifierModule } from 'angular-notifier';
+import { BusinessUserPanelComponent } from './restricted-pages/business-user-panel/business-user-panel.component';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
   { path: 'searchContacts', component: SearchContanctsComponent, canActivate: [AuthenticationGuard]},
   { path: 'addNewContact', component: AddNewContactComponent, canActivate: [AuthenticationGuard]},
   { path: 'sendMoney', component: SendMoneyComponent, canActivate: [AuthenticationGuard]},
-  { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard]}
+  { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard]},
+  { path: 'business-user-panel', component: BusinessUserPanelComponent, canActivate: [AuthenticationGuard]}
 ];
 
 @NgModule({
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
     SearchContanctsComponent,
     SendMoneyComponent,
     AddNewContactComponent,
-    CheckTransactionComponent
+    CheckTransactionComponent,
+    BusinessUserPanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export class AuthenticationService {
   private tokenTimer: NodeJS.Timer;
   private userLoginName: string;
   private initialBalance: number;
+  private role = 'business-user';
 
   private isAuthenticated = false;
 
@@ -46,6 +47,8 @@ export class AuthenticationService {
       const token = response.jwt;
       this.token = token;
       console.log(this.token);
+
+      // this.role = response.role;
 
       const balanceData = new BalanceData(response.balance, response.currency, 0); // => check model and get the currency from backend
       this.balanceService.updateBalanceData(balanceData);
@@ -194,5 +197,9 @@ export class AuthenticationService {
 
     getInitialBalance() {
       return this.initialBalance;
+    }
+
+    getRole () {
+      return this.role;
     }
   }

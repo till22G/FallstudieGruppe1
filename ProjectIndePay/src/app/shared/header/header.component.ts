@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private authenticationNameListenerSubs: Subscription;
   userIsAuthenticated = false;
   authenticatedUserName = null;
+  role = null;
 
 
   constructor(private authenticationService: AuthenticationService) {}
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
     // check if user is authenticated
     this.userIsAuthenticated = this.authenticationService.getIsAuthenticated();
+    this.role = this.authenticationService.getRole();
   }
 
   onLogout() {
