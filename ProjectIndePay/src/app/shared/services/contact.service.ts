@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ContactModel } from '../models/contact-model';
-import { Subject, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
@@ -13,6 +13,7 @@ export class ContactService {
                                                   contactList: [ContactModel]}>();
 
   private getContactListErrorListener = new Subject<{errorMessage: string}>();
+  private currentContactList: [ContactModel] = null;
 
   constructor(  private http: HttpClient,
                 private router: Router) {}
@@ -40,6 +41,7 @@ export class ContactService {
       .subscribe( response => {
                     const res = { successful: true,
                                   contactList: response.contactList};
+                    this.currentContactList = response.contactList;
                     this.getContactListListener.next(res);
                     console.log(res.contactList);
                   },
@@ -50,6 +52,10 @@ export class ContactService {
   }
 
   // implement edit contact with http.put
+
+  getCurrentContactList() {
+    return this.currentContactList;
+  }
 
   getAddContactListener() {
     return this.addContactListener.asObservable();

@@ -33,7 +33,7 @@
 <mat-action-list *ngIf="contactList != null">
   <mat-list-item *ngFor="let contact of contactList | filterContacts: pipeFilterValue">
       <div>
-        {{ contact.contactLoginName }} <span>     </span> {{ contact.comment }}
+        {{ contact.contactLoginName }} <span>  ::::::::.   </span> {{ contact.comment }}
         <button mat-raised-button color="primary" (click)="onEditContact(contact.contactLoginName)">edit</button>
         <button mat-raised-button color="primary" (click)="onSelectContact(contact.contactLoginName)">select</button>
       </div>

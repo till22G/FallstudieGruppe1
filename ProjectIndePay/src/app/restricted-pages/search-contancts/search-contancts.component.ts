@@ -35,14 +35,16 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
         console.log(error.errorMessage);
         this.errorMessage = error.errorMessage;
       });
-    if (this.contactList == null) {
-      this.getContactList();
-    }
+
+    if (this.contactService.getCurrentContactList() == null) {
+      console.log('contactList is null');
+      this.contactService.getContactList();
+    } else { this.contactList = this.contactService.getCurrentContactList(); }
   }
 
   onRefreshContactList() {
     console.log('onRefreshContactList called');
-    this.getContactList();
+    this.contactService.getContactList();
   }
 
   onEditContact() {
@@ -64,11 +66,6 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
 
   onAddNewContact() {
     this.router.navigate(['/addNewContact']);
-  }
-
-  private getContactList() {
-    console.log('getContactList called');
-    this.contactService.getContactList();
   }
 
   ngOnDestroy() {

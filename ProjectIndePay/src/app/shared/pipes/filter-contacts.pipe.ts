@@ -12,9 +12,9 @@ export class FilterContactsPipe implements PipeTransform {
     console.log();
     const resultArray = [];
     for (const contact of value) {
-      console.log(contact.loginName.substr(0, filterString.length));
+      console.log(contact.contactLoginName.substr(0, filterString.length));
       console.log(filterString);
-      if (filterString.toLocaleLowerCase() === contact.loginName.substr(0, filterString.length).toLocaleLowerCase()) {
+      if (filterString.toLocaleLowerCase() === contact.contactLoginName.substr(0, filterString.length).toLocaleLowerCase()) {
         console.log('match found');
         resultArray.push(contact);
       }

@@ -8,7 +8,9 @@ export class BalanceData {
   }
 
   getCurrency() {
-    return this.currency;
+    if (this.currency != null) {
+      return this.currency;
+    } else { return ''; }
   }
 
   getFee() {

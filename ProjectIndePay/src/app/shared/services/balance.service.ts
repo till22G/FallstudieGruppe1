@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
+
 @Injectable({ providedIn: 'root'})
 export class BalanceService {
   private currentBalanceData = new BalanceData(0, '', 0);
@@ -37,6 +38,10 @@ export class BalanceService {
   // an easy way to get the currentBalnceData is to send it again
   submitCurrentBalanceData() {
     this.currentBalanceListener.next(this.currentBalanceData);
+  }
+
+  getCurrentBalanceData() {
+    return this.currentBalanceData;
   }
 
   getCurrentBalanceListener() {
