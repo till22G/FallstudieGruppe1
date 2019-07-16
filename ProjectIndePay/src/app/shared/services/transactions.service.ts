@@ -92,6 +92,7 @@ export class TransactionsService {
           this.ongoingTransactionData = null;
           this.router.navigate(['/home']);
         }, error => {
+          console.log(error.message);
           // implement error cases here
           console.log('transaction failed');
         });

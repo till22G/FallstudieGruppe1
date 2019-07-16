@@ -1,5 +1,6 @@
 const DBService = require("./service");
 const userControl = require("./user-controller");
+const jwt = require("jsonwebtoken");
 
 function calculateFee(amount, callback) {
   console.log("calculateFee + " + amount);
@@ -25,46 +26,49 @@ exports.createTransaction = function(req, res) {
     } else {
       console.log("transaction-controller createTransaction 1");
       var row = result[0];
-      var fee = calculateFee(amount);
-      var total = req.body.amount * 1 + fee * 1;
-      if (row.BALANCE >= total) {
-        DBService.getUserByName(req.body.receiver, function(err, result) {
-          if (err) {
-            console.log(err);
-            res.send(err);
-          } else {
-            var data = [
-              total,
-              token.userId,
-              req.body.amount,
-              result[0].USERID,
-              new Date(),
-              token.userId,
-              result[0].USERID,
-              req.body.amount,
-              fee,
-              1, //req.body.currency,
-              1, //req.body.category,
-              req.body.comment
-            ];
-            DBService.doTransaction(data, function(err, result) {
-              if (err) {
-                console.log(err);
-                res.send(err);
-              } else {
-                res.status(201).json({
-                  message: "Transaction successfully created!"
-                });
-              }
-            });
-          }
-        });
-      } else {
-        res.status(201).json({
-          message:
-            "Balance of " + row.BALANCE + " can not pay amount " + total + "!"
-        });
-      }
+      calculateFee(req.body.amount, function(err, fee){
+        var total = req.body.amount * 1 + fee * 1;
+        if (row.BALANCE >= total) {
+          DBService.getUserByName(req.body.receiver, function(err, result) {
+            if (err) {
+              console.log(err);
+              res.send(err);
+            } else {
+              console.log("transaction-controller createTransaction 2");
+              var data = [
+                total,
+                token.userId,
+                req.body.amount,
+                result[0].USERID,
+                new Date(),
+                token.userId,
+                result[0].USERID,
+                req.body.amount,
+                fee,
+                1, //req.body.currency,
+                1, //req.body.category,
+                req.body.comment
+              ];
+              DBService.doTransaction(data, function(err, result) {
+                if (err) {
+                  console.log(err);
+                  res.send(err);
+                } else {
+                  console.log("transaction-controller sending Response... ");
+                  res.status(201).json({
+                    message: "Transaction successfully created!"
+                  });
+                }
+              });
+            }
+          });
+        } else {
+          res.status(201).json({
+            message:
+              "Balance of " + row.BALANCE + " can not pay amount " + total + "!"
+          });
+        }
+      });
     }
   });
 };
