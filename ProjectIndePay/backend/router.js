@@ -56,7 +56,10 @@ router.post("/api/v1/contacts/read", function(req, res) {
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
-
+router.get("/api/v1/test", function(req, res){
+  console.log("Testresponse");
+  res.status(401).send(new Error("Error"));
+});
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //

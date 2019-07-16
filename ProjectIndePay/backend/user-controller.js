@@ -39,9 +39,7 @@ exports.createUser = function(req, res) {
       console.log("UserController createUser RESULT = " + result);
       if (result != null && result.length > 0) {
         console.log("UserController createUser sending Response...");
-        res.status(401).json({
-          message: "User already exists!"
-        });
+        res.status(401).send(new Error("User already exists!"));
       } else {
         var data = [
           new Date(),
@@ -94,15 +92,11 @@ exports.getUser = function(req, res) {
             sendUserData(result[0], res);
           } else {
             console.log("UserController getUser sending Response...");
-            res.status(401).json({
-              message: "Wrong password!"
-            });
+            res.status(401).send(new Error("Wrong password!"));
           }
         } else {
           console.log("UserController getUser sending Response...");
-          res.status(401).json({
-            message: "User has been locked!"
-          });
+          res.status(401).send(new Error("User has been locked!"));
         }
       }
     });
@@ -121,15 +115,11 @@ exports.getUser = function(req, res) {
               sendUserData(result[0], res);
             } else {
               console.log("UserController getUser sending Response...");
-              res.status(401).json({
-                message: "Wrong password!"
-              });
+              res.status(401).send(new Error("Wrong password!"));
             }
           } else {
             console.log("UserController getUser sending Response...");
-            res.status(401).json({
-              message: "User has been locked!"
-            });
+            res.status(401).send(new Error("User has been locked!"));
           }
         }
       });

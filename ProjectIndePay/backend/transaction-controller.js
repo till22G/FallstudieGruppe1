@@ -63,10 +63,7 @@ exports.createTransaction = function(req, res) {
             }
           });
         } else {
-          res.status(401).json({
-            message:
-              "Balance of " + row.BALANCE + " can not pay amount " + total + "!"
-          });
+          res.status(401).send(new Error("Not enough balance!"));
         }
       });
     }
@@ -80,14 +77,7 @@ exports.getCalculatedFee = function(req, res) {
   var amount = req.body.amount;
   if (amount <= process.env.MINIMAL_AMOUNT) {
     console.log("transaction-controller getCalculatedFee sending Response...");
-    res.status(401).json({
-      message:
-        "Amount of " +
-        amount +
-        " is smaller than minimal transaction amount of " +
-        process.env.MINIMAL_AMOUNT +
-        "!"
-    });
+    res.status(401).send(new Error("Amount of " + amount + " is smaller than minimal amount " + process.env.MINIMAL_AMOUNT + "!"));
   } else {
     calculateFee(amount, function(err, fee) {
       console.log("transaction-controller getCalculatedFee sending fee " + fee);
