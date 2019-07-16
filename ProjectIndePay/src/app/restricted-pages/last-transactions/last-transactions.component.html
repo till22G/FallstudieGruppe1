@@ -6,12 +6,13 @@
   </div>
 </mat-toolbar>
 
-  <div>
+  <div><span *ngIf="isLoading"></span></div>
+  <div *ngIf="!isLoading">
     <mat-list>
       <h2>Last Transactions</h2>
       <mat-list-item
         class=list-group-item
-        *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
+        *ngFor="let transaction of lastTransactions ">
         Amount: {{ transaction.amount }}  direction: {{transaction.direction}} contact: {{transaction.contact}}
       </mat-list-item>
     </mat-list>
@@ -22,3 +23,4 @@
       (page)="onChangedPage($event)"></mat-paginator>
   </div>
 
+  <!-- | filterTransactions: pipeFilterValue : 'direction'"> -->

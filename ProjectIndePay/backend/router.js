@@ -46,8 +46,8 @@ router.post("/api/v1/contacts/create", function(req, res) {
   contactControl.createContact(req, res);
 });
 
-router.post("/api/v1/contacts/read", checkAuthentication);
-router.post("/api/v1/contacts/read", function(req, res) {
+router.get("/api/v1/contacts/read", checkAuthentication);
+router.get("/api/v1/contacts/read", function(req, res) {
   console.log("Router GET /api/v1/contacts/read");
   contactControl.getContacts(req, res);
 });

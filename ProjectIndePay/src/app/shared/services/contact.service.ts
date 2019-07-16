@@ -37,7 +37,7 @@ export class ContactService {
 
   getContactList() {
     console.log('getContactList.service called');
-    this.http.post<{message: string, contactList: [ContactModel]}>('http://localhost:3000/api/v1/contacts/read', {})
+    this.http.get<{message: string, contactList: [ContactModel]}>('http://localhost:3000/api/v1/contacts/read')
       .subscribe( response => {
                     const res = { successful: true,
                                   contactList: response.contactList};

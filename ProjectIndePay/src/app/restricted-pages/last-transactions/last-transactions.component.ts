@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TransactionsService } from '../../shared/services/transactions.service';
 import { PageEvent } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { TransactionData } from 'src/app/shared/models/transaction-data.model';
 
 @Component({
   selector: 'app-last-transactions',
@@ -11,17 +12,30 @@ import { Subscription } from 'rxjs';
 })
 export class LastTransactionsComponent implements OnInit, OnDestroy {
   private lastTransactionsListenerSub = new Subscription();
+
+  isLoading = false;
+
+  lastTransactions: [TransactionData] = null;
   pipeFilterValue = 'all';
   // totalTransactions = 8;
 
   // variables which store the data for the paginiatior so these values can
   // be set and unsed to fetch the rigth data from the backend
-  currentPage = 1;
   transactionsPerPage = 4;
+  totalTransactions = 10;
+  currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10, 20];
 
   constructor(private router: Router, private transctionService: TransactionsService) { }
 
+  ngOnInit() {
+    this.isLoading = true;
+    // this.lastTransactionsListenerSub.
+
+    // call the getTransaction method with the curren transactionsPerPage and
+    // 1 so the first set of data (for page 1) can be fetched from the backend
+    this.transctionService.getTransactions(this.transactionsPerPage, this.currentPage);
+  }
 
   onChangePipeFilter(filterValue: string) {
     this.pipeFilterValue = filterValue;
@@ -36,13 +50,6 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
     this.transctionService.getTransactions(this.transactionsPerPage, this.currentPage);
   }
 
-  ngOnInit() {
-    // this.lastTransactionsListenerSub.
-
-    // call the getTransaction method with the curren transactionsPerPage and
-    // 1 so the first set of data (for page 1) can be fetched from the backend
-    this.transctionService.getTransactions(5, 1);
-  }
 
   ngOnDestroy() {
     this.lastTransactionsListenerSub.unsubscribe();

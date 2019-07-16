@@ -25,9 +25,10 @@ export class TransactionsService {
     getTransactions(transactionsPerPage: number, currentPage: number) {
       const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
       console.log('getTransactions() called: ' + 'http:localhost:3000/api/v1/transactions/last' + queryParams);
-      this.http.get<{message: string, transactionArray: [TransactionData]}>('http:localhost:3000/api/v1/transactions/last/' + queryParams)
+      this.http.get<{message: string, transactionArray: [TransactionData]}>('http:localhost:3000/api/v1/transactions/last' + queryParams)
         .subscribe(response => {
           this.lastTransactions = response.transactionArray;
+          this.lastTransactionsListener.next(this.lastTransactions);
         }, error => {
           // implement error case here
           console.log('error at fetching the last tranasactions');
