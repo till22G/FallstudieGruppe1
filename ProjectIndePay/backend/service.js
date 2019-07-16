@@ -182,3 +182,24 @@ exports.checkContact = function (data, callback) {
   connection.end();
 }
 //-----------------------------------------------------//
+
+//-----------------------------------------------------//
+exports.getLastTransactions = function(data, callback){
+  console.log("DBService getLastTransactions " + data);
+  var selectQuery = "SELECT * FROM TRANSACTION WHERE (SENDER = ? OR RECEIVER = ?) ORDER BY SYS_CREATE_DATE LIMIT ?,?";
+  var query = mysql.format(selectQuery, data);
+  var connection = createNewConnection(false);
+  connection.connect();
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) {
+      console.log("DBService getLastTransactions ERR = " + err);
+      callback(err, null);
+    } else {
+      console.log("DBService getLastTransactions ROWS = " + rows);
+      callback(null, rows);
+    }
+  });
+  connection.end();
+}
+//-----------------------------------------------------//
