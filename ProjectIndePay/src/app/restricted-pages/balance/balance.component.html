@@ -1,11 +1,11 @@
 <div>
   <p>
-    Balance: {{ currentBalanceData.getBalance() }}
+    Balance: <span *ngIf="currentBalanceData.getBalance() != null"> {{ currentBalanceData.getBalance()  }}</span><br>
   </p>
 </div>
 
 <div>
-  Currency:  {{ currentBalanceData.getCurrency() }}
+    Currency:<span *ngIf="currentBalanceData.getCurrency() != null"> {{ currentBalanceData.getCurrency() }}</span>
 </div>
 
 <div>

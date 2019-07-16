@@ -26,15 +26,16 @@ import { SendMoneyComponent } from './restricted-pages/send-money/send-money.com
 import { SearchContanctsComponent } from './restricted-pages/search-contancts/search-contancts.component';
 
 import { AuthenticationGuard } from './shared/guards/authentication.guard';
-import { FilterTransactionsPipe } from './shared/pipes/filter-transactions.pipe';
+import { AuthenticationInterceptorService } from './shared/services/authentication-interceptor.service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddNewContactComponent } from './restricted-pages/add-new-contact/add-new-contact.component';
-import { AuthenticationInterceptorService } from './shared/services/authentication-interceptor.service';
+import { FilterTransactionsPipe } from './shared/pipes/filter-transactions.pipe';
 import { FilterContactsPipe } from './shared/pipes/filter-contacts.pipe';
 import { CheckTransactionComponent } from './restricted-pages/check-transaction/check-transaction.component';
+import { NotifierModule } from 'angular-notifier';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
@@ -83,6 +84,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    NotifierModule,
   ],
   providers: [AuthenticationGuard,
                 {

@@ -1,7 +1,11 @@
+<div *ngIf="transactionInProcess">
+  <span> please wait, the transaction is in process ...</span>
+</div>
+
 <h3>check your transaction</h3>
 
 <div>
-  Currency: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getCurrency() }}</span><br>
+  Currency: <span *ngIf="ongoingTransactionData != null"> {{ currentBalanceData.getCurrency() }}</span><br>
   <hr>
   Contact: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getReceiver() }}</span><br>
   <hr>

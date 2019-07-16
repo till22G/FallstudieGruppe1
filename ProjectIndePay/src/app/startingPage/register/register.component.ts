@@ -2,6 +2,7 @@ import { OnInit, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { RegisterUser } from 'src/app/shared/models/register-user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +11,18 @@ import { RegisterUser } from 'src/app/shared/models/register-user.model';
 })
 
 export class RegisterComponent implements OnInit {
+  private registerUserIsLoadingListenerSub = new Subscription();
   user: RegisterUser;
   isLoading = false;
 
-  constructor(public authenticationService: AuthenticationService ) {}
+  constructor(public authenticationService: AuthenticationService, ) {}
 
+  ngOnInit() {
+    this.registerUserIsLoadingListenerSub = this.authenticationService.getRegisterUserIsLoadingListener()
+      .subscribe(response => {
+        this.isLoading = response;
+      });
+  }
 
   onRegister(registerForm: NgForm) {
     if (registerForm.invalid) {
@@ -27,10 +35,8 @@ export class RegisterComponent implements OnInit {
         registerForm.value.loginName,
         registerForm.value.password,
         registerForm.value.passwordRepeat);
-      this.isLoading = true;
       }
     registerForm.reset();
     }
 
-    ngOnInit() {}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationData } from 'src/app/shared/models/authentication-data.model';
 import { AuthenticationService } from '../../shared/services/authentication.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,9 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    isLoading = false;
+  isLoading = false;
+
+  private loginUserIsLoadingLsitenerSub = new Subscription();
 
   // @ViewChild('loginForm', {static: false}) loginForm: NgForm;
   // attribute for the spinner
@@ -19,6 +22,12 @@ export class LoginComponent implements OnInit {
   constructor(public authenticationService: AuthenticationService ) {}
   user: AuthenticationData;
 
+  ngOnInit() {
+    this.loginUserIsLoadingLsitenerSub = this.authenticationService.getLoginUserIsLoading()
+      .subscribe(response => {
+        this.isLoading = response;
+      });
+  }
 
 
   // method is executed when LoginButton pressed and thus loginForm is submitted
@@ -35,7 +44,4 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-
-  }
 }

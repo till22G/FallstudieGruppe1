@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.2",
     "@angular/router": "~8.0.0",
+    "angular-notifier": "^4.1.1",
     "bootstrap": "^3.4.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

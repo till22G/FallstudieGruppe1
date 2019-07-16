@@ -6,23 +6,31 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { BalanceService } from './balance.service';
 import { BalanceData } from '../models/balance-data.model';
+import { NotifierService } from 'angular-notifier';
 
 @Injectable({ providedIn: 'root'})
 export class AuthenticationService {
   private token: string;
   private tokenTimer: NodeJS.Timer;
   private userLoginName: string;
-  private authenticationStatusListener = new Subject<boolean>();
-  private authenticationNameListener = new Subject<string>();
-  private isAuthenticated = false;
-
   private initialBalance: number;
 
-  constructor(private http: HttpClient, private router: Router, private balanceService: BalanceService) {}
+  private isAuthenticated = false;
+
+  private authenticationStatusListener = new Subject<boolean>();
+  private authenticationNameListener = new Subject<string>();
+  private registerUserIsLoadingListener = new Subject<boolean>();
+  private loginUserIsLoadingListener = new Subject<boolean>();
+
+  constructor(  private http: HttpClient,
+                private router: Router,
+                private balanceService: BalanceService,
+                private notofier: NotifierService) {}
 
 
 
   login(loginName: string, password: string) {
+    this.loginUserIsLoadingListener.next(true);
     console.log('login called');
     // create const with the data passed to the login method of the service
     const authenticationData: AuthenticationData = {loginName: loginName, password: password};
@@ -71,16 +79,18 @@ export class AuthenticationService {
         this.initialBalance = initialBalance;
 
 
-
         // give the local Storage the curent date + the expiration time so we can implements an auto login while token is valid
         // const now = new Date();
         // const expirationDate = new Date(now.getTime() + (expiresInDuration * 1000));
         // this.saveAuthenticationData(token , expirationDate); ---------------------------> for auto login
         // call router an navigate to the home page
+        this.loginUserIsLoadingListener.next(false);
         this.router.navigate(['/home']);
+        this.notofier.notify('success', 'login successfull');
       }
     }, error => {
       // implement error case here
+      this.notofier.notify('error', error);
     });
   }
 
@@ -89,6 +99,7 @@ export class AuthenticationService {
   // implement registration method here
   register(firstName: string, lastName: string, loginName: string, password: string, repeatPassword: string) {
 
+    this.registerUserIsLoadingListener.next(true);
     // create const as RegisterUser to pass along in http.post
     const registerUser: RegisterUser = {
       firstName      : firstName,
@@ -102,7 +113,11 @@ export class AuthenticationService {
       .subscribe(response => {
         console.log('registration worked');
         console.log(response);
+        this.registerUserIsLoadingListener.next(false);
+        this.notofier.notify('success', response.toString());
       }, error => {
+        this.registerUserIsLoadingListener.next(false);
+        this.notofier.notify('error', error);
         console.log('registraition failed');
       });
     }
@@ -157,12 +172,20 @@ export class AuthenticationService {
       return this.token;
     }
 
+    getLoginUserIsLoading() {
+      return this.loginUserIsLoadingListener.asObservable();
+    }
+
     getAuthenticationStatusListener() {
       return this.authenticationStatusListener.asObservable();
     }
 
     getAuthenticationNameListener() {
       return this.authenticationNameListener.asObservable();
+    }
+
+    getRegisterUserIsLoadingListener() {
+      return this.registerUserIsLoadingListener.asObservable();
     }
 
     getIsAuthenticated() {
