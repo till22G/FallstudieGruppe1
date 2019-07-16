@@ -14,10 +14,12 @@ export class TransactionsService {
 
 
     constructor(private http: HttpClient, private router: Router) {}
+
     // implement getTransactions here
     getTransactions(transactionsPerPage: number, currentPage: number) {
       const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
-      this.http.get<{message: string, transactionArray: [TransactionData]}>('')
+      console.log('getTransactions() called: ' + 'http:localhost:3000/api/v1/transactions/last' + queryParams);
+      this.http.get<{message: string, transactionArray: [TransactionData]}>('http:localhost:3000/api/v1/transactions/last' + queryParams)
         .subscribe(response => {
           this.lastTransactions = response.transactionArray;
         }, error => {

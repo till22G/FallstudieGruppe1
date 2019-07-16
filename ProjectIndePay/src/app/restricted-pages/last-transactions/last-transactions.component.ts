@@ -41,7 +41,7 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
 
     // call the getTransaction method with the curren transactionsPerPage and
     // 1 so the first set of data (for page 1) can be fetched from the backend
-    this.transctionService.getTransactions(this.transactionsPerPage, 1);
+    this.transctionService.getTransactions(5, 1);
   }
 
   ngOnDestroy() {

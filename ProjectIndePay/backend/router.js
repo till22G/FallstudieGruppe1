@@ -34,6 +34,13 @@ router.post("/api/v1/transactions/fee", function (req, res) {
   transactionControl.getCalculatedFee(req, res);
 });
 
+router.get("/api/v1/transactions/last", checkAuthentication);
+router.get("/api/v1/transactions/last", function (req, res) {
+  console.log("Router POST api/v1/transactions/last");
+  //transactionControl.createTransaction(req, res);
+  console.log(req.query.pagesize + " " + req.query.page);
+});
+
 router.post("/api/v1/contacts/create", checkAuthentication);
 router.post("/api/v1/contacts/create", function(req, res) {
   console.log("Router POST /api/v1/contacts/create");
