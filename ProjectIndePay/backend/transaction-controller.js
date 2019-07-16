@@ -63,7 +63,7 @@ exports.createTransaction = function(req, res) {
             }
           });
         } else {
-          res.status(201).json({
+          res.status(401).json({
             message:
               "Balance of " + row.BALANCE + " can not pay amount " + total + "!"
           });
@@ -80,7 +80,7 @@ exports.getCalculatedFee = function(req, res) {
   var amount = req.body.amount;
   if (amount <= process.env.MINIMAL_AMOUNT) {
     console.log("transaction-controller getCalculatedFee sending Response...");
-    res.status(201).json({
+    res.status(401).json({
       message:
         "Amount of " +
         amount +

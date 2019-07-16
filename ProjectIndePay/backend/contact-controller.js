@@ -27,7 +27,7 @@ exports.createContact = function(req, res) {
           console.log("ContactController createContact 2");
           if (result.length > 0) {
             console.log("ContactController createContact sending Response...");
-            res.status(201).json({
+            res.status(401).json({
               message: "Contact already exists!"
             });
           } else {

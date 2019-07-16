@@ -19,7 +19,7 @@ function sendUserData(row, res) {
     firstName: row.RU_FIRSTNAME,
     surname: row.RU_SURNAME,
     balance: row.BALANCE,
-    currency: row.CURRENCY,
+    currency: "UGX", // row.CURRENCY,
     role: row.ROLE,
     language: row.LANGUAGE
   });
@@ -39,7 +39,7 @@ exports.createUser = function(req, res) {
       console.log("UserController createUser RESULT = " + result);
       if (result != null && result.length > 0) {
         console.log("UserController createUser sending Response...");
-        res.status(201).json({
+        res.status(401).json({
           message: "User already exists!"
         });
       } else {
@@ -94,13 +94,13 @@ exports.getUser = function(req, res) {
             sendUserData(result[0], res);
           } else {
             console.log("UserController getUser sending Response...");
-            res.status(201).json({
+            res.status(401).json({
               message: "Wrong password!"
             });
           }
         } else {
           console.log("UserController getUser sending Response...");
-          res.status(201).json({
+          res.status(401).json({
             message: "User has been locked!"
           });
         }
@@ -121,13 +121,13 @@ exports.getUser = function(req, res) {
               sendUserData(result[0], res);
             } else {
               console.log("UserController getUser sending Response...");
-              res.status(201).json({
+              res.status(401).json({
                 message: "Wrong password!"
               });
             }
           } else {
             console.log("UserController getUser sending Response...");
-            res.status(201).json({
+            res.status(401).json({
               message: "User has been locked!"
             });
           }
@@ -157,7 +157,7 @@ exports.getUserBalance = function(req, res) {
       res.status(201).json({
         message: "success",
         balance: result[0].BALANCE,
-        currency: result[0].CURRENCY
+        currency: "UGX" //result[0].CURRENCY
       });
     }
   });

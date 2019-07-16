@@ -64,7 +64,7 @@ router.post("/api/v1/contacts/read", function(req, res) {
 //--------------------------------------------------//
 // In case no other URI worked
 router.use((req, res, next) => {
-  res.send("Not a valid path!");
+  res.status(404).send("Not a valid path!");
 });
 //--------------------------------------------------//
 
