@@ -66,7 +66,7 @@ router.get("/api/v1/test", function(req, res){
 //--------------------------------------------------//
 // In case no other URI worked
 router.use((req, res, next) => {
-  res.status(404).send("Not a valid path!");
+  res.status(201).send("Not a valid path!");
 });
 //--------------------------------------------------//
 

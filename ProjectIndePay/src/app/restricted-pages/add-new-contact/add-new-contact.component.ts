@@ -37,10 +37,11 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(addContactForm.value.contactName);
-    const newContact = new ContactModel(addContactForm.value.contactName,
-                                        addContactForm.value.comment);
-    this.contactService
-        .addNewContact(newContact);
+    const newContact = new ContactModel(
+      addContactForm.value.contactName,
+      addContactForm.value.comment);
+
+    this.contactService.addNewContact(newContact);
     addContactForm.reset();
   }
 

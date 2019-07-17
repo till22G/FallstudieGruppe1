@@ -23,7 +23,7 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
   // be set and unsed to fetch the rigth data from the backend
   transactionsPerPage = 4;
   totalTransactions = 10;
-  currentPage = 1;
+  currentPage = 300;
   pageSizeOptions = [1, 2, 5, 10, 20];
 
   constructor(private router: Router, private transctionService: TransactionsService) { }

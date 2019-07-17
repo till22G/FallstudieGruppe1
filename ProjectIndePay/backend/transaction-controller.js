@@ -131,9 +131,9 @@ exports.getLastTransactions = function(req, res) {
   //  req.headers.authentication.split(" ")[1],
   //  process.env.SECRET_KEY
   //);
-  console.log("Queryparams = " + req.query.pageSize + " " + req.query.page)
-  let offset = req.query.page * req.query.pageSize * 1;
-  let limit = req.query.pageSize * 1;
+  console.log("Queryparams = " + req.query.pagesize + " " + req.query.page)
+  let offset = (req.query.page-1) * req.query.pagesize * 1;
+  let limit = req.query.pagesize * 1;
   var data = [
     6, //token.userId,
     6, //token.userId,

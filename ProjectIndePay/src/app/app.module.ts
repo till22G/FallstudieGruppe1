@@ -38,6 +38,11 @@ import { CheckTransactionComponent } from './restricted-pages/check-transaction/
 import { NotifierModule } from 'angular-notifier';
 import { BusinessUserPanelComponent } from './restricted-pages/business-user-panel/business-user-panel.component';
 
+import { AuthorizeBusinessUserGuard } from './shared/guards/authorize-business-user.guard';
+import { AdminConsoleComponent } from './restricted-pages/admin-console/admin-console.component';
+import { AuthorizeAdminGuard } from './shared/guards/authorize-admin.guard';
+
+
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
   { path: 'info', component: InfoPageComponent},
@@ -50,7 +55,8 @@ const appRoutes: Routes = [
   { path: 'addNewContact', component: AddNewContactComponent, canActivate: [AuthenticationGuard]},
   { path: 'sendMoney', component: SendMoneyComponent, canActivate: [AuthenticationGuard]},
   { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard]},
-  { path: 'business-user-panel', component: BusinessUserPanelComponent, canActivate: [AuthenticationGuard]}
+  { path: 'businessUserPanel', component: BusinessUserPanelComponent, canActivate: [AuthenticationGuard, AuthorizeBusinessUserGuard]},
+  { path: 'adminConsole', component:  AdminConsoleComponent, canActivate: [AuthenticationGuard, AuthorizeAdminGuard]}
 ];
 
 @NgModule({
@@ -70,6 +76,7 @@ const appRoutes: Routes = [
     AddNewContactComponent,
     CheckTransactionComponent,
     BusinessUserPanelComponent,
+    AdminConsoleComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +97,9 @@ const appRoutes: Routes = [
     NotifierModule,
   ],
   providers: [AuthenticationGuard,
+              AuthorizeBusinessUserGuard,
+              AuthorizeAdminGuard,
+
                 {
                   provide: HTTP_INTERCEPTORS,
                   useClass: AuthenticationInterceptorService,

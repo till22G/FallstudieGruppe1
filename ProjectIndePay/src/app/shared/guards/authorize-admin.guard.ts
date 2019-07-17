@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
-export class AuthenticationGuard implements CanActivate {
+export class AuthorizeAdminGuard implements CanActivate {
 
   // use AuthenticationService and Router on constructor to make use of them on canActivate possible
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
@@ -15,9 +15,9 @@ export class AuthenticationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    const isAuthenticated = this.authenticationService.getIsAuthenticated();
-    if (!isAuthenticated) {
-      this.router.navigate(['/login']);
+    const role = this.authenticationService.getRole();
+    if (role !== 'admin') {
+      this.router.navigate(['/home']);
     }
     else {
        return true;

@@ -6,6 +6,7 @@ import { TransactionData } from "src/app/shared/models/transaction-data.model";
 import { TransactionsService } from 'src/app/shared/services/transactions.service';
 import { Router } from '@angular/router';
 import { BalanceData } from 'src/app/shared/models/balance-data.model';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: "app-send-money",

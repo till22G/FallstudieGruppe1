@@ -25,9 +25,11 @@ export class TransactionsService {
     getTransactions(transactionsPerPage: number, currentPage: number) {
       const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
       console.log('getTransactions() called: ' + 'http:localhost:3000/api/v1/transactions/last' + queryParams);
-      this.http.get<{message: string, transactionArray: [TransactionData]}>('http:localhost:3000/api/v1/transactions/last' + queryParams)
+      this.http.get<{message: string, transactionList: [TransactionData]}>('http://localhost:3000/api/v1/transactions/last' + queryParams)
         .subscribe(response => {
-          this.lastTransactions = response.transactionArray;
+          console.log('fetching last transactions was successfull');
+          this.lastTransactions = response.transactionList;
+          console.log(response.transactionList);
           this.lastTransactionsListener.next(this.lastTransactions);
         }, error => {
           // implement error case here
@@ -39,6 +41,7 @@ export class TransactionsService {
       this.ongoingTransactionData = transactionData;
       const amount  = this.ongoingTransactionData.getAmount();
       console.log('this amount is: ' + this.ongoingTransactionData.getAmount());
+
       this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount}) // <= change this to an 'real' object
         .subscribe(response => {
 
@@ -52,7 +55,7 @@ export class TransactionsService {
           this.router.navigate(['/checkTransaction']);
 
           }, error => {
-            // implement error case
+            this.notifier.notify('error', error.message);
           });
         }
 

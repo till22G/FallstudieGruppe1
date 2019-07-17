@@ -14,7 +14,7 @@ export class AuthenticationService {
   private tokenTimer: NodeJS.Timer;
   private userLoginName: string;
   private initialBalance: number;
-  private role = 'business-user';
+  private role = 'businessUser';
 
   private isAuthenticated = false;
 
@@ -93,7 +93,7 @@ export class AuthenticationService {
       }
     }, error => {
       // implement error case here
-      this.notofier.notify('error', error);
+      this.notofier.notify('error', error.message);
     });
   }
 
@@ -133,6 +133,7 @@ export class AuthenticationService {
       this.token = null;
       // sets is Authenticated to false
       this.isAuthenticated = false;
+      this.role = null;
       // inform subscribing roles that user is not longer authenticated
       this.authenticationStatusListener.next(false);
       // call rouer and navigate back to the info-page
@@ -199,7 +200,7 @@ export class AuthenticationService {
       return this.initialBalance;
     }
 
-    getRole () {
+    getRole() {
       return this.role;
     }
   }

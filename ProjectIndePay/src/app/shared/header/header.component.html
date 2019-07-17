@@ -5,12 +5,15 @@
     <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
       <img src="assets/img/Logo2.png" id="logo"></a></span><br>
     <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
-    
+
   </div>
 
-  <div *ngIf="role === 'business-user' && userIsAuthenticated">
-      <a mat-button routerLink="/buisiness-user-panel" routerLinkActive="mat-accent">Statistics</a>
+  <div *ngIf="(role === 'businessUser' || role === 'admin') && userIsAuthenticated">
+      <a mat-button routerLink="/businessUserPanel" routerLinkActive="mat-accent">Statistics</a>
   </div>
+  <div *ngIf="(role === 'admin') && userIsAuthenticated">
+    <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
+</div>
 
   <span class="spacer"></span>
   <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>

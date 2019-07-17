@@ -19,9 +19,7 @@ export class ContactService {
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    const test: ContactModel = {contactLoginName: 'adreher1', comment: 'test comment'};
-    console.log('addNewContact:' + test.contactLoginName);
-    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', test)
+    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', newContact)
       .subscribe( response => {
                     console.log('contact created' + response.message);
                     const res = {successfull: true, message: response.message};
