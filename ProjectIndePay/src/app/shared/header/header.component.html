@@ -1,8 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="assets">
   <div>
-    <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">INDEPAY</a></span>
-    <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">INDEPAY</a></span><br>
+    <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
+      <img src="assets/img/Logo2.png" id="logo"></a></span>
+    <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
+      <img src="assets/img/Logo2.png" id="logo"></a></span><br>
     <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
+    
   </div>
 
   <div *ngIf="role === 'business-user' && userIsAuthenticated">
