@@ -34,7 +34,7 @@ router.post("/api/v1/transactions/fee", function (req, res) {
   transactionControl.getCalculatedFee(req, res);
 });
 
-//router.get("/api/v1/transactions/last/", checkAuthentication);
+router.get("/api/v1/transactions/last/", checkAuthentication);
 router.get("/api/v1/transactions/last/", function (req, res) {
   console.log("Router GET api/v1/transactions/last/");
   transactionControl.getLastTransactions(req, res);
@@ -55,10 +55,7 @@ router.get("/api/v1/contacts/read", function(req, res) {
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
-router.get("/api/v1/test", function(req, res){
-  console.log("Testresponse");
-  res.status(401).send(new Error("Error"));
-});
+
 // ------------------------------ //
 // THIS BLOCK IS FOR TESTING ONLY //
 // ------------------------------ //
