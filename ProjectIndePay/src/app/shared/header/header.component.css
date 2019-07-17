@@ -1,7 +1,15 @@
 .spacer {
   flex: 1 1 auto;
+
 }
 
 .header-element {
   padding: 1rem;
+  z-index: 3;
+}
+#logo {
+  z-index: 3;
+  margin-top: +10px;
+  float: left;
+  width: 5cm;
 }
