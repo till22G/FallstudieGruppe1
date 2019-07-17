@@ -28,7 +28,7 @@ function sendUserData(row, res) {
 
 //-----------------------------------------------------//
 exports.createUser = function(req, res) {
-  console.log("UserController createUser ");
+  console.log("UserController createUser Start");
   // check for user existance
   DBService.getUserByName(req.body.loginName, function(err, result) {
     if (err && err != "No Results found!") {
@@ -36,7 +36,6 @@ exports.createUser = function(req, res) {
       console.log("UserController createUser sending Response...");
       res.send(err);
     } else {
-      console.log("UserController createUser RESULT = " + result);
       if (result != null && result.length > 0) {
         console.log("UserController createUser sending Response...");
         res.status(401).send(new Error("User already exists!"));
@@ -50,9 +49,9 @@ exports.createUser = function(req, res) {
           0,
           0,
           1,
-          "GER", // @ToDo get real country from request
+          "UG", // req.body.country
           1,
-          "de", // @ToDo get real language from request
+          "en", // req.body.language
           new Date(0)
         ];
 
@@ -76,7 +75,7 @@ exports.createUser = function(req, res) {
 
 //-----------------------------------------------------//
 exports.getUser = function(req, res) {
-  console.log("UserController getUser ");
+  console.log("UserController getUser Start");
   console.log(req.body);
   if (req.body.loginName) {
     DBService.getUserByName(req.body.loginName, function(err, result) {
@@ -130,7 +129,7 @@ exports.getUser = function(req, res) {
 
 //-----------------------------------------------------//
 exports.getUserBalance = function(req, res) {
-  console.log("UserController getUserBalance ");
+  console.log("UserController getUserBalance Start");
 
   var token = jwt.verify(
     req.headers.authentication.split(" ")[1],

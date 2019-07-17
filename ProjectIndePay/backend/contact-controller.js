@@ -3,13 +3,12 @@ const jwt = require("jsonwebtoken");
 
 //-----------------------------------------------------//
 exports.createContact = function(req, res) {
-  console.log("ContactController createContact ");
+  console.log("ContactController createContact Start");
   DBService.getUserByName(req.body.contactLoginName, function(err, result) {
     if (err) {
       console.log(err);
       res.send(err);
     } else {
-      console.log("ContactController createContact 1");
       console.log(result);
       var row = result[0];
       var token = jwt.verify(
@@ -24,7 +23,6 @@ exports.createContact = function(req, res) {
           console.log("ContactController createContact sending Response...");
           res.send(err);
         } else {
-          console.log("ContactController createContact 2");
           if (result.length > 0) {
             console.log("ContactController createContact sending Response...");
             res.status(401).send(new Error("Contact already exists!"));
@@ -53,7 +51,7 @@ exports.createContact = function(req, res) {
 
 //-----------------------------------------------------//
 exports.getContacts = function(req, res) {
-  console.log("ContactController getContacts ");
+  console.log("ContactController getContacts Start");
 
   var token = jwt.verify(
     req.headers.authentication.split(" ")[1],
