@@ -13,7 +13,9 @@
   margin-bottom: 1rem;
 }
 
-
+.mat-form-field{
+  font-size: 70%;
+}
 
 * {
   -webkit-box-sizing: border-box;
@@ -69,11 +71,11 @@ label {
 * -- PURE FORM STYLES --
 * Style the form inputs and labels
 */
-.pure-form label {
+.pure-form-label {
   box-sizing:border-box;
   margin: 1em 0 0;
   font-weight: bold;
-  font-size: 100%;
+  font-size: 70%%;
 }
 
 
@@ -125,6 +127,7 @@ a.pure-button-primary {
   font-weight: bold;
   color: black;
   border: solid black;
+  margin: unset;
   padding: 30px;
   font-weight: 100;
   border-radius: 5px;
