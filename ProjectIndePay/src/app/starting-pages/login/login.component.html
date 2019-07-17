@@ -1,31 +1,58 @@
-<div class="div-login-form">
-  <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
-      <mat-form-field>
-        <input type="text"
-        matInput
-        placeholder="login name"
-        name="loginName"
-        ngModel
-        required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <input type="password"
-        matInput
-        placeholder="password"
-        name="password"
-        ngModel
-        required>
-      </mat-form-field>
-      <br>
-      <button
-        *ngIf="!isLoading"
-        id="login-button"
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!loginForm.valid"
-      >Login</button>
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-  </form>
-</div>
+<body>
+
+
+
+    <div class="splash">
+        <h1 class="splash-head">
+          
+          <div class="pure-form label">
+
+            <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+              
+              
+                <mat-form-field>
+
+                  <input type="text"
+                  matInput
+                  placeholder="login name"
+                  name="loginName"
+                  ngModel
+                  required>
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <input type="password"
+                  matInput
+                  placeholder="password"
+                  name="password"
+                  ngModel
+                  required>
+                </mat-form-field>
+
+                <br>
+
+                <button class="pure-button"
+                  *ngIf="!isLoading"
+                  id="login-button"
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="!loginForm.valid"
+                >Login</button>
+
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+            </form>
+
+            </div>
+          </h1>
+    </div>
+ 
+  
+    <div class="footer l-box is-center">
+        View the source of this layout to learn more. Made with love by the YUI Team.
+    </div>
+
+</body>
