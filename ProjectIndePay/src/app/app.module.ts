@@ -15,9 +15,9 @@ import {MatToolbarModule,
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './shared/header/header.component';
-import { LoginComponent } from './startingPage/login/login.component';
-import { RegisterComponent } from './startingPage/register/register.component';
-import { InfoPageComponent } from './startingPage/info-page/info-page.component';
+import { LoginComponent } from './starting-pages/login/login.component';
+import { RegisterComponent } from './starting-pages/register/register.component';
+import { InfoPageComponent } from './starting-pages/info-page/info-page.component';
 
 import { HomePageComponent } from './restricted-pages/home-page/home-page.component';
 import { BalanceComponent } from './restricted-pages/balance/balance.component';

@@ -55,7 +55,7 @@ export class TransactionsService {
           this.router.navigate(['/checkTransaction']);
 
           }, error => {
-            this.notifier.notify('error', error.message);
+            this.notifier.notify('error', 'amount is to low');
           });
         }
 

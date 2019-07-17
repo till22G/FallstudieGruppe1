@@ -1,3 +1,11 @@
+<div>
+  Currency: {{ currentBalanceData.getCurrency() }}
+</div>
+
+<div>
+  Current balance: {{ currentBalanceData.getBalance() }}
+</div>
+
 <div class="div-send-money">
   <form [formGroup]="sendMoneyForm" >
     <div>
@@ -10,13 +18,6 @@
       </mat-form-field>
     </div>
 
-    <div>
-      Currency: {{ currentBalanceData.getCurrency() }}
-    </div>
-
-    <div>
-      Current balance: {{ currentBalanceData.getBalance() }}
-    </div>
 
     <mat-form-field>
         <input
