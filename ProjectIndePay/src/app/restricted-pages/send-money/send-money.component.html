@@ -1,54 +1,74 @@
 <body>
-  
 
-  <div>
-    Currency: {{ currentBalanceData.getCurrency() }}
+
+
+
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+
+      <div class="fadeIn first">
+        <h2>Sending money</h2>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+
+          <div class="card-text">
+            Currency: {{ currentBalanceData.getCurrency() }}
+          </div>
+
+          <div class="card-text">Current balance:
+            {{ currentBalanceData.getBalance() }}
+          </div>
+
+          <!---<p class="card-text">Expenses this month 
+            <span>   </span> Amount 
+          </p>-->
+
+        </div>
+      </div>
+
+      <div class="div-send-money">
+        <form [formGroup]="sendMoneyForm">
+
+          <div>
+            <label for="amount">Amount</label>
+
+            <input type="number" placeholder="amount" formControlName="transactionAmount" required>
+
+          </div>
+
+
+
+          <div>
+            <input type="text" required formControlName="selectedContact" placeholder="select contact">
+
+
+            <input type="submit" color="primary" value="Search in contacts"
+              (click)="onSubmit('selectContact', sendMoneyForm)">
+
+          </div>
+
+
+
+
+          <input type="text" formControlName="comment" placeholder="comment">
+
+
+
+
+          <input type="submit" class="fadeIn fourth" value="Continue"
+            (click)="onSubmit('checkTransaction', sendMoneyForm)">
+        </form>
+
+
+
+
+      </div>
+    </div>
   </div>
 
-  <div>
-    Current balance: {{ currentBalanceData.getBalance() }}
-  </div>
-
-<div class="div-send-money">
-  <form [formGroup]="sendMoneyForm" >
-    <div>
-      <mat-form-field>
-          <input type="number"
-          matInput
-          placeholder="amount"
-          formControlName="transactionAmount"
-          required>
-      </mat-form-field>
-    </div>
-
-
-    <mat-form-field>
-        <input
-          matInput
-          formControlName="comment"
-          placeholder="comment">
-    </mat-form-field>
-
-    <div>
-      <button
-        mat-raised-button
-        color="primary"
-        type="searchContacts"
-        (click)="onSubmit('selectContact', sendMoneyForm)">Search in contacts</button>
-      <br>
-      <mat-form-field>
-        <input
-          matInput
-          required
-          formControlName="selectedContact"
-          placeholder="select contact">
-      </mat-form-field>
-    </div>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      (click)="onSubmit('checkTransaction', sendMoneyForm)">Continue</button>
-  </form>
-</div>
 </body>

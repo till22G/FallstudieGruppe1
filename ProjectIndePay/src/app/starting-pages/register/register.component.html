@@ -1,93 +1,67 @@
 <body>
 
 
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-          <!-- Tabs Titles -->
-      
-          <!-- Icon -->
-          <div class="fadeIn first">
-              <div>
-                  <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
-                    <img src="assets/img/Logo2.png" id="logo"></a></span>
-                  <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
-                    <img src="assets/img/Logo2.png" id="logo"></a></span><br>
-                  <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
-          </div>
-      
-          <!-- Login Form -->
-          <form class="register-form" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
 
-                <input type="text"
-                matInput
-                placeholder="first name"
-                name="firstName"
-                ngModel
-                required>
- 
-
-              <br>
-
-
-                <input type="text"
-                matInput
-                placeholder="last name"
-                name="lastName"
-                ngModel
-                required>
-
-
-              <br>
-
-
-                <input type="text"
-                matInput
-                placeholder="login name"
-                name="loginName"
-                ngModel
-                required>
-
-
-              <br>
-
-                <input type="password"
-                matInput
-                placeholder="password"
-                name="password"
-                ngModel
-                required>
-
-
-              <br>
-
-                <input type="password"
-                matInput
-                placeholder="repeat password"
-                name="passwordRepeat"
-                ngModel
-                required>
-
-
-
-               <input type="submit"
-                id="login-button"
-                [disabled]="!registerForm.valid">
-
-                
-
-          </form>
-
-          <div *ngIf="user != null">
-
-              <span>{{user.firstName}}</span><br>
-              <span>{{user.lastName}}</span><br>
-              <span>{{user.loginName}}</span><br>
-              <span>{{user.password}}</span><br>
-              <span>{{user.repeatPassword}}</span><br>
-      
-            </div>
-      
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <div>
+          <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info"
+              routerLinkActive="mat-accent">
+              <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
+          <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home"
+              routerLinkActive="mat-accent">
+              <img src="assets/img/Logo_IndePay.png" id="logo"></a></span><br>
+          <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
         </div>
+
+        <!-- Login Form -->
+        <form class="register-form" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
+
+          <input type="text" class="fadeIn second" matInput placeholder="first name" name="firstName" ngModel required>
+
+
+          <br>
+
+
+          <input type="text" class="fadeIn second" matInput placeholder="last name" name="lastName" ngModel required>
+
+
+          <br>
+
+
+          <input type="text" class="fadeIn second" matInput placeholder="login name" name="loginName" ngModel required>
+
+
+          <br>
+
+          <input type="password" class="fadeIn third" matInput placeholder="password" name="password" ngModel required>
+
+
+          <br>
+
+          <input type="password" class="fadeIn third" matInput placeholder="repeat password" name="passwordRepeat"
+            ngModel required>
+
+
+
+          <input type="submit" class="fadeIn fourth" id="login-button" [disabled]="!registerForm.valid">
+
+
+
+        </form>
+
+        <div *ngIf="user != null">
+
+          <span>{{user.firstName}}</span><br>
+          <span>{{user.lastName}}</span><br>
+          <span>{{user.loginName}}</span><br>
+          <span>{{user.password}}</span><br>
+          <span>{{user.repeatPassword}}</span><br>
+
+        </div>
+
       </div>
-
-
+    </div>

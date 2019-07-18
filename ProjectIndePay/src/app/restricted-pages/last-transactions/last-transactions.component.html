@@ -60,10 +60,8 @@
          </tr>
 
          <mat-paginator
-         [length]="totalTransactions"
-         [pageSize]="transactionsPerPage"
-         [pageSizeOptions]="pageSizeOptions"
-         (page)="onChangedPage($event)"></mat-paginator>
+
+         [length]="totalTransactions" [pageSize]="transactionsPerPage" [pageSizeOptions]="pageSizeOptions"(page)="onChangedPage($event)"></mat-paginator>
 
         </tbody>
 
