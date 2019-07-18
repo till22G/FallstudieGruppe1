@@ -1,49 +1,37 @@
 <body>
 
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-          <!-- Tabs Titles -->
-      
-          <!-- Icon -->
-          <div class="fadeIn first">
-              <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
-                <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
-              <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
-                <img src="assets/img/Logo_IndePay.png" id="logo"></a></span><br>
-              <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
-          </div>
-      
-          <!-- Login Form -->
-          <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
 
-              <input type="text"
-              id="login"
-              class="fadeIn second"
-              matInput
-              placeholder="login name"
-              name="loginName"
-              ngModel
-              required>
-
-              <input type="password"
-              id="password"
-              class="fadeIn third"
-              matInput
-              placeholder="password"
-              name="password"
-              ngModel
-              required>
-
-            <input type="submit" class="fadeIn fourth" value="Log In"                  
-            id="login-button"
-            [disabled]="!loginForm.valid">
-
-
-          </form>
-      
-      
-        </div>
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info"
+            routerLinkActive="mat-accent">
+            <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
+        <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home"
+            routerLinkActive="mat-accent">
+            <img src="assets/img/Logo_IndePay.png" id="logo"></a></span><br>
+        <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
       </div>
+
+      <!-- Login Form -->
+      <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+
+        <input type="text" id="login" class="fadeIn second" matInput placeholder="login name" name="loginName" ngModel
+          required>
+
+        <input type="password" id="password" class="fadeIn third" matInput placeholder="password" name="password"
+          ngModel required>
+
+        <input type="submit" class="fadeIn fourth" value="Log In" id="login-button" [disabled]="!loginForm.valid">
+
+
+      </form>
+
+
+    </div>
+  </div>
 
 
 </body>

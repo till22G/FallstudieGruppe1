@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   role = null;
 
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) { }
 
   // subscribe to the authenticationListener on OnInit
   ngOnInit() {

@@ -1,20 +1,18 @@
 <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Welcome</h3>
+  <div class="card-body">
+    <h3 class="card-title">Welcome</h3>
 
-      <p class="card-text">Balance: 
-        <span *ngIf="currentBalanceData.getBalance() != null"> {{ currentBalanceData.getBalance()  }}</span>
-      </p>
+    <p class="card-text">Balance:
+      <span *ngIf="currentBalanceData.getBalance() != null"> {{ currentBalanceData.getBalance()  }}</span>
+    </p>
 
-      <p class="card-text">Currency: 
-        <span *ngIf="currentBalanceData.getCurrency() != null"> {{ currentBalanceData.getCurrency() }}</span>
-      </p>
+    <p class="card-text">Currency:
+      <span *ngIf="currentBalanceData.getCurrency() != null"> {{ currentBalanceData.getCurrency() }}</span>
+    </p>
 
-      <!---<p class="card-text">Expenses this month 
+    <!---<p class="card-text">Expenses this month 
         <span>   </span> Amount 
       </p>-->
 
-    </div>
   </div>
-
-
+</div>

@@ -27,8 +27,8 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
   });
 
   constructor(private balanceService: BalanceService,
-              private transactionService: TransactionsService,
-              private router: Router) {}
+    private transactionService: TransactionsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.currentBalanceListenerSub = this.balanceService
@@ -66,14 +66,14 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     if (type === 'checkTransaction') {
       console.log('send-money.comp: ' + this.ongoingTransactionData);
       this.transactionService.forwardToCheckTransaction(this.ongoingTransactionData);
-    } else if ( type === 'selectContact') {
+    } else if (type === 'selectContact') {
       this.router.navigate(['/searchContacts']);
     }
   }
 
   onSearchInContacts() {
 
-  this.router.navigate(['/searchContacts']);
+    this.router.navigate(['/searchContacts']);
   }
 
   ngOnDestroy() {

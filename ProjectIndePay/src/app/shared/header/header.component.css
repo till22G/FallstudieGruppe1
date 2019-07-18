@@ -1,16 +1,14 @@
 .spacer {
   flex: 1 1 auto;
-
 }
 
 .header-element {
   padding: 1rem;
   z-index: 3;
 }
+
 #logo {
   z-index: 3;
   width: 5cm;
   border: 1rem;
-
-
 }
