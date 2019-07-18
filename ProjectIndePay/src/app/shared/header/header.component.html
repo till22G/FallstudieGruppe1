@@ -2,30 +2,34 @@
 <div class="navbar navbar-default" role="navigation">
   <div class="container">
 
-      <div>
-        <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
+    <div>
+      <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info"
+          routerLinkActive="mat-accent">
           <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
-        <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
+      <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home"
+          routerLinkActive="mat-accent">
           <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
 
       <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
 
-      </div>
-
-      <div *ngIf="(role >= 2) && userIsAuthenticated">
-          <a mat-button routerLink="/businessUserPanel" routerLinkActive="mat-accent">Statistics</a>
-      </div>
-      <div *ngIf="(role >= 3) && userIsAuthenticated">
-        <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
     </div>
 
-      <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
-      <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
-      <span *ngIf="userIsAuthenticated" class="header-element"><button mat-button (click)="onLogout()">Logout</button></span>
+    <div *ngIf="(role >= 2) && userIsAuthenticated">
+      <a mat-button routerLink="/businessUserPanel" routerLinkActive="mat-accent">Statistics</a>
+    </div>
+    <div *ngIf="(role >= 3) && userIsAuthenticated">
+      <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
+    </div>
 
-    
-      <!-- /.navbar-collapse -->
+    <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register"
+        routerLinkActive="mat-accent">Register</a></span>
+    <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/login"
+        routerLinkActive="mat-accent">Login</a></span>
+    <span *ngIf="userIsAuthenticated" class="header-element"><button mat-button
+        (click)="onLogout()">Logout</button></span>
+
+
+    <!-- /.navbar-collapse -->
   </div>
   <!-- /.container -->
 </div>
-

@@ -13,7 +13,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
 
   private currentBalanceListenerSub = new Subscription();
 
-  currentBalanceData = new BalanceData (null, null, null);
+  currentBalanceData = new BalanceData(null, null, null);
 
   constructor(private balanceService: BalanceService) { }
 
@@ -21,8 +21,8 @@ export class BalanceComponent implements OnInit, OnDestroy {
     this.currentBalanceListenerSub = this.balanceService
       .getCurrentBalanceListener()
       .subscribe(currentBalanceData => {
-         this.currentBalanceData = currentBalanceData;
-         console.log('balComp: ' + currentBalanceData.getBalance());
+        this.currentBalanceData = currentBalanceData;
+        console.log('balComp: ' + currentBalanceData.getBalance());
       }, error => {
         console.log('error');
       });

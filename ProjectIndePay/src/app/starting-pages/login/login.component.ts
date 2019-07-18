@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   user: AuthenticationData;
   isLoading = false;
 
-  constructor(public authenticationService: AuthenticationService ) {}
+  constructor(public authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.loginUserIsLoadingLsitenerSub = this.authenticationService.getLoginUserIsLoading()
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     } else {     // else pass loginName and password to authentication service
       this.authenticationService
-      .login( loginForm.value.loginName,
-              loginForm.value.password);
+        .login(loginForm.value.loginName,
+          loginForm.value.password);
       this.isLoading = true;
     }
     loginForm.reset();

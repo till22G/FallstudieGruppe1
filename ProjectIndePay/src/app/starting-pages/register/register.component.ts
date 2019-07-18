@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   user: RegisterUser;
   isLoading = false;
 
-  constructor(public authenticationService: AuthenticationService, ) {}
+  constructor(public authenticationService: AuthenticationService, ) { }
 
   ngOnInit() {
     this.registerUserIsLoadingListenerSub = this.authenticationService.getRegisterUserIsLoadingListener()
@@ -32,17 +32,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     else {
       this.authenticationService
-      .register(
-        registerForm.value.firstName,
-        registerForm.value.lastName,
-        registerForm.value.loginName,
-        registerForm.value.password,
-        registerForm.value.passwordRepeat);
-      }
+        .register(
+          registerForm.value.firstName,
+          registerForm.value.lastName,
+          registerForm.value.loginName,
+          registerForm.value.password,
+          registerForm.value.passwordRepeat);
+    }
     registerForm.reset();
-    }
+  }
 
-    ngOnDestroy() {
-      this.registerUserIsLoadingListenerSub.unsubscribe();
-    }
+  ngOnDestroy() {
+    this.registerUserIsLoadingListenerSub.unsubscribe();
+  }
 }
