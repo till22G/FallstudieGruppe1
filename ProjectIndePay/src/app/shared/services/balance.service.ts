@@ -15,6 +15,8 @@ export class BalanceService {
   constructor(private http: HttpClient,
               private notifier: NotifierService) {}
 
+  // fetechs the current balance form the backend so it can be accessed
+  // from all components which need to display the currenBalanceData
    getCurrentBalance() {
      console.log('getCurrentBalance called');
      this.http.get<{balance: number}>('http://localhost:3000/api/v1/users/balance')
