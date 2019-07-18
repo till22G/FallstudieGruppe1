@@ -11,8 +11,10 @@ import { TransactionsService } from 'src/app/shared/services/transactions.servic
   styleUrls: ['./search-contancts.component.css']
 })
 export class SearchContanctsComponent implements OnInit, OnDestroy {
+
   private getContactListListenerSubs: Subscription;
   private getContactListErrorListenerSubs: Subscription;
+
   errorMessage = null;
   contactList: [ContactModel] = null;
   pipeFilterValue = '';

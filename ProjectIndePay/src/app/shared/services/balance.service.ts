@@ -7,6 +7,7 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 
 @Injectable({ providedIn: 'root'})
 export class BalanceService {
+
   private currentBalanceData = new BalanceData(0, '', 0);
   private currentBalanceListener = new Subject<BalanceData>();
 

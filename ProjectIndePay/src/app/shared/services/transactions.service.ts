@@ -12,6 +12,7 @@ export class TransactionsService {
   private ongoingTransactionListener = new Subject<TransactionData>();
   private lastTransactionsListener = new Subject<[TransactionData]>();
   private transactionPlacedListener = new Subject<boolean>();
+
   private lastTransactions: [TransactionData] = null;
   ongoingTransactionData: TransactionData = null;
 

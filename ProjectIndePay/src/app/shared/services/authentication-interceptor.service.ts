@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
 export class AuthenticationInterceptorService implements HttpInterceptor {
 
   constructor(private authenticationService: AuthenticationService) {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler ) {
     const token = this.authenticationService.getToken();
+
     if (token) {
       console.log('token not null');
       request = request.clone({

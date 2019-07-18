@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class AddNewContactComponent implements OnInit, OnDestroy {
 
   private addContactListenerSubs: Subscription;
+
   errorMessage: string = null;
   addContectSuccesssful = true;
 

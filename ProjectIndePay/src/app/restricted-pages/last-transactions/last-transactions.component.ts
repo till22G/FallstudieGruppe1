@@ -11,20 +11,21 @@ import { TransactionData } from 'src/app/shared/models/transaction-data.model';
   styleUrls: ['./last-transactions.component.css']
 })
 export class LastTransactionsComponent implements OnInit, OnDestroy {
+
   private lastTransactionsListenerSub = new Subscription();
 
   isLoading = false;
 
   lastTransactions: [TransactionData] = null;
   pipeFilterValue = 'all';
-  // totalTransactions = 8;
 
   // variables which store the data for the paginiatior so these values can
-  // be set and unsed to fetch the rigth data from the backend
+  // be set and used to fetch the rigth data from the backend
   transactionsPerPage = 4;
   totalTransactions = 10;
   currentPage = 1;
   pageSizeOptions = [3, 5, 10, 20];
+  // ---------------------------------------------------------
 
   constructor(private router: Router, private transctionService: TransactionsService) { }
 
@@ -54,7 +55,6 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
     this.transactionsPerPage = pageData.pageSize;
     this.transctionService.getTransactions(this.transactionsPerPage, this.currentPage);
   }
-
 
   ngOnDestroy() {
     this.lastTransactionsListenerSub.unsubscribe();

@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { RegisterUser } from 'src/app/shared/models/register-user.model';
@@ -10,8 +10,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./register.component.css'],
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
   private registerUserIsLoadingListenerSub = new Subscription();
+
   user: RegisterUser;
   isLoading = false;
 
@@ -30,7 +32,8 @@ export class RegisterComponent implements OnInit {
     }
     else {
       this.authenticationService
-      .register(registerForm.value.firstName,
+      .register(
+        registerForm.value.firstName,
         registerForm.value.lastName,
         registerForm.value.loginName,
         registerForm.value.password,
@@ -39,4 +42,7 @@ export class RegisterComponent implements OnInit {
     registerForm.reset();
     }
 
+    ngOnDestroy() {
+      this.registerUserIsLoadingListenerSub.unsubscribe();
+    }
 }

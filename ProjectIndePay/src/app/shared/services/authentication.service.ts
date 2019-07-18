@@ -10,19 +10,19 @@ import { NotifierService } from 'angular-notifier';
 
 @Injectable({ providedIn: 'root'})
 export class AuthenticationService {
+
+  private authenticationStatusListener = new Subject<boolean>();
+  private authenticationNameListener = new Subject<string>();
+  private registerUserIsLoadingListener = new Subject<boolean>();
+  private loginUserIsLoadingListener = new Subject<boolean>();
+
   private token: string;
   private tokenTimer: NodeJS.Timer;
 
   private userLoginName: string;
   private initialBalance: number;
   private role = null;
-
   private isAuthenticated = false;
-
-  private authenticationStatusListener = new Subject<boolean>();
-  private authenticationNameListener = new Subject<string>();
-  private registerUserIsLoadingListener = new Subject<boolean>();
-  private loginUserIsLoadingListener = new Subject<boolean>();
 
   constructor(  private http: HttpClient,
                 private router: Router,
@@ -176,7 +176,6 @@ export class AuthenticationService {
     getToken() {
       return this.token;
     }
-
 
     getIsAuthenticated() {
       return this.isAuthenticated;

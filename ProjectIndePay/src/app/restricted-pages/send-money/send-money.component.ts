@@ -13,8 +13,10 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
   styleUrls: ["./send-money.component.css"]
 })
 export class SendMoneyComponent implements OnInit, OnDestroy {
+
   private currentBalanceListenerSub: Subscription;
   private ongoingTransactionListenerSub: Subscription;
+
   currentBalanceData = new BalanceData(null, null, null);
   ongoingTransactionData: TransactionData = null;
 

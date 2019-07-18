@@ -12,8 +12,10 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
   styleUrls: ['./check-transaction.component.css']
 })
 export class CheckTransactionComponent implements OnInit, OnDestroy {
+
   private ongoingTransactioinsListenerSub = new Subscription();
   private placedTransactionListenerSub = new Subscription();
+
   ongoingTransactionData: TransactionData = null;
   currentBalanceData: BalanceData = null;
   transactionInProcess = false;

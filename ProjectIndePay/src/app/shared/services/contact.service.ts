@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class ContactService {
+
   private addContactListener = new Subject<{ successfull: boolean,
                                              message: string}>();
 

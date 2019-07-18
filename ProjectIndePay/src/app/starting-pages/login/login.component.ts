@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationData } from 'src/app/shared/models/authentication-data.model';
 import { AuthenticationService } from '../../shared/services/authentication.service';
@@ -10,17 +10,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  isLoading = false;
+export class LoginComponent implements OnInit, OnDestroy {
 
   private loginUserIsLoadingLsitenerSub = new Subscription();
 
-  // @ViewChild('loginForm', {static: false}) loginForm: NgForm;
-  // attribute for the spinner
-  // isLoading = flase;
+  user: AuthenticationData;
+  isLoading = false;
 
   constructor(public authenticationService: AuthenticationService ) {}
-  user: AuthenticationData;
 
   ngOnInit() {
     this.loginUserIsLoadingLsitenerSub = this.authenticationService.getLoginUserIsLoading()
@@ -28,7 +25,6 @@ export class LoginComponent implements OnInit {
         this.isLoading = response;
       });
   }
-
 
   // method is executed when LoginButton pressed and thus loginForm is submitted
   onLogin(loginForm: NgForm) {
@@ -41,5 +37,9 @@ export class LoginComponent implements OnInit {
       this.isLoading = true;
     }
     loginForm.reset();
+  }
+
+  ngOnDestroy() {
+    this.loginUserIsLoadingLsitenerSub.unsubscribe();
   }
 }

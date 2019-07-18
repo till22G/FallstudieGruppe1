@@ -10,11 +10,12 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 })
 
 export class BalanceComponent implements OnInit, OnDestroy {
+
   private currentBalanceListenerSub = new Subscription();
+
   currentBalanceData = new BalanceData (null, null, null);
 
   constructor(private balanceService: BalanceService) { }
-
 
   ngOnInit() {
     this.currentBalanceListenerSub = this.balanceService
