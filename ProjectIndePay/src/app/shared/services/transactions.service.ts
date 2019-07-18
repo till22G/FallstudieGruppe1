@@ -75,6 +75,8 @@ export class TransactionsService {
           });
         }
 
+    // sends the transactionData to the backend so it can be processed and inserted
+    // into the database
     placeTransaction() {
       this.transactionPlacedListener.next(true);
       this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions', this.ongoingTransactionData)

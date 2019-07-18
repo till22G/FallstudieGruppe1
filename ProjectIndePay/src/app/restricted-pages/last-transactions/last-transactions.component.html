@@ -21,7 +21,7 @@
                       <button mat-button id="sent" (click)="onChangePipeFilter('Sent')">Sent</button>
                       <button mat-button id="received" (click)="onChangePipeFilter('Received')">Recieved</button>
                   </div>
-                
+
                 </mat-toolbar>
             <tr>
 
@@ -45,7 +45,7 @@
             <td>Fee: {{ transaction.fee }}</td>
             <td>TotalAmount: {{ transaction.totalAmount }}</td>
             <td>Direction: {{transaction.direction}}</td>
-            <td>                
+            <td>
               <div>
                 <span *ngIf="transaction.direction === 'Sent'">
                   Contact: {{ transaction.receiver }}
@@ -61,11 +61,11 @@
 
          <mat-paginator
 
-         [length]="totalTransactions" [pageSize]="transactionsPerPage" [pageSizeOptions]="pageSizeOptions"(page)="onChangedPage($event)"></mat-paginator>
+         [length]="totalTransactionPages" [pageSize]="transactionsPerPage" [pageSizeOptions]="pageSizeOptions"(page)="onChangedPage($event)"></mat-paginator>
 
         </tbody>
 
 
 
 
-  
+

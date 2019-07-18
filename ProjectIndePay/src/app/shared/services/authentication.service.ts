@@ -100,6 +100,7 @@ export class AuthenticationService {
     }, error => {
       // implement error case here
       this.notofier.notify('error', error.message);
+      this.notofier.notify('error', 'error at login');
     });
   }
 // -------------------------------------------------------------------------
