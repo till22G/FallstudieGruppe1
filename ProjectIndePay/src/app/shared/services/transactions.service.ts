@@ -22,7 +22,12 @@ export class TransactionsService {
                   private balanceService: BalanceService,
                   private notifier: NotifierService) {}
 
-    // implement getTransactions here
+    // getTransactions fetches data of already carried out transactions
+    // the component calling this methods own an angualar paginator, which allows
+    // the user to select the pageSize (how many transactoins he wants to see on one page)
+    // and to select the page => to fetch the rigth data this information is passed along
+    // with the argument, put into a query const and added to the request URL (to ensure the REST API Standard
+    // of using GET to fetch data).
     getTransactions(transactionsPerPage: number, currentPage: number) {
       const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
       this.http.get<{message: string, transactionList: [TransactionData]}>('http://localhost:3000/api/v1/transactions/last' + queryParams)
@@ -82,10 +87,6 @@ export class TransactionsService {
       this.ongoingTransactionListener.next(transactionData);
     }
 
-    getOngoingTransactionData() {
-      return this.ongoingTransactionData;
-    }
-
     createTransactionData() {
       this.ongoingTransactionData = new TransactionData(
         null, // transactionData
@@ -100,6 +101,10 @@ export class TransactionsService {
         null  // comment
       );
       console.log('empty transaction created');
+    }
+
+    getOngoingTransactionData() {
+      return this.ongoingTransactionData;
     }
 
     clearOngoingTransaction() {
