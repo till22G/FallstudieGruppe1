@@ -2,7 +2,7 @@
   <div>
       <button mat-button id="all" (click)="onChangePipeFilter('All')">All</button>
       <button mat-button id="sent" (click)="onChangePipeFilter('Sent')">Sent</button>
-      <button mat-button id="recieved" (click)="onChangePipeFilter('Recieved')">Recieved</button>
+      <button mat-button id="recieved" (click)="onChangePipeFilter('Received')">Recieved</button>
   </div>
 </mat-toolbar>
 
@@ -13,7 +13,7 @@
       <mat-list-item
         class=list-group-item
         *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
-        Date: {{ transaction.date }}
+        Date: {{ transaction.transactionDate }}
         Currency: {{ transaction. currency }}
         Amount: {{ transaction.amount }}
         Fee: {{ transaction.fee }}
@@ -21,13 +21,12 @@
         Direction: {{transaction.direction}}
         <div>
           <span *ngIf="transaction.direction === 'Sent'">
-          Contact: {{ transaction.receiver }}
+            Contact: {{ transaction.receiver }}
           </span>
           <span  *ngIf="transaction.direction === 'Received'">
-              Contact: {{ transaction.sender }}
+            Contact: {{ transaction.sender }}
           </span>
         </div>
-
         Comment: {{ transaction.comment }}
       </mat-list-item>
     </mat-list>

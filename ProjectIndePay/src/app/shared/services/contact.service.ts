@@ -3,21 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { ContactModel } from '../models/contact.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 
 @Injectable({providedIn: 'root'})
 export class ContactService {
 
   private addContactListener = new Subject<{ successfull: boolean,
                                              message: string}>();
-
   private getContactListListener = new Subject<{  successful: boolean
                                                   contactList: [ContactModel]}>();
-
   private getContactListErrorListener = new Subject<{errorMessage: string}>();
+
   private currentContactList: [ContactModel] = null;
 
   constructor(  private http: HttpClient,
-                private router: Router) {}
+                private router: Router,
+                private notifier: NotifierService) {}
 
   addNewContact( newContact: ContactModel) {
     this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts', newContact)
@@ -26,11 +27,13 @@ export class ContactService {
                     const res = {successfull: true, message: response.message};
                     this.addContactListener.next(res);
                     this.router.navigate(['/searchContacts']); // navigate to next page
+                    this.notifier.notify('success', 'contact successfully created');
                   },
                   error => {
                     console.log('error from backend');
                     const eRes = {successfull: false, message: error.message};
                     this.addContactListener.next(eRes);
+                    this.notifier.notify('error', 'error while creating new contact');
                   });
   }
 
