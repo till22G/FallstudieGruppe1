@@ -55,6 +55,8 @@ export class ContactService {
     return this.currentContactList;
   }
 
+  // get the observalbes in this block
+  // ---------------------------------
   getAddContactListener() {
     return this.addContactListener.asObservable();
   }
@@ -66,4 +68,5 @@ export class ContactService {
   getGetContactListErrorListener() {
     return this.getContactListErrorListener.asObservable();
   }
+  // ---------------------------------
 }

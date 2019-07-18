@@ -177,6 +177,21 @@ export class AuthenticationService {
       return this.token;
     }
 
+
+    getIsAuthenticated() {
+      return this.isAuthenticated;
+    }
+
+    getInitialBalance() {
+      return this.initialBalance;
+    }
+
+    getRole() {
+      return this.role;
+    }
+
+    // get the observalbes in this block
+    // ---------------------------------
     getLoginUserIsLoading() {
       return this.loginUserIsLoadingListener.asObservable();
     }
@@ -192,16 +207,5 @@ export class AuthenticationService {
     getRegisterUserIsLoadingListener() {
       return this.registerUserIsLoadingListener.asObservable();
     }
-
-    getIsAuthenticated() {
-      return this.isAuthenticated;
-    }
-
-    getInitialBalance() {
-      return this.initialBalance;
-    }
-
-    getRole() {
-      return this.role;
-    }
+    // ---------------------------------
   }

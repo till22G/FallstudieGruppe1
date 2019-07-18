@@ -44,7 +44,10 @@ export class BalanceService {
     return this.currentBalanceData;
   }
 
+  // get the observalbes in this block
+  // ---------------------------------
   getCurrentBalanceListener() {
     return this.currentBalanceListener.asObservable();
   }
+   // ---------------------------------
 }

@@ -24,7 +24,6 @@ export class TransactionsService {
     // implement getTransactions here
     getTransactions(transactionsPerPage: number, currentPage: number) {
       const queryParams = `?pagesize=${transactionsPerPage}&page=${currentPage}`;
-      console.log('getTransactions() called: ' + 'http:localhost:3000/api/v1/transactions/last' + queryParams);
       this.http.get<{message: string, transactionList: [TransactionData]}>('http://localhost:3000/api/v1/transactions/last' + queryParams)
         .subscribe(response => {
           console.log('fetching last transactions was successfull');
@@ -32,6 +31,7 @@ export class TransactionsService {
           this.lastTransactionsListener.next(this.lastTransactions);
         }, error => {
           // implement error case here
+          this.notifier.notify('error', 'error occured');
           console.log('error at fetching the last tranasactions');
         });
     }
@@ -41,7 +41,7 @@ export class TransactionsService {
       const amount  = this.ongoingTransactionData.getAmount();
       console.log('this amount is: ' + this.ongoingTransactionData.getAmount());
 
-      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount}) // <= change this to an 'real' object
+      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount})
         .subscribe(response => {
 
           console.log(response);
@@ -50,6 +50,7 @@ export class TransactionsService {
           .setTotalAmount((
             this.ongoingTransactionData.getAmount() + this.ongoingTransactionData.getFee()));
           console.log(this.ongoingTransactionData);
+
           this.ongoingTransactionListener.next(this.ongoingTransactionData);
           this.router.navigate(['/checkTransaction']);
 
@@ -104,14 +105,13 @@ export class TransactionsService {
       this.ongoingTransactionData = null;
     }
 
-
-    // TODO: change this to setOngoingTransactionData(), so everything can be handeled by one method
     setOngoingTransactionDataReceiver(receiver: string) {
       this.ongoingTransactionData.setReceiver(receiver);
       this.ongoingTransactionListener.next(this.ongoingTransactionData);
     }
 
-
+    // get the observalbes in this block
+    // ---------------------------------
     getOngoingTransactionListener() {
       return this.ongoingTransactionListener.asObservable();
     }
@@ -123,4 +123,5 @@ export class TransactionsService {
     getTransactionPlacedListener() {
       return this.transactionPlacedListener.asObservable();
     }
+    // ---------------------------------
 }
