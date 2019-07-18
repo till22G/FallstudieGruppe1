@@ -76,7 +76,6 @@ exports.createUser = function(req, res) {
 //-----------------------------------------------------//
 exports.getUser = function(req, res) {
   console.log("UserController getUser Start");
-  console.log(req.body);
   if (req.body.loginName) {
     DBService.getUserByName(req.body.loginName, function(err, result) {
       if (err) {

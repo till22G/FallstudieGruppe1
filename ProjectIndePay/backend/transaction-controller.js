@@ -151,7 +151,8 @@ exports.getLastTransactions = function(req, res) {
         receiver: result.RECEIVER,
         sender: result.SENDER,
         category: result.CATEGORY,
-        comment: result.COMMENT
+        comment: result.COMMENT,
+        direction: (result.RECEIVERID == token.userId) ? "Received" : "Sent"
       }));
       console.log(
         "transaction-controller getLastTransactions sending Response..."
