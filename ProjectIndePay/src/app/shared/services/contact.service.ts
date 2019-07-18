@@ -20,12 +20,12 @@ export class ContactService {
                 private router: Router) {}
 
   addNewContact( newContact: ContactModel) {
-    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts/create', newContact)
+    this.http.post<{message: string}>('http://localhost:3000/api/v1/contacts', newContact)
       .subscribe( response => {
                     console.log('contact created' + response.message);
                     const res = {successfull: true, message: response.message};
                     this.addContactListener.next(res);
-                    this.router.navigate(['']); // navigate to next page
+                    this.router.navigate(['/searchContacts']); // navigate to next page
                   },
                   error => {
                     console.log('error from backend');

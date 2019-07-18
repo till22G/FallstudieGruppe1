@@ -13,7 +13,7 @@
       <mat-list-item
         class=list-group-item
         *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
-        Date: {{ transaction.da }}
+        Date: {{ transaction.date }}
         Currency: {{ transaction. currency }}
         Amount: {{ transaction.amount }}
         Fee: {{ transaction.fee }}

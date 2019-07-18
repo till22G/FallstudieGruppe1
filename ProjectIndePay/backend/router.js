@@ -6,31 +6,31 @@ const userControl = require("./user-controller");
 const transactionControl = require("./transaction-controller");
 const contactControl = require("./contact-controller");
 
-router.post("/api/v1/users/create", function(req, res) {
-  console.log("Router POST /api/v1/users/create");
+router.post("/api/v1/users", function(req, res) {
+  console.log("Router POST /api/v1/users");
   userControl.createUser(req, res);
 });
 
 router.post("/api/v1/users/read", function(req, res) {
-  console.log("Router GET /api/v1/users/read");
+  console.log("Router GET /api/v1/users/read"); // should be GET api/v1/users/?loginname&password
   userControl.getUser(req, res);
 });
 
-router.post("/api/v1/users/balance", checkAuthentication);
-router.post("/api/v1/users/balance", function(req, res) {
+router.get("/api/v1/users/balance", checkAuthentication);
+router.get("/api/v1/users/balance", function(req, res) {
   console.log("Router GET /api/v1/users/balance");
   userControl.getUserBalance(req, res);
 });
 
-router.post("/api/v1/transactions/create", checkAuthentication);
-router.post("/api/v1/transactions/create", function (req, res) {
-  console.log("Router POST api/v1/transactions/create");
+router.post("/api/v1/transactions", checkAuthentication);
+router.post("/api/v1/transactions", function (req, res) {
+  console.log("Router POST api/v1/transactions");
   transactionControl.createTransaction(req, res);
 });
 
 router.post("/api/v1/transactions/fee", checkAuthentication);
 router.post("/api/v1/transactions/fee", function (req, res) {
-  console.log("Router GET api/v1/transactions/create");
+  console.log("Router GET api/v1/transactions/fee"); // should be GET api/v1/transactions/?amount
   transactionControl.getCalculatedFee(req, res);
 });
 
@@ -40,9 +40,9 @@ router.get("/api/v1/transactions/last/", function (req, res) {
   transactionControl.getLastTransactions(req, res);
 });
 
-router.post("/api/v1/contacts/create", checkAuthentication);
-router.post("/api/v1/contacts/create", function(req, res) {
-  console.log("Router POST /api/v1/contacts/create");
+router.post("/api/v1/contacts", checkAuthentication);
+router.post("/api/v1/contacts", function(req, res) {
+  console.log("Router POST /api/v1/contacts");
   contactControl.createContact(req, res);
 });
 

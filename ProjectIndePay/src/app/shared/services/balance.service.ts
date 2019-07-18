@@ -15,7 +15,7 @@ export class BalanceService {
 
    getCurrentBalance() {
      console.log('getCurrentBalance called');
-     this.http.post<{balance: number}>('http://localhost:3000/api/v1/users/balance', {num: 0})
+     this.http.get<{balance: number}>('http://localhost:3000/api/v1/users/balance')
      .subscribe(response => {
        const currentBalance = response.balance;
        // const currency = response.currency;
@@ -30,8 +30,8 @@ export class BalanceService {
   // if the currentBalanceData has to be updated througth another component or service,
   // the new Data will be submitted to all interested listeners
   updateBalanceData(currentBalanceData: BalanceData) {
-    this.currentBalanceListener.next(currentBalanceData);
     this.currentBalanceData = currentBalanceData;
+    this.currentBalanceListener.next(currentBalanceData);
     console.log('uBD:' + currentBalanceData.getBalance());
   }
 
