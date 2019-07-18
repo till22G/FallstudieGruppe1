@@ -8,8 +8,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+
   private authenticationStatusListenerSubs: Subscription;
   private authenticationNameListenerSubs: Subscription;
+  private authenticationRoleListenerSubs: Subscription;
+
   userIsAuthenticated = false;
   authenticatedUserName = null;
   role = null;
@@ -31,6 +34,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(authenticatedUserName => {
         this.authenticatedUserName = authenticatedUserName;
       });
+    // subscribe to authenitcationRoleListener
+    this.authenticationRoleListenerSubs = this.authenticationService
+      .getAuthenticationRoleListener()
+      .subscribe(role => {
+        this.role = role;
+      });
     // check if user is authenticated
     this.userIsAuthenticated = this.authenticationService.getIsAuthenticated();
     this.role = this.authenticationService.getRole();
@@ -40,11 +49,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authenticationService.logout();
   }
 
-  // manual handeling of unsubscribung inDestroy
+  // manual handeling of unsubscribung onDestroy
   ngOnDestroy() {
     // unsubscribe authenticationStatusListenerSubs
     this.authenticationStatusListenerSubs.unsubscribe();
-    // unsubscribe authenticationStatusListenerSubs
-    this.authenticationStatusListenerSubs.unsubscribe();
+    // unsubscribe authenticationNameListenerSubs
+    this.authenticationNameListenerSubs.unsubscribe();
+    // unsubscribe authenticationRoleListenerSubs
+    this.authenticationRoleListenerSubs.unsubscribe();
   }
 }

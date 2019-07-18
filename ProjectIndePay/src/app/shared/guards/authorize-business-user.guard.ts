@@ -16,7 +16,7 @@ export class AuthorizeBusinessUserGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     const role = this.authenticationService.getRole();
-    if (role !== 'businessUser' && role !== 'admin') {
+    if (role !== 2 && role !== 3) {
       this.router.navigate(['/home']);
     }
     else {

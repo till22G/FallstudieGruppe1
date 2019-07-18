@@ -13,6 +13,7 @@ export class AuthenticationService {
 
   private authenticationStatusListener = new Subject<boolean>();
   private authenticationNameListener = new Subject<string>();
+  private authenticationRoleListener = new Subject<number>();
   private registerUserIsLoadingListener = new Subject<boolean>();
   private loginUserIsLoadingListener = new Subject<boolean>();
 
@@ -21,7 +22,7 @@ export class AuthenticationService {
 
   private userLoginName: string;
   private initialBalance: number;
-  private role = 'admin';
+  private role = null;
   private isAuthenticated = false;
 
   constructor(  private http: HttpClient,
@@ -38,7 +39,7 @@ export class AuthenticationService {
     const authenticationData: AuthenticationData = new AuthenticationData (loginName, password);
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string, role: string}>
+    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string, role: number}>
     ('http://localhost:3000/api/v1/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
@@ -50,6 +51,7 @@ export class AuthenticationService {
       console.log(this.token);
 
       this.role = response.role;
+      this.authenticationRoleListener.next(this.role);
 
       const balanceData = new BalanceData(response.balance, response.currency, 0); // => check model and get the currency from backend
       this.balanceService.updateBalanceData(balanceData);
@@ -205,6 +207,10 @@ export class AuthenticationService {
 
     getRegisterUserIsLoadingListener() {
       return this.registerUserIsLoadingListener.asObservable();
+    }
+
+    getAuthenticationRoleListener() {
+      return this.authenticationRoleListener.asObservable();
     }
     // ---------------------------------
   }

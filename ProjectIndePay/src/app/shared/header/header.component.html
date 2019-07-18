@@ -11,10 +11,10 @@
 
       </div>
 
-      <div *ngIf="(role === 'businessUser' || role === 'admin') && userIsAuthenticated">
+      <div *ngIf="(role >= 2) && userIsAuthenticated">
           <a mat-button routerLink="/businessUserPanel" routerLinkActive="mat-accent">Statistics</a>
       </div>
-      <div *ngIf="(role === 'admin') && userIsAuthenticated">
+      <div *ngIf="(role >= 3) && userIsAuthenticated">
         <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
     </div>
 

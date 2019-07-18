@@ -16,7 +16,7 @@ export class AuthorizeAdminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     const role = this.authenticationService.getRole();
-    if (role !== 'admin') {
+    if (role !== 3) {
       this.router.navigate(['/home']);
     }
     else {

@@ -2,15 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import {MatToolbarModule,
-        MatMenuModule,
-        MatFormFieldModule,
-        MatCardModule,
-        MatButtonModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatListModule,
-        MatPaginatorModule} from '@angular/material';
+import { MatToolbarModule,
+         MatMenuModule,
+         MatFormFieldModule,
+         MatCardModule,
+         MatButtonModule,
+         MatInputModule,
+         MatProgressSpinnerModule,
+         MatListModule,
+         MatPaginatorModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 
