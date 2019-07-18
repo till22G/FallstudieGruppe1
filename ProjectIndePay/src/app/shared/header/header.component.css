@@ -9,7 +9,8 @@
 }
 #logo {
   z-index: 3;
-  margin-top: +10px;
-  float: left;
   width: 5cm;
+  border: 1rem;
+  margin: 1rem;
+  padding: 1rem;
 }
