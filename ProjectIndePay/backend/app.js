@@ -5,14 +5,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
-console.log("Server has started!");
-
 //--------------------------------------------------//
-// Necessary to have an easier request body to work with
+// Necessary parsers to have an easier request body to work with
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Necessary to access to other servers on different hosts and ports
+// Necessary headers to access to other servers on different hosts and ports, cross-origin-issues, etc.
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -27,7 +25,9 @@ app.use((req, res, next) => {
 });
 //--------------------------------------------------//
 
+// Import the routes
 app.use("/", router);
+console.log("Server has started!");
 
 // Exports
 module.exports = app;
