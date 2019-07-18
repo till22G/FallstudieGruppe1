@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { BalanceService } from './balance.service';
 import { BalanceData } from '../models/balance-data.model';
 import { NotifierService } from 'angular-notifier';
+import { TransactionsService } from './transactions.service';
 
 @Injectable({ providedIn: 'root'})
 export class AuthenticationService {
@@ -28,7 +29,8 @@ export class AuthenticationService {
   constructor(  private http: HttpClient,
                 private router: Router,
                 private balanceService: BalanceService,
-                private notofier: NotifierService) {}
+                private notofier: NotifierService,
+                private transactionService: TransactionsService) {}
 
 
 
@@ -139,6 +141,7 @@ export class AuthenticationService {
       // sets is Authenticated to false and changes role to null
       this.isAuthenticated = false;
       this.role = null;
+      this.transactionService.clearOngoingTransaction();
       // inform subscribing roles that user is not longer authenticated
       this.authenticationStatusListener.next(false);
       // call rouer and navigate back to the info-page
