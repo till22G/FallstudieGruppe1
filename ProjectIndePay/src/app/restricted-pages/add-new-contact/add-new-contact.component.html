@@ -1,47 +1,38 @@
 <body>
-  
 
-<hr>
-<div>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onBackToSearchContacts()"
-    >back</button>
-  <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
-    <mat-form-field>
-      <input type="text"
-        matInput
-        placeholder="contact name"
-        name="contactName"
-        ngModel
-        required>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input type="text"
-        matInput
-        placeholder="comment (optinal)"
-        name="comment"
-        ngModel>
-    </mat-form-field>
-    <br>
-    <button
-      *ngIf="!errorMessage"
-      id="create-contact-button"
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="!createContactForm.valid"
-      >Add to contacts</button>
-  </form>
-  <div *ngIf="errorMessage"> {{ errorMessage }}
-    <button
-      *ngIf="errorMessage"
-      id="resetErrorMessage"
-      mat-raised-button
-      color="primary"
-      (click)="onResetErrorMessage()">ok</button>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+
+      <div class="fadeIn first">
+        <h2>Adding new contact</h2>
+      </div>
+
+
+      <input type="submit" (click)="onBackToSearchContacts()" value="Return">
+
+      <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
+
+
+
+        <input type="text" matInput placeholder="contact name" name="contactName" required>
+
+        <input type="text" matInput placeholder="comment (optinal)" name="comment">
+
+        <input *ngIf="!errorMessage" class="fadeIn fourth" id="create-contact-button" type="submit"
+          [disabled]="!createContactForm.valid" value="Add to contacts">
+
+
+      </form>
+      <div *ngIf="errorMessage"> {{ errorMessage }}
+
+        <input *ngIf="errorMessage" id="resetErrorMessage" mat-raised-button color="primary"
+          (click)="onResetErrorMessage()" value="Accept">
+      </div>
+
+    </div>
   </div>
-</div>
+
+
 </body>

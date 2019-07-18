@@ -23,13 +23,13 @@ export class AddNewContactComponent implements OnInit, OnDestroy {
     this.addContactListenerSubs = this.contactService
       .getAddContactListener()
       .subscribe(contactAdded => {
-          if (contactAdded.successfull) {
-            this.addContectSuccesssful = true;
-              // display success message and rerout to next step
-          } else {
-            this.errorMessage = contactAdded.message;
-            this.addContectSuccesssful = contactAdded.successfull;
-          }
+        if (contactAdded.successfull) {
+          this.addContectSuccesssful = true;
+          // display success message and rerout to next step
+        } else {
+          this.errorMessage = contactAdded.message;
+          this.addContectSuccesssful = contactAdded.successfull;
+        }
       });
   }
 

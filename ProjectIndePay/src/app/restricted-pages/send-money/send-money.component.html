@@ -1,8 +1,5 @@
 <body>
 
-
-
-
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
@@ -35,36 +32,27 @@
         <form [formGroup]="sendMoneyForm">
 
           <div>
-            <label for="amount">Amount</label>
+            <label class="fadeIn second" for="amount">Amount</label>
 
-            <input type="number" id="amount" placeholder="amount" formControlName="transactionAmount" required>
+            <input type="number" id="amount" class="fadeIn second" placeholder="amount"
+              formControlName="transactionAmount" required>
 
           </div>
 
-
-
           <div>
-            <input type="text" required formControlName="selectedContact" placeholder="select contact">
+            <input type="text" class="fadeIn third" required formControlName="selectedContact"
+              placeholder="select contact">
 
-
-            <input type="submit" color="primary" value="Search in contacts"
+            <input type="submit" class="fadeIn third" value="Search in contacts"
               (click)="onSubmit('selectContact', sendMoneyForm)">
 
           </div>
 
-
-
-
-          <input type="text" formControlName="comment" placeholder="comment">
-
-
-
+          <input type="text" class="fadeIn third" formControlName="comment" placeholder="comment">
 
           <input type="submit" class="fadeIn fourth" value="Continue"
             (click)="onSubmit('checkTransaction', sendMoneyForm)">
         </form>
-
-
 
 
       </div>
