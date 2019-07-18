@@ -9,12 +9,13 @@ exports.createContact = function(req, res) {
       console.log(err);
       res.send(err);
     } else {
-      console.log(result);
       var row = result[0];
+
       var token = jwt.verify(
         req.headers.authentication.split(" ")[1],
         process.env.SECRET_KEY
       );
+
       var data = [token.userId, row.USERID];
 
       DBService.checkContact(data, function(err, result) {
@@ -32,10 +33,14 @@ exports.createContact = function(req, res) {
             DBService.createContact(data, function(err, result) {
               if (err) {
                 console.log(err);
-                console.log("ContactController createContact sending Response...");
+                console.log(
+                  "ContactController createContact sending Response..."
+                );
                 res.send(null, err);
               } else {
-                console.log("ContactController createContact sending Response...");
+                console.log(
+                  "ContactController createContact sending Response..."
+                );
                 res.status(201).json({
                   message: "Contact successfully created!"
                 });
@@ -57,6 +62,7 @@ exports.getContacts = function(req, res) {
     req.headers.authentication.split(" ")[1],
     process.env.SECRET_KEY
   );
+
   var data = [token.userId];
 
   DBService.getContacts(data, function(err, results) {

@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 
 //-----------------------------------------------------//
+// this function connects to the database, and returns the connectionObject, on which operations and queries can be called
 function createNewConnection(multiple) {
   var tempConnection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -23,7 +24,9 @@ exports.createUser = function(data, callback) {
 
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService createUser running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService createUser query returned!");
     if (err) {
       console.log("DBService createUser ERR = " + err);
       callback(err, null);
@@ -43,7 +46,9 @@ exports.getUserByName = function(loginName, callback) {
 
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService getUserByName running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService getUserByName query returned!");
     if (err) {
       console.log("DBService getUserByName ERR = " + err);
       callback(err, null);
@@ -66,7 +71,9 @@ exports.getUserById = function(userId, callback) {
   var query = mysql.format(selectQuery, [userId]);
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService getUserById running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService getUserById query returned!");
     if (err) {
       console.log("DBService getUserById ERR = " + err);
       callback(err, null);
@@ -100,7 +107,9 @@ exports.doTransaction = function(data, callback) {
   var query = mysql.format(totalQuery, data);
   var connection = createNewConnection(true);
   connection.connect();
+  console.log("DBService doTransaction running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService doTransaction query returned!");
     if (err) {
       console.log("DBService getUserById ERR = " + err);
       callback(err, null);
@@ -122,7 +131,9 @@ exports.createContact = function(data, callback) {
 
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService createContact running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService createContact query returned!");
     if (err) {
       console.log("DBService createContact ERR = " + err);
       callback(err, null);
@@ -143,7 +154,9 @@ exports.getContacts = function(userId, callback) {
 
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService getContacts running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService getContacts query returned!");
     if (err) {
       console.log("DBService getContacts ERR = " + err);
       callback(err, null);
@@ -163,7 +176,9 @@ exports.checkContact = function(data, callback) {
   var query = mysql.format(selectQuery, data);
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService checkContact running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService checkContact query returned!");
     if (err) {
       console.log("DBService checkContact ERR = " + err);
       callback(err, null);
@@ -183,7 +198,9 @@ exports.getLastTransactions = function(data, callback) {
   var query = mysql.format(selectQuery, data);
   var connection = createNewConnection(false);
   connection.connect();
+  console.log("DBService getLastTransactions running query...");
   connection.query(query, function(err, rows, fields) {
+    console.log("DBService getLastTransactions query returned!");
     if (err) {
       console.log("DBService getLastTransactions ERR = " + err);
       callback(err, null);

@@ -2,6 +2,7 @@ const DBService = require("./service");
 const userControl = require("./user-controller");
 const jwt = require("jsonwebtoken");
 
+// This auxiliary function calculates the fee to a given amount. Where the fee-percentage comes from, can be changed modular
 function calculateFee(amount, callback) {
   console.log("calculateFee amount + " + amount);
   var fee = amount * process.env.FEE_PERCENTAGE;
@@ -13,6 +14,7 @@ function calculateFee(amount, callback) {
 //-----------------------------------------------------//
 exports.createTransaction = function(req, res) {
   console.log("transaction-controller createTransaction Start");
+
   var token = jwt.verify(
     req.headers.authentication.split(" ")[1],
     process.env.SECRET_KEY
@@ -25,8 +27,10 @@ exports.createTransaction = function(req, res) {
         res.send(err);
       } else {
         var row = result[0];
+
         calculateFee(req.body.amount, function(err, fee) {
           var total = req.body.amount * 1 + fee * 1;
+
           if (row.BALANCE >= total) {
             DBService.getUserByName(req.body.receiver, function(err, result) {
               if (err) {
@@ -43,8 +47,8 @@ exports.createTransaction = function(req, res) {
                   result[0].USERID,
                   req.body.amount,
                   fee,
-                  1, //req.body.currency,
-                  1, //req.body.category,
+                  1, // @ToDo fill in req.body.currency here
+                  1, // @ToDo fill in req.body.category here
                   req.body.comment,
                   fee
                 ];
@@ -92,7 +96,9 @@ exports.createTransaction = function(req, res) {
 //-----------------------------------------------------//
 exports.getCalculatedFee = function(req, res) {
   console.log("transaction-controller getCalculatedFee Start");
+
   var amount = req.body.amount;
+
   if (amount <= process.env.MINIMAL_AMOUNT) {
     console.log("transaction-controller getCalculatedFee sending Response...");
     res
@@ -131,26 +137,21 @@ exports.getLastTransactions = function(req, res) {
   console.log("Queryparams = " + req.query.pagesize + " " + req.query.page);
   let offset = (req.query.page - 1) * req.query.pagesize * 1;
   let limit = req.query.pagesize * 1;
-  var data = [
-    token.userId,
-    token.userId,
-    offset,
-    limit
-  ];
+  var data = [token.userId, token.userId, offset, limit];
   DBService.getLastTransactions(data, function(err, results) {
     if (err) {
       console.log(err);
       res.send(err);
     } else {
       var returnObject = results.map(result => ({
-        transactionDate: result.SYS_CREATE_DATE,
+        transactionDate: result.DATE,
         totalAmount: result.AMOUNT * 1 + result.FEE * 1,
         amount: result.AMOUNT,
         fee: result.FEE,
         currency: result.CURRENCY,
         receiver: result.RECEIVER,
         sender: result.SENDER,
-        direction: (result.RECEIVERID == token.userId) ? "Received" : "Sent",
+        direction: result.RECEIVERID == token.userId ? "Received" : "Sent",
         category: result.CATEGORY,
         comment: result.COMMENT
       }));

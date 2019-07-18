@@ -2,20 +2,21 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
   try {
-    console.log('check-authorizatoin called');
-    // try to get the token out of the autorization header
-    // token is the second part the name => therefore use split at whitespace to get it
+    console.log("Check-Admin-Authorization Start");
+
     const token = req.headers.authentication.split(" ")[1];
-    console.log(token);
-    //verify the token with  jwt.verify()
     const payload = jwt.verify(token, process.env.SECRET_KEY);
-    if (payload.role >= 3){
+
+    // if the role is admin or higher, we allow it, else we throw unauthorized error
+    if (payload.role >= 3) {
+      console.log("Check-Admin-Authorization Success!");
       next();
     } else {
+      console.log("Check-Admin-Authorization Fail!");
       res.status(401).json({ message: "Authorization failed!" });
     }
   } catch (error) {
-    // next(); // for testing in backend
+    console.log("Check-Admin-Authorization Fail!");
     res.status(401).json({ message: "Authentication failed!" });
   }
 };
