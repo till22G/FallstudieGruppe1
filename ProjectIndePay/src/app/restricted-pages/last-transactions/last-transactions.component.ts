@@ -21,8 +21,10 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
 
   // variables which store the data for the paginiatior so these values can
   // be set and used to fetch the rigth data from the backend
+  totalTransactions;
   transactionsPerPage = 4;
-  totalTransactions = 10;
+  totalTransactionPages = 11; // calculate this with total transactions from backend
+  // totalTransactionPages = Math.ceil(totalTransactions / transactionsPerPage);
   currentPage = 1;
   pageSizeOptions = [3, 5, 10, 20];
   // ---------------------------------------------------------
