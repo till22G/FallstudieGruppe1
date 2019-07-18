@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ContactService } from '../../shared/services/contact.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContactModel } from 'src/app/shared/models/contact-model';
+import { ContactModel } from 'src/app/shared/models/contact.model';
 import { Router } from '@angular/router';
 
 @Component({

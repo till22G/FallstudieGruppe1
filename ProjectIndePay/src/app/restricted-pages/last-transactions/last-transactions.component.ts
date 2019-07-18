@@ -23,14 +23,19 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
   // be set and unsed to fetch the rigth data from the backend
   transactionsPerPage = 4;
   totalTransactions = 10;
-  currentPage = 300;
-  pageSizeOptions = [1, 2, 5, 10, 20];
+  currentPage = 1;
+  pageSizeOptions = [3, 5, 10, 20];
 
   constructor(private router: Router, private transctionService: TransactionsService) { }
 
   ngOnInit() {
     this.isLoading = true;
-    // this.lastTransactionsListenerSub.
+    this.lastTransactionsListenerSub = this.transctionService.getlastTransactionsListener()
+      .subscribe(lastTransactions => {
+        this.lastTransactions = lastTransactions;
+        this.isLoading = false;
+        console.log(this.lastTransactions);
+      });
 
     // call the getTransaction method with the curren transactionsPerPage and
     // 1 so the first set of data (for page 1) can be fetched from the backend

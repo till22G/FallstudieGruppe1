@@ -6,14 +6,22 @@
   </div>
 </mat-toolbar>
 
-  <div><span *ngIf="isLoading"></span></div>
+  <div><span *ngIf="isLoading">last transactions are loading ...</span></div>
   <div *ngIf="!isLoading">
     <mat-list>
       <h2>Last Transactions</h2>
       <mat-list-item
         class=list-group-item
         *ngFor="let transaction of lastTransactions ">
-        Amount: {{ transaction.amount }}  direction: {{transaction.direction}} contact: {{transaction.contact}}
+        Date: {{ transaction.da }}
+        Currency: {{ transaction. currency }}
+        Amount: {{ transaction.amount }}
+        Fee: {{ transaction.fee }}
+        TotalAmount: {{ transaction.totalAmount }}
+        Direction: {{transaction.direction}}
+        Contact: {{transaction.receiver}}
+        Comment: {{ transaction.comment }}
+
       </mat-list-item>
     </mat-list>
     <mat-paginator

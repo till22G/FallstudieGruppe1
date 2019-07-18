@@ -12,9 +12,10 @@ import { NotifierService } from 'angular-notifier';
 export class AuthenticationService {
   private token: string;
   private tokenTimer: NodeJS.Timer;
+
   private userLoginName: string;
   private initialBalance: number;
-  private role = 'businessUser';
+  private role = null;
 
   private isAuthenticated = false;
 
@@ -34,10 +35,10 @@ export class AuthenticationService {
     this.loginUserIsLoadingListener.next(true);
     console.log('login called');
     // create const with the data passed to the login method of the service
-    const authenticationData: AuthenticationData = {loginName: loginName, password: password};
+    const authenticationData: AuthenticationData = new AuthenticationData (loginName, password);
     // pass authenticationData to http and post it + subsribe for response
 
-    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string}>
+    this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string, role: string}>
     ('http://localhost:3000/api/v1/users/read', authenticationData)
     .subscribe(response => {
       console.log('auth worked');
@@ -48,7 +49,7 @@ export class AuthenticationService {
       this.token = token;
       console.log(this.token);
 
-      // this.role = response.role;
+      this.role = response.role;
 
       const balanceData = new BalanceData(response.balance, response.currency, 0); // => check model and get the currency from backend
       this.balanceService.updateBalanceData(balanceData);
@@ -104,12 +105,12 @@ export class AuthenticationService {
 
     this.registerUserIsLoadingListener.next(true);
     // create const as RegisterUser to pass along in http.post
-    const registerUser: RegisterUser = {
-      firstName      : firstName,
-      lastName       : lastName,
-      loginName      : loginName,
-      password       : password,
-      repeatPassword : repeatPassword};
+    const registerUser: RegisterUser = new RegisterUser (
+      firstName,
+      lastName,
+      loginName,
+      password,
+      repeatPassword);
 
       // implement path for user registration
     this.http.post('http://localhost:3000/api/v1/users/create', registerUser)
@@ -131,7 +132,7 @@ export class AuthenticationService {
     logout() {
       // set token to null to clear it
       this.token = null;
-      // sets is Authenticated to false
+      // sets is Authenticated to false and changes role to null
       this.isAuthenticated = false;
       this.role = null;
       // inform subscribing roles that user is not longer authenticated

@@ -10,9 +10,9 @@ import { NotifierService } from 'angular-notifier';
 export class TransactionsService {
 
   private ongoingTransactionListener = new Subject<TransactionData>();
-  private lastTransactionsListener = new Subject<TransactionData[]>();
+  private lastTransactionsListener = new Subject<[TransactionData]>();
   private transactionPlacedListener = new Subject<boolean>();
-  private lastTransactions: TransactionData[] = [];
+  private lastTransactions: [TransactionData] = null;
   ongoingTransactionData: TransactionData = null;
 
 
@@ -29,7 +29,6 @@ export class TransactionsService {
         .subscribe(response => {
           console.log('fetching last transactions was successfull');
           this.lastTransactions = response.transactionList;
-          console.log(response.transactionList);
           this.lastTransactionsListener.next(this.lastTransactions);
         }, error => {
           // implement error case here
@@ -94,6 +93,7 @@ export class TransactionsService {
         null, // currency
         null, // receiver
         null, // sender
+        null, // direction
         null, // category
         null  // comment
       );

@@ -1,4 +1,5 @@
 export class BalanceData {
+
   constructor(private balance: number,
               private currency: string,
               private fee: number) {}

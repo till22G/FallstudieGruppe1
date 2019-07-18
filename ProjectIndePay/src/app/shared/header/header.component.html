@@ -1,23 +1,23 @@
 <!-- Navigation -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-      
+
       <div>
         <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
           <img src="assets/img/Logo2.png" id="logo"></a></span>
         <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
-          <img src="assets/img/Logo2.png" id="logo"></a></span><br>
+          <img src="assets/img/Logo2.png" id="logo"></a></span>
         <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
-    
+
       </div>
-    
+
       <div *ngIf="(role === 'businessUser' || role === 'admin') && userIsAuthenticated">
           <a mat-button routerLink="/businessUserPanel" routerLinkActive="mat-accent">Statistics</a>
       </div>
       <div *ngIf="(role === 'admin') && userIsAuthenticated">
         <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
     </div>
-    
+
       <span class="spacer"></span>
       <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
       <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>

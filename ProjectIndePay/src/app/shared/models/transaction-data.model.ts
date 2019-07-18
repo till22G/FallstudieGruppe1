@@ -9,6 +9,7 @@ export class TransactionData {
                 private currency: string,
                 private receiver: string,
                 private sender: string,
+                private direction: string,
                 private category: string,
                 private comment: string) {}
 
