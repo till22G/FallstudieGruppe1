@@ -17,7 +17,7 @@ export class LastTransactionsComponent implements OnInit, OnDestroy {
   isLoading = false;
 
   lastTransactions: [TransactionData] = null;
-  pipeFilterValue = 'all';
+  pipeFilterValue = 'All';
 
   // variables which store the data for the paginiatior so these values can
   // be set and used to fetch the rigth data from the backend
