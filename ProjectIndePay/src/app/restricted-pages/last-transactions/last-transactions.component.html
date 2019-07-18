@@ -19,9 +19,16 @@
         Fee: {{ transaction.fee }}
         TotalAmount: {{ transaction.totalAmount }}
         Direction: {{transaction.direction}}
-        Contact: {{transaction.receiver}}
-        Comment: {{ transaction.comment }}
+        <div>
+          <span *ngIf="transaction.direction === 'Sent'">
+          Contact: {{ transaction.receiver }}
+          </span>
+          <span  *ngIf="transaction.direction === 'Received'">
+              Contact: {{ transaction.sender }}
+          </span>
+        </div>
 
+        Comment: {{ transaction.comment }}
       </mat-list-item>
     </mat-list>
     <mat-paginator

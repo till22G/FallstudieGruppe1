@@ -21,7 +21,7 @@ export class AuthenticationService {
 
   private userLoginName: string;
   private initialBalance: number;
-  private role = null;
+  private role = 'admin';
   private isAuthenticated = false;
 
   constructor(  private http: HttpClient,
