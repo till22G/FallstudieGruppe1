@@ -4,9 +4,9 @@
 
       <div>
         <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/info" routerLinkActive="mat-accent">
-          <img src="assets/img/Logo2.png" id="logo"></a></span>
+          <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
         <span *ngIf="userIsAuthenticated" class="header-element"><a mat-button routerLink="/home" routerLinkActive="mat-accent">
-          <img src="assets/img/Logo2.png" id="logo"></a></span>
+          <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
 
       <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
 
@@ -19,7 +19,6 @@
         <a mat-button routerLink="/adminConsole" routerLinkActive="mat-accent">Admin console</a>
     </div>
 
-      <span class="spacer"></span>
       <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/register" routerLinkActive="mat-accent">Register</a></span>
       <span *ngIf="!userIsAuthenticated" class="header-element"><a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a></span>
       <span *ngIf="userIsAuthenticated" class="header-element"><button mat-button (click)="onLogout()">Logout</button></span>
