@@ -147,10 +147,10 @@ exports.getLastTransactions = function(req, res) {
         totalAmount: result.AMOUNT * 1 + result.FEE * 1,
         amount: result.AMOUNT,
         fee: result.FEE,
-        currency: "UGX", // result.CURRENCY,
+        currency: result.CURRENCY,
         receiver: result.RECEIVER,
         sender: result.SENDER,
-        category: "Misc", // result.CATEGORY,
+        category: result.CATEGORY,
         comment: result.COMMENT
       }));
       console.log(
