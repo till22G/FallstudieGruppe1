@@ -39,7 +39,7 @@ export class AuthenticationService {
     // pass authenticationData to http and post it + subsribe for response
 
     this.http.post<{jwt: string, firstName: string, expiresIn: number, balance: number, currency: string, role: string}>
-    ('http://localhost:3000/api/v1/users/read', authenticationData)
+    ('http://localhost:3000/api/v1/users/read', authenticationData) // @ToDo should be GET api/v1/users/?loginname&password
     .subscribe(response => {
       console.log('auth worked');
       console.log(response);
@@ -113,7 +113,7 @@ export class AuthenticationService {
       repeatPassword);
 
       // implement path for user registration
-    this.http.post('http://localhost:3000/api/v1/users/create', registerUser)
+    this.http.post('http://localhost:3000/api/v1/users', registerUser)
       .subscribe(response => {
         console.log('registration worked');
         console.log(response);

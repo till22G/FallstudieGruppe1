@@ -26,6 +26,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
       }, error => {
         console.log('error');
       });
+    this.balanceService.getCurrentBalance();
     this.balanceService.submitCurrentBalanceData();
   }
 

@@ -42,7 +42,7 @@ export class TransactionsService {
       const amount  = this.ongoingTransactionData.getAmount();
       console.log('this amount is: ' + this.ongoingTransactionData.getAmount());
 
-      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount})
+      this.http.post<{fee: number}>('http://localhost:3000/api/v1/transactions/fee', {amount}) // @ToDo should be GET api/v1/transactions/?amount
         .subscribe(response => {
 
           console.log(response);
@@ -62,7 +62,7 @@ export class TransactionsService {
 
       placeTransaction() {
         this.transactionPlacedListener.next(true);
-        this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions/create', this.ongoingTransactionData)
+        this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions', this.ongoingTransactionData)
           .subscribe(response => {
             console.log('transaction successfully placed');
             this.transactionPlacedListener.next(false);
