@@ -1,16 +1,13 @@
-<div class="container">
-    <div class="BigWelcome">
-      <h1>Welcome</h1>
-      <h2>I hope this works</h2>
-    </div>
+<body>
+  
 
-<div>
-  Currency: {{ currentBalanceData.getCurrency() }}
-</div>
+  <div>
+    Currency: {{ currentBalanceData.getCurrency() }}
+  </div>
 
-<div>
-  Current balance: {{ currentBalanceData.getBalance() }}
-</div>
+  <div>
+    Current balance: {{ currentBalanceData.getBalance() }}
+  </div>
 
 <div class="div-send-money">
   <form [formGroup]="sendMoneyForm" >
@@ -54,3 +51,4 @@
       (click)="onSubmit('checkTransaction', sendMoneyForm)">Continue</button>
   </form>
 </div>
+</body>
