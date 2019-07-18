@@ -49,6 +49,7 @@ export class ContactService {
                   },
                   error => {
                     console.log(error);
+                    this.notifier.notify('error', 'error at fetching contact list');
                     this.getContactListErrorListener.next(error.message);
                   });
   }
