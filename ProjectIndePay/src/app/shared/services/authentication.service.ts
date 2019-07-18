@@ -32,6 +32,7 @@ export class AuthenticationService {
 
 
 
+  // -------------------------------------------------------------------------
   login(loginName: string, password: string) {
     this.loginUserIsLoadingListener.next(true);
     console.log('login called');
@@ -99,6 +100,7 @@ export class AuthenticationService {
       this.notofier.notify('error', error.message);
     });
   }
+// -------------------------------------------------------------------------
 
 
 
@@ -120,10 +122,10 @@ export class AuthenticationService {
         console.log('registration worked');
         console.log(response);
         this.registerUserIsLoadingListener.next(false);
-        this.notofier.notify('success', response.toString());
+        this.notofier.notify('success', 'registation successfull');
       }, error => {
         this.registerUserIsLoadingListener.next(false);
-        this.notofier.notify('error', error);
+        this.notofier.notify('error', 'registation failed');
         console.log('registraition failed');
       });
     }

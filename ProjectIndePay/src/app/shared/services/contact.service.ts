@@ -26,7 +26,7 @@ export class ContactService {
                     console.log('contact created' + response.message);
                     const res = {successfull: true, message: response.message};
                     this.addContactListener.next(res);
-                    this.router.navigate(['/searchContacts']); // navigate to next page
+                    this.router.navigate(['/searchContacts']); // back to search-contacts.component
                     this.notifier.notify('success', 'contact successfully created');
                   },
                   error => {

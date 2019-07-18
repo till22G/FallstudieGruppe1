@@ -22,10 +22,10 @@ export class TransactionsService {
                   private balanceService: BalanceService,
                   private notifier: NotifierService) {}
 
-    // getTransactions fetches data of already carried out transactions
-    // the component calling this methods own an angualar paginator, which allows
+    // getTransactions fetches data of already carried out transactions.
+    // the component calling this methods owns an angualar paginator, which allows
     // the user to select the pageSize (how many transactoins he wants to see on one page)
-    // and to select the page => to fetch the rigth data this information is passed along
+    // and to select the page => to fetch the right data this information is passed along
     // with the argument, put into a query const and added to the request URL (to ensure the REST API Standard
     // of using GET to fetch data).
     getTransactions(transactionsPerPage: number, currentPage: number) {
@@ -42,6 +42,16 @@ export class TransactionsService {
         });
     }
 
+
+    // forwaforwardToCheckTransaction fetches the current transactions fee rate in percentage
+    // to calculate the totalAmount (transactioNAmount + fee) the user will be charged after confirming the
+    // transaction. If the request is return successfully the user gets forwardet to the check-transaction.component
+    // This is only for the pourpose of informing the user about the fee he has to pay,
+    // this calculated data is not sent back to the backend. The final calculation will take place there
+    // with the current fee rate so i can not be manipulated.
+    // Furthermore if the total amount the user entered is smaller than the allowd minimal amount
+    // an error is send back and the user gets informes via a notification.
+    // also the user will not be reroutet to the check-transaction.component
     forwardToCheckTransaction(transactionData: TransactionData) {
       this.ongoingTransactionData = transactionData;
       const amount  = this.ongoingTransactionData.getAmount();
@@ -65,28 +75,27 @@ export class TransactionsService {
           });
         }
 
-      placeTransaction() {
-        this.transactionPlacedListener.next(true);
-        this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions', this.ongoingTransactionData)
-          .subscribe(response => {
-            console.log('transaction successfully placed');
-            this.transactionPlacedListener.next(false);
-            this.ongoingTransactionData = null;
-            this.router.navigate(['/home']);
-            this.notifier.notify('success', 'transaction was placed succesfully');
-           }, error => {
-            this.transactionPlacedListener.next(false);
-            this.notifier.notify('error', error.message);
-            console.log('transaction failed');
-           });
-      }
-
-    setOngoingTransactionData(transactionData: TransactionData) {
-      this.ongoingTransactionData = transactionData;
-      console.log(transactionData);
-      this.ongoingTransactionListener.next(transactionData);
+    placeTransaction() {
+      this.transactionPlacedListener.next(true);
+      this.http.post<{message: string}>('http://localhost:3000/api/v1/transactions', this.ongoingTransactionData)
+        .subscribe(response => {
+          console.log('transaction successfully placed');
+          this.transactionPlacedListener.next(false);
+          this.ongoingTransactionData = null;
+          this.router.navigate(['/home']);
+          this.notifier.notify('success', 'transaction was placed succesfully');
+         }, error => {
+          this.transactionPlacedListener.next(false);
+          this.notifier.notify('error', error.message);
+          console.log('transaction failed');
+         });
     }
 
+    // these methods ensure that the data which was put in by the user
+    // doesnt get lost when he switches between components
+    // components holding these data write it to the servive before the rerouting
+    // and fetch it in the onInit() method, so it can be filled into the form fields
+    // ---------------------------------
     createTransactionData() {
       this.ongoingTransactionData = new TransactionData(
         null, // transactionData
@@ -99,8 +108,14 @@ export class TransactionsService {
         null, // direction
         null, // category
         null  // comment
-      );
+        );
       console.log('empty transaction created');
+      }
+
+    setOngoingTransactionData(transactionData: TransactionData) {
+      this.ongoingTransactionData = transactionData;
+      console.log(transactionData);
+      this.ongoingTransactionListener.next(transactionData);
     }
 
     getOngoingTransactionData() {
@@ -115,6 +130,8 @@ export class TransactionsService {
       this.ongoingTransactionData.setReceiver(receiver);
       this.ongoingTransactionListener.next(this.ongoingTransactionData);
     }
+    // ---------------------------------
+
 
     // get the observalbes in this block
     // ---------------------------------
