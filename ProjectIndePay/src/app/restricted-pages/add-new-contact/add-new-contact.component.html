@@ -42,8 +42,8 @@
       </div>
       <div *ngIf="errorMessage"> {{ errorMessage }}
 
-        <input *ngIf="errorMessage" id="resetErrorMessage" mat-raised-button color="primary"
-          (click)="onResetErrorMessage()" value="Accept">
+        <button mat-raised-button color="primary" *ngIf="errorMessage" id="resetErrorMessage"
+          (click)="onResetErrorMessage()">Accept</button>
       </div>
 
     </div>
