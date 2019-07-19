@@ -29,14 +29,14 @@
         <input type="password" id="password" class="fadeIn third" matInput placeholder="password" name="password"
           ngModel required>
 
-       
-          <input type="submit" class="fadeIn fourth" value="Log In" id="login-button" [disabled]="!loginForm.valid">
 
-          <span *ngIf="isLoading">
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-          </span>
+        <input type="submit" class="fadeIn fourth" value="Log In" id="login-button" [disabled]="!loginForm.valid">
+
+        <span *ngIf="isLoading">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </span>
 
       </form>
 

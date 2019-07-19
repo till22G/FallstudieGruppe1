@@ -1,5 +1,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~angular-notifier/styles";
+html, body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin-top: 150px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin-top: 150px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

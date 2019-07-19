@@ -52,8 +52,9 @@
 
                 <mat-list-item *ngFor="let contact of contactList | filterContacts: pipeFilterValue">
 
-                  <span class="left-allign">{{ contact.contactLoginName }}  {{ contact.comment }}</span>
-                  <button mat-raised-button color="primary" (click)="onEditContact(contact.contactLoginName)">Edit</button>
+                  <span class="left-allign">{{ contact.contactLoginName }} {{ contact.comment }}</span>
+                  <button mat-raised-button color="primary"
+                    (click)="onEditContact(contact.contactLoginName)">Edit</button>
                   <button mat-raised-button color="primary"
                     (click)="onSelectContact(contact.contactLoginName)">Select</button>
 

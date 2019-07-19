@@ -4,10 +4,11 @@
     border: 1rem;
     margin: 1rem;
 }
-.card-text{
-text-align: left;
 
+.card-text {
+    text-align: left;
 }
+
 /* BASIC */
 
 html {
@@ -84,7 +85,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit]{
+input[type=button], input[type=submit] {
     background-color: #56baed;
     border: none;
     color: white;
