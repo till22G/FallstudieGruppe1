@@ -2,27 +2,29 @@ body {
     line-height: 1.7em;
     color: #7f8c8d;
     font-size: 13px;
-}#logo {
+}
+
+#logo {
     z-index: 3;
     width: 5cm;
     border: 1rem;
     margin: 1rem;
 }
-._mat-animation-noopable.mat-raised-button{
 
-    text-align: right;
-
-}
-
-.mleft-allign{
-
+._mat-animation-noopable.mat-raised-button {
     text-align: right;
 }
+
+.mleft-allign {
+    text-align: right;
+}
+
 /* BASIC */
-h1{
 
+h1 {
     color: black;
 }
+
 html {
     background-color: #56baed;
 }

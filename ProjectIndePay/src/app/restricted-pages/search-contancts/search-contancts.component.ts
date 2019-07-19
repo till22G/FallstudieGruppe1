@@ -20,13 +20,13 @@ export class SearchContanctsComponent implements OnInit, OnDestroy {
   pipeFilterValue = '';
 
   constructor(private contactService: ContactService,
-              private transactionService: TransactionsService,
-              private router: Router ) { }
+    private transactionService: TransactionsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getContactListListenerSubs = this.contactService
       .getGetContactListListener()
-      .subscribe( reqContactList => {
+      .subscribe(reqContactList => {
         this.errorMessage = null;
         this.contactList = reqContactList.contactList;
       });

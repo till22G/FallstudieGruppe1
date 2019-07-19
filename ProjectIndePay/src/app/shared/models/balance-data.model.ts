@@ -1,8 +1,8 @@
 export class BalanceData {
 
   constructor(private balance: number,
-              private currency: string,
-              private fee: number) {}
+    private currency: string,
+    private fee: number) { }
 
   getBalance() {
     return this.balance;

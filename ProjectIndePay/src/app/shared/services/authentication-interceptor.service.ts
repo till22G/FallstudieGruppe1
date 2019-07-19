@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticationInterceptorService implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) { }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler ) {
+  intercept(request: HttpRequest<any>, next: HttpHandler) {
     const token = this.authenticationService.getToken();
 
     if (token) {
@@ -15,7 +15,7 @@ export class AuthenticationInterceptorService implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           'Content-Type': 'application/json',
-          Authentication : 'Bearer ' + token
+          Authentication: 'Bearer ' + token
         }
       });
     }

@@ -17,7 +17,7 @@ export class BalanceComponent implements OnInit, OnDestroy {
 
   constructor(private balanceService: BalanceService) { }
 
-  ngOnInit() {
+    ngOnInit() {
     this.currentBalanceListenerSub = this.balanceService
       .getCurrentBalanceListener()
       .subscribe(currentBalanceData => {

@@ -5,7 +5,7 @@ import { BalanceData } from 'src/app/shared/models/balance-data.model';
 import { NotifierService } from 'angular-notifier';
 
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class BalanceService {
 
   private currentBalanceListener = new Subject<BalanceData>();
@@ -13,26 +13,26 @@ export class BalanceService {
   private currentBalanceData = new BalanceData(0, '', 0);
 
   constructor(private http: HttpClient,
-              private notifier: NotifierService) {}
+    private notifier: NotifierService) { }
 
   // fetechs the current balance form the backend so it can be accessed
   // from all components which need to display the currenBalanceData
-   getCurrentBalance() {
-     console.log('getCurrentBalance called');
-     this.http.get<{balance: number}>('http://localhost:3000/api/v1/users/balance')
-     .subscribe(response => {
-       const currentBalance = response.balance;
-       // const currency = response.currency;
-       // this.currentBalanceData.setCurrency(currency); => implement getCurrency()
-       console.log(response.balance);
-       this.currentBalanceData.setBalance(currentBalance);
-       console.log('current balance: ' + this.currentBalanceData.getBalance());
-       this.updateBalanceData(this.currentBalanceData);
+  getCurrentBalance() {
+    console.log('getCurrentBalance called');
+    this.http.get<{ balance: number }>('http://localhost:3000/api/v1/users/balance')
+      .subscribe(response => {
+        const currentBalance = response.balance;
+        // const currency = response.currency;
+        // this.currentBalanceData.setCurrency(currency); => implement getCurrency()
+        console.log(response.balance);
+        this.currentBalanceData.setBalance(currentBalance);
+        console.log('current balance: ' + this.currentBalanceData.getBalance());
+        this.updateBalanceData(this.currentBalanceData);
       }, error => {
         // implement errot case here
         this.notifier.notify('error', error.message);
       });
-    }
+  }
 
   // if the currentBalanceData has to be updated througth another component or service,
   // the new Data will be submitted to all interested listeners
@@ -62,5 +62,5 @@ export class BalanceService {
   getCurrentBalanceListener() {
     return this.currentBalanceListener.asObservable();
   }
-   // ---------------------------------
+  // ---------------------------------
 }

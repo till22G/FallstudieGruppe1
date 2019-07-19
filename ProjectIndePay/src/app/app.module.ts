@@ -2,15 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { MatToolbarModule,
-         MatMenuModule,
-         MatFormFieldModule,
-         MatCardModule,
-         MatButtonModule,
-         MatInputModule,
-         MatProgressSpinnerModule,
-         MatListModule,
-         MatPaginatorModule} from '@angular/material';
+import {
+  MatToolbarModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatButtonModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatListModule,
+  MatPaginatorModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -45,18 +47,18 @@ import { AuthorizeAdminGuard } from './shared/guards/authorize-admin.guard';
 
 // can be hadneled in an outsorced module
 const appRoutes: Routes = [
-  { path: 'info', component: InfoPageComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'info', component: InfoPageComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 
-  { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard]},
-  { path: 'lastTransactions', component: LastTransactionsComponent, canActivate: [AuthenticationGuard]},
-  { path: 'searchContacts', component: SearchContanctsComponent, canActivate: [AuthenticationGuard]},
-  { path: 'addNewContact', component: AddNewContactComponent, canActivate: [AuthenticationGuard]},
-  { path: 'sendMoney', component: SendMoneyComponent, canActivate: [AuthenticationGuard]},
-  { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard]},
-  { path: 'businessUserPanel', component: BusinessUserPanelComponent, canActivate: [AuthenticationGuard, AuthorizeBusinessUserGuard]},
-  { path: 'adminConsole', component:  AdminConsoleComponent, canActivate: [AuthenticationGuard, AuthorizeAdminGuard]}
+  { path: 'home', component: HomePageComponent, canActivate: [AuthenticationGuard] },
+  { path: 'lastTransactions', component: LastTransactionsComponent, canActivate: [AuthenticationGuard] },
+  { path: 'searchContacts', component: SearchContanctsComponent, canActivate: [AuthenticationGuard] },
+  { path: 'addNewContact', component: AddNewContactComponent, canActivate: [AuthenticationGuard] },
+  { path: 'sendMoney', component: SendMoneyComponent, canActivate: [AuthenticationGuard] },
+  { path: 'checkTransaction', component: CheckTransactionComponent, canActivate: [AuthenticationGuard] },
+  { path: 'businessUserPanel', component: BusinessUserPanelComponent, canActivate: [AuthenticationGuard, AuthorizeBusinessUserGuard] },
+  { path: 'adminConsole', component: AdminConsoleComponent, canActivate: [AuthenticationGuard, AuthorizeAdminGuard] }
 ];
 
 @NgModule({
@@ -97,15 +99,15 @@ const appRoutes: Routes = [
     NotifierModule,
   ],
   providers: [AuthenticationGuard,
-              AuthorizeBusinessUserGuard,
-              AuthorizeAdminGuard,
+    AuthorizeBusinessUserGuard,
+    AuthorizeAdminGuard,
 
-                {
-                  provide: HTTP_INTERCEPTORS,
-                  useClass: AuthenticationInterceptorService,
-                  multi: true
-                }
-              ],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,9 +20,9 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
   currentBalanceData: BalanceData = null;
   transactionInProcess = false;
 
-  constructor(  private transactionService: TransactionsService,
-                private balanceService: BalanceService,
-                private router: Router) { }
+  constructor(private transactionService: TransactionsService,
+    private balanceService: BalanceService,
+    private router: Router) { }
 
   ngOnInit() {
     this.placedTransactionListenerSub = this.transactionService
@@ -48,7 +48,7 @@ export class CheckTransactionComponent implements OnInit, OnDestroy {
     this.router.navigate(['/sendMoney']);
   }
 
-  ngOnDestroy()  {
+  ngOnDestroy() {
     this.ongoingTransactioinsListenerSub.unsubscribe();
   }
 

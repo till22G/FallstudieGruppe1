@@ -7,7 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AuthorizeAdminGuard implements CanActivate {
 
   // use AuthenticationService and Router on constructor to make use of them on canActivate possible
-  constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   // checks if user is authenticated to decide if he can be send along the selected route or
   // if he has to be rerouted when not authenticated
@@ -20,7 +20,7 @@ export class AuthorizeAdminGuard implements CanActivate {
       this.router.navigate(['/home']);
     }
     else {
-       return true;
+      return true;
     }
   }
 }
