@@ -84,6 +84,7 @@ export class TransactionsService {
           console.log('transaction successfully placed');
           this.transactionPlacedListener.next(false);
           this.ongoingTransactionData = null;
+          this.balanceService.getCurrentBalance(); // => test
           this.router.navigate(['/home']);
           this.notifier.notify('success', 'transaction was placed succesfully');
          }, error => {
