@@ -16,7 +16,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, label {
-    color: #34495e;
+    color: darkslategray;
 }
 
 .pure-img-responsive {
@@ -203,6 +203,7 @@ a.pure-button-primary {
     position: fixed;
     bottom: 0;
     width: 100%;
+    text-align: center;
 }
 
 /*

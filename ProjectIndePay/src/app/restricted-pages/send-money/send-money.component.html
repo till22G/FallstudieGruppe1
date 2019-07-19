@@ -6,7 +6,11 @@
 
 
       <div class="fadeIn first">
-        <h2>Sending money</h2>
+        <div class="card">
+          <div class="card-body">
+            <h1>Sending money</h1>
+          </div>
+        </div>
       </div>
 
       <div class="card">
@@ -25,35 +29,50 @@
             <span>   </span> Amount 
           </p>-->
 
+          <br>
+
+          <div class="div-send-money">
+            <form [formGroup]="sendMoneyForm">
+
+                <mat-form-field>
+                    <input type="number" matInput color="primary" placeholder="AMOUNT" formControlName="transactionAmount" required>
+                  </mat-form-field>
+
+
+              <div>
+                <button mat-raised-button color="primary" type="searchContacts"
+                  (click)="onSubmit('selectContact', sendMoneyForm)">Search in contacts</button>
+              </div>
+              <br>
+              <div>
+                <mat-form-field>
+                  <input matInput required formControlName="selectedContact" placeholder="SELECTED CONTACT">
+                </mat-form-field>
+              </div>
+
+
+
+              <div>
+                <mat-form-field>
+                  <input matInput formControlName="comment" placeholder="COMMENT">
+                </mat-form-field>
+              </div>
+
+
+              <div>
+                <button mat-raised-button color="primary" type="submit" (click)="onBackToHome()">Back</button>
+
+                <span> </span>
+
+                <button mat-raised-button color="primary" type="submit"
+                  (click)="onSubmit('checkTransaction', sendMoneyForm)">Continue</button>
+
+
+
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-
-      <div class="div-send-money">
-        <form [formGroup]="sendMoneyForm">
-
-          <div>
-            <label class="fadeIn second" for="amount">Amount</label>
-
-            <input type="number" id="amount" class="fadeIn second" placeholder="amount"
-              formControlName="transactionAmount" required>
-
-          </div>
-
-          <div>
-            <input type="text" class="fadeIn third" required formControlName="selectedContact"
-              placeholder="select contact">
-
-            <input type="submit" class="fadeIn third" value="Search in contacts"
-              (click)="onSubmit('selectContact', sendMoneyForm)">
-
-          </div>
-
-          <input type="text" class="fadeIn third" formControlName="comment" placeholder="comment">
-
-          <input type="submit" class="fadeIn fourth" value="Continue"
-            (click)="onSubmit('checkTransaction', sendMoneyForm)">
-        </form>
-
 
       </div>
     </div>

@@ -6,25 +6,40 @@
 
 
       <div class="fadeIn first">
-        <h2>Adding new contact</h2>
+        <div class="card">
+          <div class="card-body">
+            <h1>Adding new contact</h1>
+          </div>
+        </div>
       </div>
 
+      <div class="card">
+        <div class="card-body">
+          <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
 
-      <input type="submit" (click)="onBackToSearchContacts()" value="Return">
+            <div>
+              <mat-form-field>
 
-      <form (ngSubmit)="onAddContact(createContactForm)" #createContactForm="ngForm">
+                <input type="text" matInput placeholder="CONATCT NAME" name="contactName" ngModel required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input type="text" matInput placeholder="COMMENT (OPTIONA)" name="comment" ngModel>
+              </mat-form-field>
+            </div>
+            <button type="button" class="btn btn-primary" mat-raised-button color="primary"
+              (click)="onBackToSearchContacts()">Back</button>
+              <span> </span>
+            <button mat-raised-button color="primary" *ngIf="!errorMessage" id="create-contact-button" type="submit"
+              [disabled]="!createContactForm.valid">Add to contacts</button>
 
 
 
-        <input type="text" matInput placeholder="contact name" name="contactName" required>
 
-        <input type="text" matInput placeholder="comment (optinal)" name="comment">
-
-        <input *ngIf="!errorMessage" class="fadeIn fourth" id="create-contact-button" type="submit"
-          [disabled]="!createContactForm.valid" value="Add to contacts">
-
-
-      </form>
+          </form>
+        </div>
+      </div>
       <div *ngIf="errorMessage"> {{ errorMessage }}
 
         <input *ngIf="errorMessage" id="resetErrorMessage" mat-raised-button color="primary"

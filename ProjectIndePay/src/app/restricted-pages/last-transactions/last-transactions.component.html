@@ -1,71 +1,70 @@
+<span *ngIf="isLoading">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</span>
+<h1 class="card-body">Recent Transactions</h1>
+<div *ngIf="!isLoading">
 
-
-
-  <div><span *ngIf="isLoading">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div></span>
+  <div class="nav navbar-default">
+    <button class="mat-button" mat-button id="all" (click)="onChangePipeFilter('all')">All</button>
+    <button mat-button id="sent" (click)="onChangePipeFilter('sent')">Sent</button>
+    <button mat-button id="recieved" (click)="onChangePipeFilter('recieved')">Received</button>
   </div>
 
-
-
-  <div *ngIf="!isLoading">
-
-      <table class="table table-striped">
-          <thead>
-              <h2>Last Transactions</h2>
-              <mat-toolbar>
-
-                  <div>
-                      <button mat-button id="all" (click)="onChangePipeFilter('All')">All</button>
-                      <button mat-button id="sent" (click)="onChangePipeFilter('Sent')">Sent</button>
-                      <button mat-button id="received" (click)="onChangePipeFilter('Received')">Recieved</button>
-                  </div>
-
-                </mat-toolbar>
-            <tr>
-
-              <th scope="col">Date</th>
-              <th scope="col">Currency</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Fee</th>
-              <th scope="col">TotalAmount</th>
-              <th scope="col">Direction</th>
-              <th scope="col">Contact</th>
-              <th scope="col">Comment</th>
-            </tr>
-          </thead>
-
-
-      <tbody>
-        <tr *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
-          <td>Date: {{ transaction.date }}</td>
-            <td>Currency: {{ transaction. currency }}</td>
-            <td>Amount: {{ transaction.amount }}</td>
-            <td>Fee: {{ transaction.fee }}</td>
-            <td>TotalAmount: {{ transaction.totalAmount }}</td>
-            <td>Direction: {{transaction.direction}}</td>
-            <td>
-              <div>
-                <span *ngIf="transaction.direction === 'Sent'">
-                  Contact: {{ transaction.receiver }}
-                </span>
-
-                <span  *ngIf="transaction.direction === 'Received'">
-                    Contact: {{ transaction.sender }}
-                </span>
-              </div>
-            </td>
-            <td>Comment: {{ transaction.comment }}</td>
-         </tr>
-
-         <mat-paginator
-
-         [length]="totalTransactionPages" [pageSize]="transactionsPerPage" [pageSizeOptions]="pageSizeOptions"(page)="onChangedPage($event)"></mat-paginator>
-
-        </tbody>
+  <table class="table table-striped">
 
 
 
+    <thead>
 
 
+      <tr>
+
+        <th scope="col">Date</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Fee</th>
+        <th scope="col">TotalAmount</th>
+        <th scope="col">Direction</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Comment</th>
+      </tr>
+    </thead>
+
+    <span *ngIf="isLoading">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </span>
+
+
+    <tbody>
+      <tr *ngFor="let transaction of lastTransactions | filterTransactions: pipeFilterValue : 'direction'">
+        <td>Date: {{ transaction.date }}</td>
+        <td>Currency: {{ transaction. currency }}</td>
+        <td>Amount: {{ transaction.amount }}</td>
+        <td>Fee: {{ transaction.fee }}</td>
+        <td>TotalAmount: {{ transaction.totalAmount }}</td>
+        <td>Direction: {{transaction.direction}}</td>
+        <td>
+          <div>
+            <span *ngIf="transaction.direction === 'Sent'">
+              Contact: {{ transaction.receiver }}
+            </span>
+
+            <span *ngIf="transaction.direction === 'Received'">
+              Contact: {{ transaction.sender }}
+            </span>
+          </div>
+        </td>
+        <td>Comment: {{ transaction.comment }}</td>
+      </tr>
+
+      <mat-paginator [length]="totalTransactions" [pageSize]="transactionsPerPage" [pageSizeOptions]="pageSizeOptions"
+        (page)="onChangedPage($event)"></mat-paginator>
+
+    </tbody>
+  </table>
+
+</div>

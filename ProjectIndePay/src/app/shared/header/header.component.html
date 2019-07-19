@@ -1,3 +1,4 @@
+
 <!-- Navigation -->
 <div class="navbar navbar-default" role="navigation">
   <div class="container">
@@ -10,7 +11,7 @@
           routerLinkActive="mat-accent">
           <img src="assets/img/Logo_IndePay.png" id="logo"></a></span>
 
-      <span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>
+      <!---<span *ngIf="userIsAuthenticated">Welcome {{authenticatedUserName}}</span>--->
 
     </div>
 
@@ -27,6 +28,13 @@
         routerLinkActive="mat-accent">Login</a></span>
     <span *ngIf="userIsAuthenticated" class="header-element"><button mat-button
         (click)="onLogout()">Logout</button></span>
+        
+      <span *ngIf="isLoading">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </span>
+
 
 
     <!-- /.navbar-collapse -->

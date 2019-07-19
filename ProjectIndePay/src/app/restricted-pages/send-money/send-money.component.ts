@@ -71,6 +71,10 @@ export class SendMoneyComponent implements OnInit, OnDestroy {
     }
   }
 
+  onBackToHome() {
+    this.router.navigate(['/home']);
+  }
+
   onSearchInContacts() {
 
     this.router.navigate(['/searchContacts']);

@@ -1,7 +1,7 @@
 <body>
 
 
-    
+
 
   <div class="wrapper fadeInDown">
     <div id="formContent">
@@ -9,52 +9,69 @@
 
 
       <div class="fadeIn first">
-        <h2>Searching for contact</h2>
+        <div class="card">
+          <div class="card-body">
+            <h1>Searching for contact</h1>
+          </div>
+        </div>
       </div>
 
-      <div *ngIf="!isLoading">
+      <div class="card">
+        <div class="card-body">
 
-        <table class="table table-striped">
-          <thead>
+          <div *ngIf="!isLoading">
 
-            <div>
-              <input type="submit" (click)="onBackToSendMoney()" value="Return">
-              <input type="submit" (click)="onAddNewContact()" value="Add new contact">
-              <input type="submit" (click)="onRefreshContactList()" value="Refresh contact list">
-            </div>
+            <table class="table table-striped">
+              <thead>
 
-            <tr>
-              <input type="text" matInput placeholder="search contact" name="searchContact" ngModel
-                [(ngModel)]="pipeFilterValue">
+                <button mat-raised-button color="primary" (click)="onAddNewContact()">Add new contact</button>
 
-            </tr>
-          </thead>
+                <button mat-raised-button color="primary" (click)="onRefreshContactList()">Refresh contact
+                  list</button>
 
-          <div *ngIf="contactList == null">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
+                <div>
+                  <mat-form-field>
+                    <input type="text" matInput placeholder="SEARCH CONTACT" name="searchContact" ngModel
+                      [(ngModel)]="pipeFilterValue">
+                  </mat-form-field>
 
-          <tbody *ngIf="contactList != null">
+                </div>
 
-            <tr *ngFor="let contact of contactList | filterContacts: pipeFilterValue">
 
-              <div>
+              </thead>
 
-                {{ contact.contactLoginName }} <span> ::::::::. </span> {{ contact.comment }}
-
-                <!---<input type="submit" (click)="onEditContact(contact.contactLoginName)" value="Edit">--->
-
-                <input type="submit" (click)="onSelectContact(contact.contactLoginName)" value="Select">
-
+              <div *ngIf="contactList == null">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
               </div>
-            </tr>
 
-            <div *ngIf="errorMessage"> {{ errorMessage }}></div>
+              <tbody *ngIf="contactList != null">
 
-          </tbody>
-        </table>
+
+
+                <mat-list-item *ngFor="let contact of contactList | filterContacts: pipeFilterValue">
+
+                  <span class="left-allign">{{ contact.contactLoginName }}  {{ contact.comment }}</span>
+                  <!---<button mat-raised-button color="primary" (click)="onEditContact(contact.contactLoginName)">Edit</button>--->
+                  <button mat-raised-button color="primary"
+                    (click)="onSelectContact(contact.contactLoginName)">Select</button>
+
+
+                </mat-list-item>
+
+
+
+
+
+                <div *ngIf="errorMessage"> {{ errorMessage }}></div>
+
+              </tbody>
+
+            </table>
+            <button mat-raised-button color="primary" (click)="onBackToSendMoney()">Back</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,13 +1,13 @@
-<div class="card">
+<div class="jumbotron jumbotron-fluid">
   <div class="card-body">
-    <h3 class="card-title">Welcome</h3>
+      <h2 class="display-4">Hello, world!</h2>
 
-    <p class="card-text">Balance:
-      <span *ngIf="currentBalanceData.getBalance() != null"> {{ currentBalanceData.getBalance()  }}</span>
+    <p class="lead">Balance:
+      <span class="lead" *ngIf="currentBalanceData.getBalance() != null"> {{ currentBalanceData.getBalance()  }}</span>
     </p>
 
-    <p class="card-text">Currency:
-      <span *ngIf="currentBalanceData.getCurrency() != null"> {{ currentBalanceData.getCurrency() }}</span>
+    <p class="lead">Currency:
+      <span class="lead" *ngIf="currentBalanceData.getCurrency() != null"> {{ currentBalanceData.getCurrency() }}</span>
     </p>
 
     <!---<p class="card-text">Expenses this month 

@@ -8,9 +8,21 @@ body {
     border: 1rem;
     margin: 1rem;
 }
+._mat-animation-noopable.mat-raised-button{
 
+    text-align: right;
+
+}
+
+.mleft-allign{
+
+    text-align: right;
+}
 /* BASIC */
+h1{
 
+    color: black;
+}
 html {
     background-color: #56baed;
 }

@@ -1,49 +1,60 @@
-
 <body>
-  
-<div *ngIf="transactionInProcess">
-  <span> please wait, the transaction is in process ...</span>
-</div>
 
-<h3>check your transaction</h3>
-
-<div>
-  Currency: <span *ngIf="ongoingTransactionData != null"> {{ currentBalanceData.getCurrency() }}</span><br>
-  <hr>
-  Contact: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getReceiver() }}</span><br>
-  <hr>
-  Comment: <br>
-  <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getComment() }}</span>
-</div>
-<br>
-<br>
-
-
-<div name="transactionDetails">
-  <p>Details</p>
-  <hr>
-  <div>
-    Amount: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getAmount() }}</span>
+  <div *ngIf="transactionInProcess">
+    <span> please wait, the transaction is in process ...</span>
   </div>
-  <hr>
-  <div>
-    Transaction fees:<span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getFee() }}</span>
-  </div>
-  <hr>
-  <div>
-    Total Payment: <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getTotalAmount() }}</span>
-  </div>
-    <hr>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onBackToSendMoney()"
-    >change transaction</button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onConfirmTransaction()"
-    >confirm transaction</button>
 
-</div>
+
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+
+      <div class="fadeIn first">
+          <div class="card">
+              <div class="card-body">
+        <h1>Check your transaction:</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+      <div class="card-body">
+      <p class="card-text">Currency: <span *ngIf="ongoingTransactionData != null">
+          {{ currentBalanceData.getCurrency() }}</span>
+      </p>
+
+      <p class="card-text">Contact: <span *ngIf="ongoingTransactionData != null">
+          {{ ongoingTransactionData.getReceiver() }}</span>
+      </p>
+
+      <p class="card-text">Comment: <br>
+        <span *ngIf="ongoingTransactionData != null"> {{ ongoingTransactionData.getComment() }}</span>
+      </p>
+
+      <div name="transactionDetails">
+        <p>Details</p>
+
+        <p class="card-text">Amount: <span *ngIf="ongoingTransactionData != null">
+            {{ ongoingTransactionData.getAmount() }}</span>
+        </p>
+
+        <p class="card-text">Transaction fees:<span *ngIf="ongoingTransactionData != null">
+            {{ ongoingTransactionData.getFee() }}</span>
+        </p>
+
+        <p class="card-text">Total Payment: <span *ngIf="ongoingTransactionData != null">
+            {{ ongoingTransactionData.getTotalAmount() }}</span>
+        </p>
+
+    </div>
+  </div>
+
+        <button mat-raised-button color="primary" (click)="onBackToSendMoney()">Change transaction</button>
+        <button mat-raised-button color="primary" (click)="onConfirmTransaction()">Confirm transaction</button>
+      </div>
+
+
+    </div>
+  </div>
 </body>
